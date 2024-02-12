@@ -1,0 +1,12 @@
+bibclean
+codespell[toml]>=2.2.4
+furo
+matplotlib
+memory-profiler
+numpydoc
+sphinx
+sphinx-copybutton
+sphinx-design
+sphinx-gallery
+sphinx-issues
+sphinxcontrib-bibtex
