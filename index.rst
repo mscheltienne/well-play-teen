@@ -40,6 +40,7 @@ répondre à quelques questionnaires (environ 40 minutes).
 http://www.fpse.qualtrics.com/jfe/form/SV_3E6v3cgTWULvUHk
 
 Responsable(s) du projet de recherche:
+--------------------------------------
 
 Prof. Daphné Bavelier, FPSE - Université de Genève & Prof. Swann Pichon - Geneva School
 for Health Science, HES-SO.

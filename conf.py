@@ -55,7 +55,14 @@ html_static_path = ["_static"]
 html_css_files = []
 html_title = project
 html_show_sphinx = False
-html_theme_options = {}
+
+html_permalinks_icon = "🔗"
+html_context = {
+    "display_github": True,
+    "github_user": "mscheltienne",
+    "github_repo": "well-play-teen",
+}
+html_theme_options = {"breadcrumbs": False, "show_insipid": False, "nosidebar": True}
 
 # -- autosectionlabels -----------------------------------------------------------------
 autosectionlabel_prefix_document = True
