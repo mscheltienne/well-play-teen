@@ -1,6 +1,6 @@
 bibclean
 codespell[toml]>=2.2.4
-furo
+insipid-sphinx-theme
 sphinx
 sphinx-copybutton
 sphinx-design
