@@ -29,6 +29,7 @@ extensions = [
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.mathjax",
     "sphinxcontrib.bibtex",
+    "sphinxcontrib.youtube",
     "sphinx_copybutton",
     "sphinx_design",
 ]
