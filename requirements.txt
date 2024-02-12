@@ -1,5 +1,4 @@
 bibclean
-codespell[toml]>=2.2.4
 insipid-sphinx-theme
 sphinx
 sphinx-copybutton
