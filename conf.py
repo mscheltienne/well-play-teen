@@ -3,27 +3,17 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-
-import inspect
-import subprocess
-import sys
 from datetime import date
-from importlib import import_module
-from typing import Optional
-
-from sphinx_gallery.sorting import FileNameSortKey
-
-import template
 
 # -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "template-python"
+project = "Well-Play Teen"
 author = "Mathieu Scheltienne"
 copyright = f"{date.today().year}, {author}"
-release = template.__version__
-package = template.__name__
-gh_url = "https://github.com/mscheltienne/template-python"
+release = "0.0.1"
+package = "Well-Play Teen"
+gh_url = "https://github.com/mscheltienne/well-play-teen"
 
 # -- general configuration -------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -38,18 +28,11 @@ root_doc = "index"
 # Add any Sphinx extension module names here, as strings. They can be extensions coming
 # with Sphinx (named "sphinx.ext.*") or your custom ones.
 extensions = [
-    "sphinx.ext.autodoc",
     "sphinx.ext.autosectionlabel",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.linkcode",
     "sphinx.ext.mathjax",
-    "numpydoc",
     "sphinxcontrib.bibtex",
     "sphinx_copybutton",
     "sphinx_design",
-    "sphinx_gallery.gen_gallery",
-    "sphinx_issues",
 ]
 
 templates_path = ["_templates"]
@@ -60,7 +43,7 @@ nitpicky = True
 nitpick_ignore = []
 
 # A list of ignored prefixes for module index sorting.
-modindex_common_prefix = [f"{package}."]
+modindex_common_prefix = []
 
 # The name of a reST role (builtin or Sphinx extension) to use as the default role, that
 # is, for text marked up `like this`. This can be set to 'py:obj' to make `filter` a
@@ -93,159 +76,14 @@ html_theme_options = {
     ],
 }
 
-# -- autosummary -----------------------------------------------------------------------
-autosummary_generate = True
-
-# -- autodoc ---------------------------------------------------------------------------
-autodoc_typehints = "none"
-autodoc_member_order = "groupwise"
-autodoc_warningiserror = True
-autoclass_content = "class"
-
-# -- intersphinx -----------------------------------------------------------------------
-intersphinx_mapping = {
-    "matplotlib": ("https://matplotlib.org/stable", None),
-    "mne": ("https://mne.tools/stable/", None),
-    "numpy": ("https://numpy.org/doc/stable", None),
-    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
-    "python": ("https://docs.python.org/3", None),
-    "scipy": ("https://docs.scipy.org/doc/scipy", None),
-    "sklearn": ("https://scikit-learn.org/stable/", None),
-}
-intersphinx_timeout = 5
-
 # -- sphinx-issues ---------------------------------------------------------------------
 issues_github_path = gh_url.split("https://github.com/")[-1]
 
 # -- autosectionlabels -----------------------------------------------------------------
 autosectionlabel_prefix_document = True
 
-# -- numpydoc --------------------------------------------------------------------------
-numpydoc_class_members_toctree = False
-numpydoc_attributes_as_param_list = False
-
-# x-ref
-numpydoc_xref_param_type = True
-numpydoc_xref_aliases = {
-    # Matplotlib
-    "Axes": "matplotlib.axes.Axes",
-    "Figure": "matplotlib.figure.Figure",
-    # MNE
-    "DigMontage": "mne.channels.DigMontage",
-    "Epochs": "mne.Epochs",
-    "Evoked": "mne.Evoked",
-    "Info": "mne.Info",
-    "Projection": "mne.Projection",
-    "Raw": "mne.io.Raw",
-    # Python
-    "bool": ":class:`python:bool`",
-    "Path": "pathlib.Path",
-    "TextIO": "io.TextIOBase",
-}
-numpydoc_xref_ignore = {
-    "of",
-    "shape",
-}
-
-# validation
-# https://numpydoc.readthedocs.io/en/latest/validation.html#validation-checks
-error_ignores = {
-    "GL01",  # docstring should start in the line immediately after the quotes
-    "EX01",  # section 'Examples' not found
-    "ES01",  # no extended summary found
-    "SA01",  # section 'See Also' not found
-    "RT02",  # The first line of the Returns section should contain only the type, unless multiple values are being returned  # noqa: E501
-}
-numpydoc_validate = True
-numpydoc_validation_checks = {"all"} | set(error_ignores)
-numpydoc_validation_exclude = {  # regex to ignore during docstring check
-    r"\.__getitem__",
-    r"\.__contains__",
-    r"\.__hash__",
-    r"\.__mul__",
-    r"\.__sub__",
-    r"\.__add__",
-    r"\.__iter__",
-    r"\.__div__",
-    r"\.__neg__",
-}
-
 # -- sphinxcontrib-bibtex --------------------------------------------------------------
 bibtex_bibfiles = ["./references.bib"]
-
-# -- sphinx.ext.linkcode ---------------------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/extensions/linkcode.html
-
-
-def linkcode_resolve(domain: str, info: dict[str, str]) -> Optional[str]:
-    """Determine the URL corresponding to a Python object.
-
-    Parameters
-    ----------
-    domain : str
-        One of 'py', 'c', 'cpp', 'javascript'.
-    info : dict
-        With keys "module" and "fullname".
-
-    Returns
-    -------
-    url : str | None
-        The code URL. If None, no link is added.
-    """
-    if domain != "py":
-        return None  # only document python objects
-
-    # retrieve pyobject and file
-    try:
-        module = import_module(info["module"])
-        pyobject = module
-        for elt in info["fullname"].split("."):
-            pyobject = getattr(pyobject, elt)
-        fname = inspect.getsourcefile(pyobject).replace("\\", "/")
-    except Exception:
-        # Either the object could not be loaded or the file was not found.
-        # For instance, properties will raise.
-        return None
-
-    # retrieve start/stop lines
-    source, start_line = inspect.getsourcelines(pyobject)
-    lines = "L%d-L%d" % (start_line, start_line + len(source) - 1)
-
-    # create URL
-    if "dev" in release:
-        branch = "main"
-    else:
-        return None  # alternatively, link to a maint/version branch
-    fname = fname.rsplit(f"/{package}/")[1]
-    url = f"{gh_url}/blob/{branch}/{package}/{fname}#{lines}"
-    return url
-
-
-# -- sphinx-gallery --------------------------------------------------------------------
-if sys.platform.startswith("win"):
-    try:
-        subprocess.check_call(["optipng", "--version"])
-        compress_images = ("images", "thumbnails")
-    except Exception:
-        compress_images = ()
-else:
-    compress_images = ("images", "thumbnails")
-
-sphinx_gallery_conf = {
-    "backreferences_dir": "generated/backreferences",
-    "compress_images": compress_images,
-    "doc_module": (f"{package}",),
-    "examples_dirs": ["../tutorials"],
-    "exclude_implicit_doc": {},  # set
-    "filename_pattern": r"\d{2}_",
-    "gallery_dirs": ["generated/tutorials"],
-    "line_numbers": False,
-    "plot_gallery": "True",  # str, to enable overwrite from CLI without warning
-    "reference_url": {f"{package}": None},
-    "remove_config_comments": True,
-    "show_memory": True,
-    "within_subsection_order": FileNameSortKey,
-}
 
 # -- linkcheck -------------------------------------------------------------------------
 linkcheck_anchors = False  # saves a bit of time
