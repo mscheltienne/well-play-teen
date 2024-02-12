@@ -8,7 +8,7 @@ from datetime import date
 # -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Well-Play Teen"
+project = "WELL-PLAY TEEN"
 author = "Mathieu Scheltienne"
 copyright = f"{date.today().year}, {author}"
 release = "0.0.1"
