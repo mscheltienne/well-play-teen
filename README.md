@@ -9,4 +9,16 @@ requires Python 3.9 or above. The requirements can be installed with:
 $ pip install -r requirements.txt
 ```
 
+Commands:
+- Build the documentation: `make html`
+- Open the build in a browser: `make view`
+- Delete the build: `make clean`
+- Check all links: `make linkcheck`
+- Parse the output from linkcheck for errors: `make linkcheck-grep`
+
 This repository supports the pre-commit framework for linting.
+
+```
+$ pip install pre-commit
+$ pre-commit install
+```
