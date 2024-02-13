@@ -22,6 +22,8 @@ l'apprentissage et du bien-être chez les adolescents.
 
         ..  youtube:: FktsFcooIG8
             :align: center
+            :height: 378
+            :width: 620
 
     .. tab-item:: Emission ARTE: Scope
 
