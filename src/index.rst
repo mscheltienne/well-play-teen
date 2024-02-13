@@ -35,10 +35,11 @@ l'apprentissage et du bien-être chez les adolescents.
             <div style="text-align: center;">
                 <iframe
                     src="https://player.twitch.tv/?video=1950152310&parent=mscheltienne.github.io&parent=well-play-teen.org"
-                    frameborder="0"
                     allowfullscreen="true"
-                    scrolling="no"
+                    autoplay="false"
+                    frameborder="0"
                     height="378"
+                    scrolling="no"
                     width="620">
                 </iframe>
             </div>
