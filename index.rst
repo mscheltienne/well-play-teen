@@ -21,6 +21,7 @@ l'apprentissage et du bien-être chez les adolescents.
         jeux vidéo d'action sur les individus.
 
         ..  youtube:: FktsFcooIG8
+            :align: center
 
     .. tab-item:: Emission ARTE: Scope
 
