@@ -50,19 +50,19 @@ modindex_common_prefix = []
 default_role = "py:obj"
 
 # -- options for HTML output -----------------------------------------------------------
-html_theme = "insipid"
-html_static_path = ["_static"]
-html_css_files = []
-html_title = project
-html_show_sphinx = False
-
-html_permalinks_icon = "🔗"
 html_context = {
     "display_github": True,
     "github_user": "mscheltienne",
     "github_repo": "well-play-teen",
 }
+html_css_files = []
+html_logo = "_static/logo-UNIGE.png"
+html_permalinks_icon = "🔗"
+html_show_sphinx = False
+html_static_path = ["_static"]
+html_theme = "insipid"
 html_theme_options = {"breadcrumbs": False, "show_insipid": False, "nosidebar": True}
+html_title = project
 
 # -- autosectionlabels -----------------------------------------------------------------
 autosectionlabel_prefix_document = True
