@@ -40,7 +40,7 @@ l'apprentissage et du bien-être chez les adolescents.
             :height: 378
             :width: 620
 
-    .. tab-item:: Emission ARTE: Scope
+    .. tab-item:: Emission ARTE : Scope
 
         Découvrez la rediffusion de Scope, une émission scientifique diffusée sur Arte,
         dans laquelle Naïma Gradi, doctorante travaillant sur ce projet, discute des
