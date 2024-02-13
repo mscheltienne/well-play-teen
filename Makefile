@@ -16,16 +16,16 @@ help:
 	@echo "  view             to view the built HTML"
 
 html:
-	$(SPHINXBUILD) . _build/html -b html $(SPHINXOPTS)
+	$(SPHINXBUILD) src build/html -b html $(SPHINXOPTS)
 
 clean:
-	rm -rf _build
+	rm -rf build
 
 linkcheck:
-	$(SPHINXBUILD) . _build/linkcheck -b linkcheck -D plot_gallery=0
+	$(SPHINXBUILD) src build/linkcheck -b linkcheck
 
 linkcheck-grep:
-	@! grep -h "^.*:.*: \[\(\(local\)\|\(broken\)\)\]" _build/linkcheck/output.txt
+	@! grep -h "^.*:.*: \[\(\(local\)\|\(broken\)\)\]" build/linkcheck/output.txt
 
 view:
-	@python -c "import webbrowser; webbrowser.open_new_tab('file://$(PWD)/_build/html/index.html')"
+	@python -c "import webbrowser; webbrowser.open_new_tab('file://$(PWD)/build/html/index.html')"

@@ -24,27 +24,27 @@ echo   view             to view the built HTML
 goto :eof
 
 :html
-%SPHINXBUILD% . _build\html -b html %SPHINXOPTS%
+%SPHINXBUILD% src build\html -b html %SPHINXOPTS%
 goto :eof
 
 :clean
-rmdir /s /q _build
+rmdir /s /q build
 goto :eof
 
 :linkcheck
-%SPHINXBUILD% . _build\linkcheck -b linkcheck -D plot_gallery=0
+%SPHINXBUILD% src build\linkcheck -b linkcheck
 goto :eof
 
 :linkcheck-grep
-findstr /C:"[broken]" _build\linkcheck\output.txt > nul
+findstr /C:"[broken]" build\linkcheck\output.txt > nul
 if %errorlevel% equ 0 (
     echo Lines with [broken]:
-    findstr /C:"[broken]" _build\linkcheck\output.txt
+    findstr /C:"[broken]" build\linkcheck\output.txt
 ) else (
     echo No lines with [broken] found.
 )
 goto :eof
 
 :view
-python -c "import webbrowser; webbrowser.open_new_tab(r'file:///%cd%\_build\html\index.html')"
+python -c "import webbrowser; webbrowser.open_new_tab(r'file:///%cd%\build\html\index.html')"
 goto :eof
