@@ -25,12 +25,23 @@ l'apprentissage et du bien-être chez les adolescents.
 
     .. tab-item:: Emission ARTE: Scope
 
-         Découvrez la rediffusion de Scope, une émission scientifique diffusée sur Arte,
-         dans laquelle Naïma Gradi, doctorante travaillant sur ce projet, discute des
-         effets des jeux vidéo sur les capacités de réflexion et sur le corps d'un point
-         de vue scientifique.
+        Découvrez la rediffusion de Scope, une émission scientifique diffusée sur Arte,
+        dans laquelle Naïma Gradi, doctorante travaillant sur ce projet, discute des
+        effets des jeux vidéo sur les capacités de réflexion et sur le corps d'un point
+        de vue scientifique.
 
-         https://www.twitch.tv/videos/1950152310
+        .. raw:: html
+
+            <div class="iframe-container">
+                <iframe
+                    src="https://player.twitch.tv/?video=1950152310&parent=mscheltienne.github.io"
+                    frameborder="0"
+                    allowfullscreen="true"
+                    scrolling="no"
+                    height="378"
+                    width="620">
+                </iframe>
+            </div>
 
 Participer
 ----------
