@@ -2,7 +2,7 @@
 
 .. image:: ./_static/logo-UNIGE.png
     :align: right
-    :width: 100
+    :width: 135
 
 .. raw:: html
 
