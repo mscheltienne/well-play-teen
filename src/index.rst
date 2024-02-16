@@ -60,22 +60,31 @@ l'apprentissage et du bien-être chez les adolescents.
                 <iframe width="620" height="378" src="https://www.rts.ch/play/embed?urn=urn:rts:video:10593138&subdivisions=false" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
             </div>
 
-Responsable(s) du projet de recherche:
---------------------------------------
+Responsables du projet de recherche:
+------------------------------------
 
-- .. raw:: html
+.. raw:: html
 
-     <div style="display: flex; align-items: center; margin-bottom: 20px;">
-        <span>Prof. Daphné Bavelier, FPSE - Université de Genève</span>
-        <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: auto;">
-     </div>
+    <div style="display: flex; align-items: flex-start;">
+        <div style="flex: 1;">
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li>Prof. Daphné Bavelier, FPSE - Université de Genève</li>
+                <li>Naïma Gradi, FPSE - Université de Genève</li>
+            </ul>
+        </div>
+        <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: 20px; margin-top: 25px;">
+    </div>
 
-- .. raw:: html
+.. raw:: html
 
-     <div style="display: flex; align-items: center; margin-bottom: 20px;">
-        <span>Prof. Swann Pichon - Geneva School for Health Science, HES-SO</span>
-        <img src="./_static/logo-HEDS.svg" width="100" style="margin-left: auto;">
-     </div>
+    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <div style="flex: 1;">
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li>Prof. Swann Pichon - Geneva School for Health Science, HES-SO</li>
+            </ul>
+        </div>
+        <img src="./_static/logo-HEDS.svg" width="100" style="margin-left: 20px;">
+    </div>
 
 Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou si vous
 avez des questions, n'hésitez pas à nous écrire à l'adresse
