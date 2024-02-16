@@ -49,6 +49,14 @@ l'apprentissage et du bien-être chez les adolescents.
                 </iframe>
             </div>
 
+    .. tab-item:: Emission RTS
+
+        .. raw:: html
+
+            <div style="text-align: center;">
+                <iframe width="620" height="378" src="https://www.rts.ch/play/embed?urn=urn:rts:video:10593138&subdivisions=false" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
+            </div>
+
 Participer
 ----------
 
