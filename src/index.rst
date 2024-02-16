@@ -51,6 +51,9 @@ l'apprentissage et du bien-être chez les adolescents.
 
     .. tab-item:: Emission RTS
 
+        Vision, attention... les jeux vidéos d'action bénéfiques à nos cerveaux!
+        `source : article RTS <RTS emission_>`_.
+
         .. raw:: html
 
             <div style="text-align: center;">
@@ -61,9 +64,9 @@ Participer
 ----------
 
 Pour participer à cette étude, les parents doivent d'abord donner leur consentement et
-répondre à quelques questionnaires (environ 40 minutes).
+répondre à quelques questionnaires (environ 15-20 minutes).
 
-http://www.fpse.qualtrics.com/jfe/form/SV_3E6v3cgTWULvUHk
+http://fpse.qualtrics.com/jfe/form/SV_3E6v3cgTWULvUHk
 
 Responsable(s) du projet de recherche:
 --------------------------------------

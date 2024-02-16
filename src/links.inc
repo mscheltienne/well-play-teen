@@ -7,6 +7,4 @@
    __not_case_sensitive__, so only one target definition is needed for:
    nipy, NIPY, Nipy, etc...
 
-.. license
-
-.. _MIT license: https://opensource.org/licenses/MIT
+.. _RTS emission: https://www.rts.ch/info/sciences-tech/10593222-vision-attention-les-jeux-videos-daction-benefiques-a-nos-cerveaux.html
