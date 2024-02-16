@@ -1,9 +1,9 @@
 div.admonition {
     background-color: transparent;
-    border: 4px solid #0cbcc9;
+    border: 4px solid #90d5f2;
 }
 div.admonition > p.admonition-title {
-    background-color: #0cbcc9;
+    background-color: #90d5f2;
     font-size: x-large;
 }
 div.body h1 { font-size: 1.5em; }
