@@ -1,12 +1,5 @@
 .. include:: ./links.inc
 
-.. raw:: html
-
-   <div style="display: flex; justify-content: flex-end;">
-      <img src="./_static/logo-HEDS.svg" width="100" style="margin-right: 10px;">
-      <img src="./_static/logo-UNIGE.png" width="135">
-   </div>
-
 Bonjour et bienvenue !
 ----------------------
 
@@ -70,8 +63,19 @@ l'apprentissage et du bien-être chez les adolescents.
 Responsable(s) du projet de recherche:
 --------------------------------------
 
-Prof. Daphné Bavelier, FPSE - Université de Genève & Prof. Swann Pichon - Geneva School
-for Health Science, HES-SO.
+- .. raw:: html
+
+     <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <span>Prof. Daphné Bavelier, FPSE - Université de Genève</span>
+        <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: auto;">
+     </div>
+
+- .. raw:: html
+
+     <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <span>Prof. Swann Pichon - Geneva School for Health Science, HES-SO</span>
+        <img src="./_static/logo-HEDS.svg" width="100" style="margin-left: auto;">
+     </div>
 
 Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou si vous
 avez des questions, n'hésitez pas à nous écrire à l'adresse
