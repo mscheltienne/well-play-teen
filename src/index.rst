@@ -8,6 +8,7 @@
    </div>
 
 Bonjour et bienvenue !
+----------------------
 
 Nous sommes ravis de vous accueillir dans notre projet de recherche portant sur l'impact
 des jeux vidéos sur la santé et les émotions des adolescents. Nous sommes un groupe de
@@ -15,6 +16,12 @@ chercheurs/euses de l'Université de Genève et de la Haute Ecole de Santé. Not
 est d'explorer en profondeur comment une pratique modérée de jeux vidéo soigneusement
 sélectionnés, dans un environnement encadré, peut influencer divers aspects de
 l'apprentissage et du bien-être chez les adolescents.
+
+.. admonition:: **Participer!**
+
+    Pour participer à cette étude, les parents doivent d'abord donner leur consentement
+    et répondre à quelques questionnaires (environ 15-20 minutes).
+    `Cliquez ici <participation questionnaire_>`_.
 
 .. tab-set::
 
@@ -59,14 +66,6 @@ l'apprentissage et du bien-être chez les adolescents.
             <div style="text-align: center;">
                 <iframe width="620" height="378" src="https://www.rts.ch/play/embed?urn=urn:rts:video:10593138&subdivisions=false" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
             </div>
-
-Participer
-----------
-
-Pour participer à cette étude, les parents doivent d'abord donner leur consentement et
-répondre à quelques questionnaires (environ 15-20 minutes).
-
-http://fpse.qualtrics.com/jfe/form/SV_3E6v3cgTWULvUHk
 
 Responsable(s) du projet de recherche:
 --------------------------------------

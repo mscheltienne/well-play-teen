@@ -1,0 +1,14 @@
+div.admonition {
+    background-color: transparent;
+    border: 4px solid #0cbcc9;
+}
+div.admonition > p.admonition-title {
+    background-color: #0cbcc9;
+    font-size: x-large;
+}
+div.body h1 { font-size: 1.5em; }
+div.body h2 { font-size: 1.3em; }
+div.body h3 { font-size: 1.1em; }
+div.body h4 { font-size: 0.9em; }
+div.body h5 { font-size: 0.8em; }
+div.body h6 { font-size: 0.7em }

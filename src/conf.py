@@ -55,7 +55,7 @@ html_context = {
     "github_user": "mscheltienne",
     "github_repo": "well-play-teen",
 }
-html_css_files = []
+html_css_files = ["style.css"]
 html_logo = "_static/logo-UNIGE.png"
 html_permalinks_icon = "🔗"
 html_show_sphinx = False
