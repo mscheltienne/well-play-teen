@@ -1,7 +1,10 @@
 .. include:: ./links.inc
 
-Bonjour et bienvenue !
-----------------------
+.. raw:: html
+
+    <div class="welcome">
+        <p><strong>Bonjour et bienvenue !</strong></p>
+    </div>
 
 Nous sommes ravis de vous accueillir dans notre projet de recherche portant sur l'impact
 des jeux vidéos sur la santé et les émotions des adolescents. Nous sommes un groupe de
