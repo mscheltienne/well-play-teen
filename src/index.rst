@@ -68,8 +68,8 @@ Responsables du projet de recherche:
     <div style="display: flex; align-items: flex-start;">
         <div style="flex: 1;">
             <ul style="list-style-type: none; padding-left: 0;">
-                <li>Prof. Daphné Bavelier, FPSE - Université de Genève</li>
-                <li>Naïma Gradi, FPSE - Université de Genève</li>
+                <li>Prof. Daphné Bavelier, <a href="https://www.unige.ch/fapse/">FPSE</a> - Université de Genève</li>
+                <li>Naïma Gradi, <a href="https://www.unige.ch/fapse/">FPSE</a> - Université de Genève</li>
             </ul>
         </div>
         <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: 20px; margin-top: 25px;">
@@ -80,11 +80,12 @@ Responsables du projet de recherche:
     <div style="display: flex; align-items: center; margin-bottom: 20px;">
         <div style="flex: 1;">
             <ul style="list-style-type: none; padding-left: 0;">
-                <li>Prof. Swann Pichon - Geneva School for Health Science, HES-SO</li>
+                <li>Prof. Swann Pichon, <a href="https://www.hes-so.ch/accueil">HES-SO</a> - Geneva School for Health Science</li>
             </ul>
         </div>
         <img src="./_static/logo-HEDS.svg" width="100" style="margin-left: 20px;">
     </div>
+
 
 Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou si vous
 avez des questions, n'hésitez pas à nous écrire à l'adresse
