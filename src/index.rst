@@ -27,10 +27,17 @@ l'apprentissage et du bien-être chez les adolescents.
         recherche, explorant l'impact des jeux et mettant en lumière les bénéfices des
         jeux vidéo d'action sur les individus.
 
-        ..  youtube:: FktsFcooIG8
-            :align: center
-            :height: 378
-            :width: 620
+        .. raw:: html
+
+            <div class="dynamic-size-iframe">
+                <iframe
+                    src="https://www.youtube.com/embed/FktsFcooIG8?si=JVifJVVHBCZVDmo4"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
 
     .. tab-item:: Emission ARTE : Scope
 
@@ -41,14 +48,12 @@ l'apprentissage et du bien-être chez les adolescents.
 
         .. raw:: html
 
-            <div style="text-align: center;">
+            <div class="dynamic-size-iframe">
                 <iframe
                     src="https://player.twitch.tv/?video=1950152310&parent=mscheltienne.github.io&parent=well-play-teen.org&autoplay=false"
                     allowfullscreen
                     frameborder="0"
-                    height="378"
-                    scrolling="no"
-                    width="620">
+                    scrolling="no">
                 </iframe>
             </div>
 
@@ -59,8 +64,12 @@ l'apprentissage et du bien-être chez les adolescents.
 
         .. raw:: html
 
-            <div style="text-align: center;">
-                <iframe width="620" height="378" src="https://www.rts.ch/play/embed?urn=urn:rts:video:10593138&subdivisions=false" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
+            <div class="dynamic-size-iframe">
+                <iframe
+                    src="https://www.rts.ch/play/embed?urn=urn:rts:video:10593138&subdivisions=false"
+                    allow="geolocation *; autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
             </div>
 
 Responsables du projet de recherche:
