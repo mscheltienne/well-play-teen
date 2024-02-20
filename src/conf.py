@@ -60,7 +60,12 @@ html_permalinks_icon = "🔗"
 html_show_sphinx = False
 html_static_path = ["_static"]
 html_theme = "insipid"
-html_theme_options = {"breadcrumbs": False, "show_insipid": False, "nosidebar": True}
+html_theme_options = {
+    "breadcrumbs": False,
+    "left_buttons": [],
+    "nosidebar": True,
+    "show_insipid": False,
+}
 html_title = project
 
 # -- autosectionlabels -----------------------------------------------------------------
