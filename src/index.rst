@@ -13,7 +13,7 @@ est d'explorer en profondeur comment une pratique modérée de jeux vidéo soign
 sélectionnés, dans un environnement encadré, peut influencer divers aspects de
 l'apprentissage et du bien-être chez les adolescents.
 
-.. admonition:: **Participer!**
+.. admonition:: **Participer !**
 
     Pour participer à cette étude, les parents doivent d'abord donner leur consentement
     et répondre à quelques questionnaires (environ 15-20 minutes).
