@@ -59,7 +59,7 @@ l'apprentissage et du bien-être chez les adolescents.
 
     .. tab-item:: Emission RTS
 
-        Vision, attention... les jeux vidéos d'action bénéfiques à nos cerveaux!
+        Vision, attention... les jeux vidéos d'action bénéfiques à nos cerveaux !
         `source : article RTS <RTS emission_>`_.
 
         .. raw:: html
