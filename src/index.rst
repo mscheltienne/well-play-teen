@@ -16,7 +16,7 @@ l'apprentissage et du bien-être chez les adolescents.
 .. admonition:: **Participer !**
 
     Pour participer à cette étude, les parents doivent d'abord donner leur consentement
-    et répondre à quelques questionnaires (environ 15-20 minutes).
+    et répondre à quelques questionnaires (environ 10 minutes).
     `Cliquez ici <participation questionnaire_>`_.
 
 .. tab-set::
