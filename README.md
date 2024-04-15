@@ -12,8 +12,8 @@ above.
 
 ## Website
 
-The website build uses `sphinx`. Requirements can be installed with the `[doc]` key of
-this python package.
+The [website](https://well-play-teen.org/) build uses `sphinx`. Requirements can be
+installed with the `[doc]` key of this python package.
 
 Build commands from the `doc` folder:
 - Build the documentation: `make html`
