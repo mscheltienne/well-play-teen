@@ -10,6 +10,21 @@
 Website build and code for the research project Well-Play Teen. Requires Python 3.10 or
 above.
 
+## Package
+
+The python package can be installed with `pip` from source:
+
+```bash
+pip install git+https://github.com/mscheltienne/well-play-teen
+```
+
+The package entry-points can be used from a terminal:
+
+```bash
+wp-gametime --help
+wp-gametime-plot --help
+```
+
 ## Website
 
 The [website](https://well-play-teen.org/) build uses `sphinx`. Requirements can be
