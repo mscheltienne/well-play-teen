@@ -1,0 +1,162 @@
+[build-system]
+build-backend = 'setuptools.build_meta'
+requires = ['setuptools >= 64.0.0']
+
+[project]
+authors = [
+  {email = 'mathieu.scheltienne@fcbg.ch', name = 'Mathieu Scheltienne'},
+]
+classifiers = [
+  'License :: OSI Approved :: MIT License',
+  'Natural Language :: English',
+  'Operating System :: MacOS',
+  'Operating System :: Microsoft :: Windows',
+  'Operating System :: Unix',
+  'Programming Language :: Python :: 3 :: Only',
+  'Programming Language :: Python :: 3.10',
+  'Programming Language :: Python :: 3.11',
+  'Programming Language :: Python :: 3.12',
+]
+dependencies = [
+  'numpy>=1.21',
+  'packaging',
+  'pandas',
+  'psutil',
+  'pyqt6',
+  'requests',
+  'seaborn',
+]
+description = 'Code and website for the Well-Play Teen project.'
+keywords = [
+  'python',
+  'steam',
+  'videogame',
+]
+license = {file = 'LICENSE'}
+maintainers = [
+  {email = 'mathieu.scheltienne@fcbg.ch', name = 'Mathieu Scheltienne'},
+]
+name = 'wp'
+readme = 'README.md'
+requires-python = '>=3.10'
+version = '0.1.0'
+
+[project.optional-dependencies]
+all = [
+  'wp[build]',
+  'wp[doc]',
+  'wp[style]',
+  'wp[test]',
+]
+build = [
+  'build',
+  'twine',
+]
+doc = [
+  'bibclean',
+  'insipid-sphinx-theme',
+  'sphinx',
+  'sphinx-copybutton',
+  'sphinx-design',
+  'sphinxcontrib-bibtex',
+]
+full = [
+  'wp[all]',
+]
+style = [
+  'codespell[toml]>=2.2.4',
+  'isort',
+  'pydocstyle[toml]',
+  'ruff>=0.1.8',
+  'toml-sort',
+  'yamllint',
+]
+test = [
+  'pytest-cov',
+  'pytest-timeout',
+  'pytest>=8.0',
+]
+
+[project.scripts]
+wp-gametime = 'wp.commands.gametime:run'
+wp-gametime-plot = 'wp.commands.gametime_plot:run'
+wp-sys_info = 'wp.commands.sys_info:run'
+
+[project.urls]
+source = 'https://github.com/mscheltienne/well-play-teen'
+tracker = 'https://github.com/mscheltienne/well-play-teen/issues'
+
+[tool.codespell]
+check-filenames = true
+check-hidden = true
+ignore-words = '.codespellignore'
+skip = 'build,.git,.mypy_cache,.pytest_cache'
+
+[tool.coverage.report]
+exclude_lines = [
+  'if __name__ == .__main__.:',
+  'if TYPE_CHECKING:',
+  'pragma: no cover',
+]
+precision = 2
+
+[tool.coverage.run]
+branch = true
+cover_pylib = false
+omit = [
+  '**/__init__.py',
+  '**/conftest.py',
+  '**/tests/**',
+  '**/wp/_version.py',
+  '**/wp/commands/*',
+  '**/wp/utils/_fixes.py',
+]
+
+[tool.isort]
+extend_skip_glob = []
+line_length = 88
+multi_line_output = 3
+profile = 'black'
+py_version = 310
+
+[tool.pydocstyle]
+add_ignore = 'D100,D104,D107'
+convention = 'numpy'
+ignore-decorators = '(copy_doc|property|.*setter|.*getter|pyqtSlot|Slot)'
+match = '^(?!__init__|test_).*\.py'
+match-dir = '^wp.*'
+
+[tool.pytest.ini_options]
+addopts = '--durations 20 --junit-xml=junit-results.xml --verbose'
+minversion = '8.0'
+
+[tool.ruff]
+extend-exclude = []
+line-length = 88
+target-version = 'py310'
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+
+[tool.ruff.lint]
+ignore = []
+select = ['A', 'B', 'E', 'F', 'UP', 'W']
+
+[tool.ruff.lint.per-file-ignores]
+'*' = [
+  'B904', # 'Within an except clause, raise exceptions with raise ... from ...'
+]
+'__init__.py' = ['F401']
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+exclude = ['wp*tests']
+include = ['wp*']
+
+[tool.tomlsort]
+all = true
+ignore_case = true
+trailing_comma_inline_array = true

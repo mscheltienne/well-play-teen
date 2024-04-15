@@ -60,6 +60,7 @@ def sys_info(fid: IO | None = None, developer: bool = False):
     if developer:
         keys = (
             "build",
+            "doc",
             "test",
             "style",
         )
