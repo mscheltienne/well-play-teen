@@ -60,9 +60,9 @@ def sys_info(fid: IO | None = None, developer: bool = False):
     if developer:
         keys = (
             "build",
-            "doc",
             "test",
             "style",
+            "website",
         )
         for key in keys:
             extra_dependencies = [

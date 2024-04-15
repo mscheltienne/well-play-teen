@@ -44,21 +44,13 @@ version = '0.1.0'
 [project.optional-dependencies]
 all = [
   'wp[build]',
-  'wp[doc]',
   'wp[style]',
   'wp[test]',
+  'wp[website]',
 ]
 build = [
   'build',
   'twine',
-]
-doc = [
-  'bibclean',
-  'insipid-sphinx-theme',
-  'sphinx',
-  'sphinx-copybutton',
-  'sphinx-design',
-  'sphinxcontrib-bibtex',
 ]
 full = [
   'wp[all]',
@@ -75,6 +67,14 @@ test = [
   'pytest-cov',
   'pytest-timeout',
   'pytest>=8.0',
+]
+website = [
+  'bibclean',
+  'insipid-sphinx-theme',
+  'sphinx',
+  'sphinx-copybutton',
+  'sphinx-design',
+  'sphinxcontrib-bibtex',
 ]
 
 [project.scripts]

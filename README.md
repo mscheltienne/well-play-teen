@@ -3,7 +3,7 @@
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![codecov](https://codecov.io/gh/mscheltienne/well-play-teen/graph/badge.svg?token=ufvGyLnUMY)](https://codecov.io/gh/mscheltienne/well-play-teen)
 [![tests](https://github.com/mscheltienne/well-play-teen/actions/workflows/pytest.yaml/badge.svg?branch=main)](https://github.com/mscheltienne/well-play-teen/actions/workflows/pytest.yaml)
-[![doc](https://github.com/mscheltienne/well-play-teen/actions/workflows/doc.yaml/badge.svg?branch=main)](https://github.com/mscheltienne/well-play-teen/actions/workflows/doc.yaml)
+[![website](https://github.com/mscheltienne/well-play-teen/actions/workflows/website.yaml/badge.svg?branch=main)](https://github.com/mscheltienne/well-play-teen/actions/workflows/website.yaml)
 
 # WELL-PLAY TEEN
 
@@ -13,10 +13,10 @@ above.
 ## Website
 
 The [website](https://well-play-teen.org/) build uses `sphinx`. Requirements can be
-installed with the `[doc]` key of this python package.
+installed with the `[website]` key of this python package.
 
-Build commands from the `doc` folder:
-- Build the documentation: `make html`
+Build commands from the `website` folder:
+- Build the website: `make html`
 - Open the build in a browser: `make view`
 - Delete the build: `make clean`
 - Check all links: `make linkcheck`

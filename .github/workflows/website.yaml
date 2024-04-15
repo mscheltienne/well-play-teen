@@ -30,18 +30,18 @@ jobs:
       - name: Install package
         run: |
           python -m pip install --progress-bar off --upgrade pip setuptools
-          python -m pip install --progress-bar off .[doc]
+          python -m pip install --progress-bar off .[website]
       - name: Display system information
         run: wp-sys_info --developer
       - name: Build doc
-        run: make -C doc html
+        run: make -C website html
       - name: Prune sphinx environment
-        run: rm -R ./doc/_build/html/.doctrees
+        run: rm -R ./website/_build/html/.doctrees
       - name: Upload documentation
         uses: actions/upload-artifact@v4
         with:
           name: doc-build
-          path: ./doc/_build/html
+          path: ./website/_build/html
 
   deploy:
     if: github.event_name == 'push'
