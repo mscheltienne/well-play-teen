@@ -64,6 +64,10 @@ docdict["steam_ids"] = """
 steam_ids : list or tuple of str | None
     The Steam IDs to select and plot. If None, all Steam IDs are plotted."""
 
+docdict["steam_ids_mapping"] = """
+steam_ids_mapping : dict of str -> str | None
+    Mapping between a steam ID and the username/token. If None, the steam ID is used."""
+
 # -- T ---------------------------------------------------------------------------------
 # -- U ---------------------------------------------------------------------------------
 # -- V ---------------------------------------------------------------------------------

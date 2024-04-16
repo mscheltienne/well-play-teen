@@ -89,16 +89,18 @@ def run() -> None:
 
     now = datetime.now().strftime("%Y%m%d-%H%M%S")
     if args.lineplot:
-        f, _ = plot_lineplot(df, "game_id", ids, (dt_start, dt_stop))
+        f, _ = plot_lineplot(
+            df, "game_id", steam_ids=ids, datetimes=(dt_start, dt_stop)
+        )
         f.savefig(out / f"lineplot_gid_{now}.svg", transparent=True)
-        f, _ = plot_lineplot(df, "steam_id", ids, (dt_start, dt_stop))
+        f, _ = plot_lineplot(df, "steam_id", ids, datetimes=(dt_start, dt_stop))
         f.savefig(out / f"lineplot_sid_{now}.svg", transparent=True)
     if args.heatmap:
-        f, _ = plot_heatmap(df, ids, (dt_start, dt_stop))
+        f, _ = plot_heatmap(df, steam_ids=ids, datetimes=(dt_start, dt_stop))
         f.savefig(out / f"heatmap_{now}.svg", transparent=True)
     if args.barplot_dts:
-        f, _ = plot_barplot_dts(df, ids, (dt_start, dt_stop))
+        f, _ = plot_barplot_dts(df, steam_ids=ids, datetimes=(dt_start, dt_stop))
         f.savefig(out / f"barplot_dts_{now}.svg", transparent=True)
     if args.barplot_ids:
-        f, _ = plot_barplot_ids(df, ids, (dt_start, dt_stop))
+        f, _ = plot_barplot_ids(df, steam_ids=ids, datetimes=(dt_start, dt_stop))
         f.savefig(out / f"barplot_ids_{now}.svg", transparent=True)

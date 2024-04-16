@@ -2,6 +2,7 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
+from .config import STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
 from .utils._checks import check_type, check_value
 from .utils._docs import fill_doc
 
@@ -10,6 +11,7 @@ from .utils._docs import fill_doc
 def plot_heatmap(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] | None = None,
+    steam_ids_mapping: dict[str, str] | None = None,
     datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
     | list[pd.Timestamp | None] = (None, None),
     ax: plt.Axes | None = None,
@@ -20,6 +22,7 @@ def plot_heatmap(
     ----------
     %(df_gametime)s
     %(steam_ids)s
+    %(steam_ids_mapping)s
     %(datetimes)s
     %(ax_arg)s
 
@@ -28,13 +31,8 @@ def plot_heatmap(
     %(fig)s
     %(ax_return)s
     """
-    check_type(df, (pd.DataFrame,), "df")
-    _check_steam_ids(steam_ids)
-    _check_datetimes(datetimes)
+    df = _prepare_df(df, steam_ids, datetimes, steam_ids_mapping)
     check_type(ax, (plt.Axes, None), "ax")
-    if steam_ids is not None:
-        df = df[df["steam_id"].isin(steam_ids)]
-    df = _select_datetimes(df, datetimes)
     pivot_df = df.pivot_table(
         index="steam_id", columns="acq_time", values="game_time_diff"
     )
@@ -49,6 +47,7 @@ def plot_lineplot(
     df: pd.DataFrame,
     hue: str,
     steam_ids: list[str] | tuple[str, ...] | None = None,
+    steam_ids_mapping: dict[str, str] | None = None,
     datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
     | list[pd.Timestamp | None] = (None, None),
     ax: plt.Axes | None = None,
@@ -61,6 +60,7 @@ def plot_lineplot(
     hue : str
         Either "game_id" or "steam_id".
     %(steam_ids)s
+    %(steam_ids_mapping)s
     %(datetimes)s
     %(ax_arg)s
 
@@ -69,15 +69,10 @@ def plot_lineplot(
     %(fig)s
     %(ax_return)s
     """
-    check_type(df, (pd.DataFrame,), "df")
+    df = _prepare_df(df, steam_ids, datetimes, steam_ids_mapping)
     check_type(hue, (str,), "hue")
     check_value(hue, ("game_id", "steam_id"), "hue")
-    _check_steam_ids(steam_ids)
-    _check_datetimes(datetimes)
     check_type(ax, (plt.Axes, None), "ax")
-    if steam_ids is not None:
-        df = df[df["steam_id"].isin(steam_ids)]
-    df = _select_datetimes(df, datetimes)
     if ax is None:
         _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
     ax = sns.lineplot(df, x="acq_time", y="game_time", hue=hue, ax=ax)
@@ -88,6 +83,7 @@ def plot_lineplot(
 def plot_barplot_dts(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] = None,
+    steam_ids_mapping: dict[str, str] | None = None,
     datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
     | list[pd.Timestamp | None] = (None, None),
     ax: plt.Axes | None = None,
@@ -98,6 +94,7 @@ def plot_barplot_dts(
     ----------
     %(df_gametime)s
     %(steam_ids)s
+    %(steam_ids_mapping)s
     %(datetimes)s
     %(ax_arg)s
 
@@ -106,13 +103,8 @@ def plot_barplot_dts(
     %(fig)s
     %(ax_return)s
     """
-    check_type(df, (pd.DataFrame,), "df")
-    _check_steam_ids(steam_ids)
-    _check_datetimes(datetimes)
+    df = _prepare_df(df, steam_ids, datetimes, steam_ids_mapping)
     check_type(ax, (plt.Axes, None), "ax")
-    if steam_ids is not None:
-        df = df[df["steam_id"].isin(steam_ids)]
-    df = _select_datetimes(df, datetimes)
     if ax is None:
         _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
     ax = sns.barplot(df, x="acq_time", y="game_time", hue="steam_id", ax=ax)
@@ -123,6 +115,7 @@ def plot_barplot_dts(
 def plot_barplot_ids(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] = None,
+    steam_ids_mapping: dict[str, str] | None = None,
     datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
     | list[pd.Timestamp | None] = (None, None),
     ax: plt.Axes | None = None,
@@ -133,6 +126,7 @@ def plot_barplot_ids(
     ----------
     %(df_gametime)s
     %(steam_ids)s
+    %(steam_ids_mapping)s
     %(datetimes)s
     %(ax_arg)s
 
@@ -141,13 +135,8 @@ def plot_barplot_ids(
     %(fig)s
     %(ax_return)s
     """
-    check_type(df, (pd.DataFrame,), "df")
-    _check_steam_ids(steam_ids)
-    _check_datetimes(datetimes)
+    df = _prepare_df(df, steam_ids, datetimes, steam_ids_mapping)
     check_type(ax, (plt.Axes, None), "ax")
-    if steam_ids is not None:
-        df = df[df["steam_id"].isin(steam_ids)]
-    df = _select_datetimes(df, datetimes)
     data = dict()
     for elt in df.groupby("steam_id"):
         data[elt[0]] = []
@@ -202,3 +191,49 @@ def _select_datetimes(
     else:
         return df
     return df.loc[mask]
+
+
+def _map_game_id(df: pd.DataFrame) -> pd.DataFrame:
+    """Map the game IDs to game names."""
+    mapping = {
+        str(STEAM_ECO_RESCUE_APP_ID): "Ecorescue",
+        str(STEAM_BEJEWELED_APP_ID): "Bejeweled",
+    }
+    mapping = {
+        key: value for key, value in mapping.items() if key in df["game_id"].unique()
+    }
+    if sorted(df["game_id"].unique()) != sorted(mapping.keys()):
+        raise ValueError("'game_id' must contain only the Ecorescue and Bejeweled IDs.")
+    df.loc[:, "game_id"] = df["game_id"].map(mapping)
+    return df
+
+
+def _map_steam_id(df: pd.DataFrame, mapping: dict[str, str]) -> pd.DataFrame:
+    """Map the steam IDs to user names."""
+    mapping = {
+        key: value for key, value in mapping.items() if key in df["steam_id"].unique()
+    }
+    if sorted(df["steam_id"].unique()) != sorted(mapping.keys()):
+        raise ValueError("'steam_id' must contain all the keys of the mapping.")
+    df.loc[:, "steam_id"] = df["steam_id"].map(mapping)
+    return df
+
+
+def _prepare_df(
+    df: pd.DataFrame,
+    steam_ids: list[str] | tuple[str, ...] | None,
+    datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
+    | list[pd.Timestamp | None],
+    steam_ids_mapping: dict[str, str] | None,
+) -> pd.DataFrame:
+    """Prepare the DataFrame for plotting."""
+    check_type(df, (pd.DataFrame,), "df")
+    _check_steam_ids(steam_ids)
+    _check_datetimes(datetimes)
+    if steam_ids is not None:
+        df = df[df["steam_id"].isin(steam_ids)]
+    df = _select_datetimes(df, datetimes)
+    df = _map_game_id(df)
+    if steam_ids_mapping is not None:
+        df = _map_steam_id(df, steam_ids_mapping)
+    return df

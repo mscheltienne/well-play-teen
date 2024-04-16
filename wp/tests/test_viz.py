@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from importlib.resources import files
+from itertools import product
 from typing import TYPE_CHECKING
 
 import pandas as pd
@@ -32,104 +33,107 @@ def steam_ids() -> list[str]:
     return ["76561198329580279", "76561198329580271"]
 
 
-@pytest.fixture(scope="function")
-def datetimes() -> tuple[pd.Timestamp, pd.Timestamp]:
-    """Start/Stop datetimes to select."""
-    return (
-        pd.Timestamp(year=2024, month=4, day=12, hour=12, tz="utc"),
-        pd.Timestamp(year=2024, month=4, day=12, hour=16, tz="utc"),
-    )
-
-
-def test_plot_heatmap(
-    dataframe: pd.DataFrame,
-    steam_ids: list[str],
-    datetimes: tuple[pd.Timestamp, pd.Timestamp],
-):
-    """Test the plot_heatmap function."""
-    f, ax = plot_heatmap(dataframe)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_heatmap(dataframe, steam_ids)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_heatmap(dataframe, datetimes=datetimes)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_heatmap(dataframe, datetimes=(None, datetimes[1]))
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_heatmap(dataframe, datetimes=(datetimes[0], None))
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    _, ax = plt.subplots(1, 1)
-    plot_heatmap(dataframe, steam_ids, ax=ax)
-
-
-@pytest.mark.parametrize("hue", ["game_id", "steam_id"])
-def test_plot_lineplot(
-    dataframe: pd.DataFrame,
-    steam_ids: list[str],
-    datetimes: tuple[pd.Timestamp, pd.Timestamp],
-    hue: str,
-):
-    """Test the plot_lineplot function."""
-    f, ax = plot_lineplot(dataframe, hue)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_lineplot(dataframe, hue, steam_ids)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_lineplot(dataframe, hue, datetimes=datetimes)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_lineplot(dataframe, hue, datetimes=(None, datetimes[1]))
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_lineplot(dataframe, hue, datetimes=(datetimes[0], None))
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    _, ax = plt.subplots(1, 1)
-    plot_lineplot(dataframe, hue, steam_ids, ax=ax)
-
-
-@pytest.mark.parametrize("func", [plot_barplot_dts, plot_barplot_ids])
-def test_plot_barplot(
-    dataframe: pd.DataFrame,
-    steam_ids: list[str],
-    datetimes: tuple[pd.Timestamp, pd.Timestamp],
+@pytest.mark.parametrize("func", [plot_heatmap, plot_barplot_dts, plot_barplot_ids])
+def test_plot_basic(
     func,
+    dataframe: pd.DataFrame,
 ):
-    """Test the plot_barplot_* functions."""
+    """Test the plot_* functions."""
     f, ax = func(dataframe)
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
-    f, ax = func(dataframe, steam_ids)
+
+@pytest.mark.parametrize("func", [plot_heatmap, plot_barplot_dts, plot_barplot_ids])
+def test_plot_select_ids(
+    func,
+    dataframe: pd.DataFrame,
+    steam_ids: list[str],
+):
+    """Test the plot_* functions."""
+    f, ax = func(dataframe, steam_ids=steam_ids)
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
+
+@pytest.mark.parametrize("func", [plot_heatmap, plot_barplot_dts, plot_barplot_ids])
+def test_plot_ax(
+    func,
+    dataframe: pd.DataFrame,
+):
+    """Test the plot_* functions."""
+    _, ax = plt.subplots(1, 1)
+    func(dataframe, ax=ax)
+
+
+@pytest.mark.parametrize(
+    "func, datetimes",
+    product(
+        [plot_heatmap, plot_barplot_dts, plot_barplot_ids],
+        [
+            (
+                pd.Timestamp(year=2024, month=4, day=12, hour=12, tz="utc"),
+                pd.Timestamp(year=2024, month=4, day=12, hour=16, tz="utc"),
+            ),
+            (None, pd.Timestamp(year=2024, month=4, day=12, hour=16, tz="utc")),
+            (pd.Timestamp(year=2024, month=4, day=12, hour=12, tz="utc"), None),
+        ],
+    ),
+)
+def test_plot_select_dts(
+    func,
+    dataframe: pd.DataFrame,
+    datetimes: tuple[pd.Timestamp, pd.Timestamp],
+):
+    """Test the plot_* functions."""
     f, ax = func(dataframe, datetimes=datetimes)
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
-    f, ax = func(dataframe, datetimes=(None, datetimes[1]))
+
+@pytest.mark.parametrize("hue", ["game_id", "steam_id"])
+def test_lineplot(dataframe: pd.DataFrame, hue):
+    """Test the lineplot function."""
+    f, ax = plot_lineplot(dataframe, hue)
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
-    f, ax = func(dataframe, datetimes=(datetimes[0], None))
+
+def test_select_and_map_steam_ids(dataframe: pd.DataFrame, steam_ids: list[str]):
+    """Test selection and mapping of steam IDs functions."""
+    f, ax = plot_heatmap(
+        dataframe,
+        steam_ids=steam_ids,
+        steam_ids_mapping={elt: str(k) for k, elt in enumerate(steam_ids)},
+    )
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
-    _, ax = plt.subplots(1, 1)
-    func(dataframe, steam_ids, ax=ax)
+
+def test_select_and_map_too_many_steam_ids(
+    dataframe: pd.DataFrame, steam_ids: list[str]
+):
+    """Test selection and mapping of steam IDs functions."""
+    mapping = {elt: str(k) for k, elt in enumerate(steam_ids)}
+    mapping["test"] = "101"
+    f, ax = plot_heatmap(
+        dataframe,
+        steam_ids=steam_ids,
+        steam_ids_mapping=mapping,
+    )
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+
+def test_select_and_map_too_few_steam_ids(
+    dataframe: pd.DataFrame, steam_ids: list[str]
+):
+    """Test selection and mapping of steam IDs functions."""
+    mapping = {elt: str(k) for k, elt in enumerate(steam_ids)}
+    del mapping[steam_ids[0]]
+    with pytest.raises(ValueError, match="must contain all the keys"):
+        plot_heatmap(
+            dataframe,
+            steam_ids=steam_ids,
+            steam_ids_mapping=mapping,
+        )
