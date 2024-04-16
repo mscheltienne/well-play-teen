@@ -99,7 +99,7 @@ def plot_barplot_total_gametime(
     ----------
     %(df_gametime)s
     %(steam_ids)s
-    %(datetime)s
+    %(datetimes)s
     %(ax_arg)s
 
     Returns

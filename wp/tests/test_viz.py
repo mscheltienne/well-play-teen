@@ -32,7 +32,20 @@ def steam_ids() -> list[str]:
     return ["76561198329580279", "76561198329580271"]
 
 
-def test_plot_heatmap(dataframe: pd.DataFrame, steam_ids: list[str]):
+@pytest.fixture(scope="function")
+def datetimes() -> tuple[pd.Timestamp, pd.Timestamp]:
+    """Start/Stop datetimes to select."""
+    return (
+        pd.Timestamp(year=2024, month=4, day=12, hour=12),
+        pd.Timestamp(year=2024, month=4, day=12, hour=16),
+    )
+
+
+def test_plot_heatmap(
+    dataframe: pd.DataFrame,
+    steam_ids: list[str],
+    datetimes: tuple[pd.Timestamp, pd.Timestamp],
+):
     """Test the plot_heatmap function."""
     f, ax = plot_heatmap(dataframe)
     assert isinstance(f, plt.Figure)
@@ -42,11 +55,19 @@ def test_plot_heatmap(dataframe: pd.DataFrame, steam_ids: list[str]):
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
+    f, ax = plot_heatmap(dataframe, datetimes=datetimes)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
     _, ax = plt.subplots(1, 1)
     plot_heatmap(dataframe, steam_ids, ax=ax)
 
 
-def test_plot_barplot_total_gametime(dataframe: pd.DataFrame, steam_ids: list[str]):
+def test_plot_barplot_total_gametime(
+    dataframe: pd.DataFrame,
+    steam_ids: list[str],
+    datetimes: tuple[pd.Timestamp, pd.Timestamp],
+):
     """Test the plot_barplot_total_gametime function."""
     f, ax = plot_barplot_total_gametime(dataframe)
     assert isinstance(f, plt.Figure)
@@ -56,18 +77,31 @@ def test_plot_barplot_total_gametime(dataframe: pd.DataFrame, steam_ids: list[st
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
+    f, ax = plot_barplot_total_gametime(dataframe, datetimes=datetimes)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
     _, ax = plt.subplots(1, 1)
     plot_barplot_total_gametime(dataframe, steam_ids, ax=ax)
 
 
 @pytest.mark.parametrize("hue", ["game_id", "steam_id"])
-def test_plot_lineplot(dataframe: pd.DataFrame, steam_ids: list[str], hue: str):
+def test_plot_lineplot(
+    dataframe: pd.DataFrame,
+    steam_ids: list[str],
+    datetimes: tuple[pd.Timestamp, pd.Timestamp],
+    hue: str,
+):
     """Test the plot_lineplot function."""
     f, ax = plot_lineplot(dataframe, hue)
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
     f, ax = plot_lineplot(dataframe, hue, steam_ids)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_lineplot(dataframe, hue, datetimes=datetimes)
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
