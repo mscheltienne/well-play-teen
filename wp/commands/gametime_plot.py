@@ -3,6 +3,7 @@ from datetime import datetime
 
 import pandas as pd
 
+from ..config import DF_DTYPES
 from ..utils._checks import ensure_path
 from ..viz import plot_barplot_total_gametime, plot_heatmap, plot_lineplot
 
@@ -46,7 +47,7 @@ def run() -> None:
     now = datetime.now().strftime("%Y%m%d")
     out = fname.parent / "plots" / now
     out.mkdir(parents=True, exist_ok=True)
-    df = pd.read_csv(fname, index_col=0, dtype={"steam_id": str})
+    df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
 
     if args.steam_ids is not None:
         steam_ids = ensure_path(args.steam_ids, must_exist=True)

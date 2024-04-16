@@ -7,6 +7,7 @@ import pandas as pd
 import pytest
 from matplotlib import pyplot as plt
 
+from wp.config import DF_DTYPES
 from wp.viz import plot_barplot_total_gametime, plot_heatmap, plot_lineplot
 
 if TYPE_CHECKING:
@@ -22,7 +23,7 @@ def fname() -> Path:
 @pytest.fixture(scope="function")
 def dataframe(fname) -> pd.DataFrame:
     """Load a gametime CSV dataset."""
-    return pd.read_csv(fname, index_col=0, dtype={"steam_id": str})
+    return pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
 
 
 @pytest.fixture(scope="function")

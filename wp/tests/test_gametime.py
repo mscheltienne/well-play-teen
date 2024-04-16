@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 from numpy.testing import assert_allclose
 
-from wp.config import STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
+from wp.config import DF_DTYPES, STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
 from wp.gametime import (
     _BACKUP_DAYS,
     clean_backup_and_logs,
@@ -90,19 +90,34 @@ def test_update_gametime_dataset(tmp_path, steam_id):
     assert (tmp_path / "gametime.csv").exists()
     assert len([elt for elt in (tmp_path / "backup").iterdir()]) == 0
     assert len([elt for elt in (tmp_path / "logs").iterdir()]) == 1
-    df = pd.read_csv(tmp_path / "gametime.csv", index_col=0, dtype={"steam_id": str})
+    df = pd.read_csv(
+        tmp_path / "gametime.csv",
+        index_col=0,
+        dtype=DF_DTYPES,
+        parse_dates=["acq_time"],
+    )
     assert df.shape == (1, 5)
     assert np.isnan(df["game_time_diff"].values).all()
     assert 0 < df["game_time"].values[0]
     # add second query of the same game
     update_gametime_dataset(tmp_path, [steam_id], [])
-    df = pd.read_csv(tmp_path / "gametime.csv", index_col=0, dtype={"steam_id": str})
+    df = pd.read_csv(
+        tmp_path / "gametime.csv",
+        index_col=0,
+        dtype=DF_DTYPES,
+        parse_dates=["acq_time"],
+    )
     assert df.shape == (2, 5)
     assert_allclose(df["game_time_diff"].values, [np.nan, 0], equal_nan=True)
     assert np.all(0 < df["game_time"].values)
     # add third query with different game
     update_gametime_dataset(tmp_path, [], [steam_id])
-    df = pd.read_csv(tmp_path / "gametime.csv", index_col=0, dtype={"steam_id": str})
+    df = pd.read_csv(
+        tmp_path / "gametime.csv",
+        index_col=0,
+        dtype=DF_DTYPES,
+        parse_dates=["acq_time"],
+    )
     # don't bother checking something else than the shape, we are not suppose to call
     # the same steam ID with both games
     assert df.shape == (3, 5)
