@@ -28,6 +28,11 @@ ax : Axes
 # -- B ---------------------------------------------------------------------------------
 # -- C ---------------------------------------------------------------------------------
 # -- D ---------------------------------------------------------------------------------
+docdict["datetimes"] = """
+datetimes : tuple of pd.Timestamp | list of pd.Timestamp | None
+    The start and stop datetimes to select and plot. If None, all datetimes are
+    plotted."""
+
 docdict["df_gametime"] = """
 df : pd.DataFrame
     The DataFrame with the gametime data. The DataFrame should have columns

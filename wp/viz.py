@@ -10,6 +10,7 @@ from .utils._docs import fill_doc
 def plot_heatmap(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] | None = None,
+    datetimes: tuple[pd.Timestamp, pd.Timestamp] | list[pd.Timestamp] | None = None,
     ax: plt.Axes | None = None,
 ) -> tuple[plt.Figure, plt.Axes]:
     """Plot a heatmap of the gametime deltas.
@@ -18,6 +19,7 @@ def plot_heatmap(
     ----------
     %(df_gametime)s
     %(steam_ids)s
+    %(datetimes)s
     %(ax_arg)s
 
     Returns
@@ -27,12 +29,16 @@ def plot_heatmap(
     """
     check_type(df, (pd.DataFrame,), "df")
     _check_steam_ids(steam_ids)
+    _check_datetimes(datetimes)
     check_type(ax, (plt.Axes, None), "ax")
+    if steam_ids is not None:
+        df = df[df["steam_id"].isin(steam_ids)]
+    if datetimes is not None:
+        mask = (datetimes[0] <= df["acq_time"]) & (df["acq_time"] <= datetimes[1])
+        df = df.loc[mask]
     pivot_df = df.pivot_table(
         index="steam_id", columns="acq_time", values="game_time_diff"
     )
-    if steam_ids is not None:
-        pivot_df = pivot_df.loc[steam_ids]
     if ax is None:
         _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
     ax = sns.heatmap(pivot_df, ax=ax)
@@ -44,6 +50,7 @@ def plot_lineplot(
     df: pd.DataFrame,
     hue: str,
     steam_ids: list[str] | tuple[str, ...] | None = None,
+    datetimes: tuple[pd.Timestamp, pd.Timestamp] | list[pd.Timestamp] | None = None,
     ax: plt.Axes | None = None,
 ) -> tuple[plt.Figure, plt.Axes]:
     """Plot a lineplot of the gametime.
@@ -54,6 +61,7 @@ def plot_lineplot(
     hue : str
         Either "game_id" or "steam_id".
     %(steam_ids)s
+    %(datetimes)s
     %(ax_arg)s
 
     Returns
@@ -65,9 +73,13 @@ def plot_lineplot(
     check_type(hue, (str,), "hue")
     check_value(hue, ("game_id", "steam_id"), "hue")
     _check_steam_ids(steam_ids)
+    _check_datetimes(datetimes)
     check_type(ax, (plt.Axes, None), "ax")
     if steam_ids is not None:
         df = df[df["steam_id"].isin(steam_ids)]
+    if datetimes is not None:
+        mask = (datetimes[0] <= df["acq_time"]) & (df["acq_time"] <= datetimes[1])
+        df = df.loc[mask]
     if ax is None:
         _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
     ax = sns.lineplot(df, x="acq_time", y="game_time", hue=hue, ax=ax)
@@ -78,6 +90,7 @@ def plot_lineplot(
 def plot_barplot_total_gametime(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] = None,
+    datetimes: tuple[pd.Timestamp, pd.Timestamp] | list[pd.Timestamp] | None = None,
     ax: plt.Axes | None = None,
 ) -> tuple[plt.Figure, plt.Axes]:
     """Plot a barplot of the total gametime.
@@ -86,6 +99,7 @@ def plot_barplot_total_gametime(
     ----------
     %(df_gametime)s
     %(steam_ids)s
+    %(datetime)s
     %(ax_arg)s
 
     Returns
@@ -95,9 +109,13 @@ def plot_barplot_total_gametime(
     """
     check_type(df, (pd.DataFrame,), "df")
     _check_steam_ids(steam_ids)
+    _check_datetimes(datetimes)
     check_type(ax, (plt.Axes, None), "ax")
     if steam_ids is not None:
         df = df[df["steam_id"].isin(steam_ids)]
+    if datetimes is not None:
+        mask = (datetimes[0] <= df["acq_time"]) & (df["acq_time"] <= datetimes[1])
+        df = df.loc[mask]
     data = dict()
     for elt in df.groupby("steam_id"):
         data[elt[0]] = []
@@ -116,3 +134,15 @@ def _check_steam_ids(steam_ids: list[str] | tuple[str, ...] | None):
             check_type(elt, (str,), "steam_id")
         if len(steam_ids) == 0:
             raise ValueError("steam_ids cannot be an empty list or tuple.")
+
+
+def _check_datetimes(
+    datetimes: tuple[pd.Timestamp, pd.Timestamp] | list[pd.Timestamp] | None,
+):
+    """Validate the datetimes parameter."""
+    check_type(datetimes, (tuple, None), "datetimes")
+    if datetimes is not None:
+        check_type(datetimes[0], (pd.Timestamp,), "datetimes[0]")
+        check_type(datetimes[1], (pd.Timestamp,), "datetimes[1]")
+        if datetimes[1] < datetimes[0]:
+            raise ValueError("datetimes[1] must be greater than datetimes[0].")
