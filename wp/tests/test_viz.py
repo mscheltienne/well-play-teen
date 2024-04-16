@@ -59,6 +59,14 @@ def test_plot_heatmap(
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
+    f, ax = plot_heatmap(dataframe, datetimes=(None, datetimes[1]))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_heatmap(dataframe, datetimes=(datetimes[0], None))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
     _, ax = plt.subplots(1, 1)
     plot_heatmap(dataframe, steam_ids, ax=ax)
 
@@ -78,6 +86,14 @@ def test_plot_barplot_total_gametime(
     assert isinstance(ax, plt.Axes)
 
     f, ax = plot_barplot_total_gametime(dataframe, datetimes=datetimes)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot_total_gametime(dataframe, datetimes=(None, datetimes[1]))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot_total_gametime(dataframe, datetimes=(datetimes[0], None))
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 
@@ -102,6 +118,14 @@ def test_plot_lineplot(
     assert isinstance(ax, plt.Axes)
 
     f, ax = plot_lineplot(dataframe, hue, datetimes=datetimes)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_lineplot(dataframe, hue, datetimes=(None, datetimes[1]))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_lineplot(dataframe, hue, datetimes=(datetimes[0], None))
     assert isinstance(f, plt.Figure)
     assert isinstance(ax, plt.Axes)
 

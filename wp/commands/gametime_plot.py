@@ -28,6 +28,22 @@ def run() -> None:
         default=None,
     )
     parser.add_argument(
+        "-dt-start",
+        "--datetime-start",
+        type=str,
+        metavar="str",
+        help="start date to select, format 'YYYY-MM-DD HH:MM:SS'.",
+        default=None,
+    )
+    parser.add_argument(
+        "-dt-stop",
+        "--datetime-stop",
+        type=str,
+        metavar="str",
+        help="stop date to select, format 'YYYY-MM-DD HH:MM:SS'.",
+        default=None,
+    )
+    parser.add_argument(
         "--lineplot",
         help="plot the lineplots.",
         action="store_true",
@@ -55,16 +71,20 @@ def run() -> None:
             ids = [elt.strip() for elt in fid.readlines() if len(elt.strip()) != 0]
     else:
         ids = None
+    dt_start = (
+        None if args.datetime_start is None else pd.Timestamp(args.datetime_start)
+    )
+    dt_stop = None if args.datetime_stop is None else pd.Timestamp(args.datetime_stop)
 
     now = datetime.now().strftime("%Y%m%d-%H%M%S")
     if args.lineplot:
-        f, _ = plot_lineplot(df, "game_id", ids)
+        f, _ = plot_lineplot(df, "game_id", ids, (dt_start, dt_stop))
         f.savefig(out / f"lineplot_gid_{now}.svg", transparent=True)
-        f, _ = plot_lineplot(df, "steam_id", ids)
+        f, _ = plot_lineplot(df, "steam_id", ids, (dt_start, dt_stop))
         f.savefig(out / f"lineplot_sid_{now}.svg", transparent=True)
     if args.heatmap:
-        f, _ = plot_heatmap(df, ids)
+        f, _ = plot_heatmap(df, ids, (dt_start, dt_stop))
         f.savefig(out / f"heatmap_{now}.svg", transparent=True)
     if args.barplot:
-        f, _ = plot_barplot_total_gametime(df, ids)
+        f, _ = plot_barplot_total_gametime(df, ids, (dt_start, dt_stop))
         f.savefig(out / f"barplot_{now}.svg", transparent=True)
