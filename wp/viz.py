@@ -85,6 +85,41 @@ def plot_lineplot(
 
 
 @fill_doc
+def plot_barplot(
+    df: pd.DataFrame,
+    steam_ids: list[str] | tuple[str, ...] = None,
+    datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
+    | list[pd.Timestamp | None] = (None, None),
+    ax: plt.Axes | None = None,
+) -> tuple[plt.Figure, plt.Axes]:
+    """Plot a barplot of the total gametime per datetime.
+
+    Parameters
+    ----------
+    %(df_gametime)s
+    %(steam_ids)s
+    %(datetimes)s
+    %(ax_arg)s
+
+    Returns
+    -------
+    %(fig)s
+    %(ax_return)s
+    """
+    check_type(df, (pd.DataFrame,), "df")
+    _check_steam_ids(steam_ids)
+    _check_datetimes(datetimes)
+    check_type(ax, (plt.Axes, None), "ax")
+    if steam_ids is not None:
+        df = df[df["steam_id"].isin(steam_ids)]
+    df = _select_datetimes(df, datetimes)
+    if ax is None:
+        _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
+    ax = sns.barplot(df, x="acq_time", y="game_time", hue="steam_id", ax=ax)
+    return ax.figure, ax
+
+
+@fill_doc
 def plot_barplot_total_gametime(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] = None,

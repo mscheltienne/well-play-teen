@@ -5,7 +5,7 @@ import pandas as pd
 
 from ..config import DF_DTYPES
 from ..utils._checks import ensure_path
-from ..viz import plot_barplot_total_gametime, plot_heatmap, plot_lineplot
+from ..viz import plot_barplot, plot_barplot_total_gametime, plot_heatmap, plot_lineplot
 
 
 def run() -> None:
@@ -54,8 +54,13 @@ def run() -> None:
         action="store_true",
     )
     parser.add_argument(
-        "--barplot",
-        help="plot the total gametime barplot.",
+        "--barplot-dts",
+        help="plot the total gametime barplot / date.",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--barplot-ids",
+        help="plot the total gametime barplot / IDs.",
         action="store_true",
     )
     args = parser.parse_args()
@@ -91,6 +96,9 @@ def run() -> None:
     if args.heatmap:
         f, _ = plot_heatmap(df, ids, (dt_start, dt_stop))
         f.savefig(out / f"heatmap_{now}.svg", transparent=True)
-    if args.barplot:
+    if args.barplot_dts:
+        f, _ = plot_barplot(df, ids, (dt_start, dt_stop))
+        f.savefig(out / f"barplot_dts_{now}.svg", transparent=True)
+    if args.barplot_ids:
         f, _ = plot_barplot_total_gametime(df, ids, (dt_start, dt_stop))
-        f.savefig(out / f"barplot_{now}.svg", transparent=True)
+        f.savefig(out / f"barplot_ids_{now}.svg", transparent=True)

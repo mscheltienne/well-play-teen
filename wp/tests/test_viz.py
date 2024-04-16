@@ -8,7 +8,12 @@ import pytest
 from matplotlib import pyplot as plt
 
 from wp.config import DF_DTYPES
-from wp.viz import plot_barplot_total_gametime, plot_heatmap, plot_lineplot
+from wp.viz import (
+    plot_barplot,
+    plot_barplot_total_gametime,
+    plot_heatmap,
+    plot_lineplot,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -71,36 +76,6 @@ def test_plot_heatmap(
     plot_heatmap(dataframe, steam_ids, ax=ax)
 
 
-def test_plot_barplot_total_gametime(
-    dataframe: pd.DataFrame,
-    steam_ids: list[str],
-    datetimes: tuple[pd.Timestamp, pd.Timestamp],
-):
-    """Test the plot_barplot_total_gametime function."""
-    f, ax = plot_barplot_total_gametime(dataframe)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_barplot_total_gametime(dataframe, steam_ids)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_barplot_total_gametime(dataframe, datetimes=datetimes)
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_barplot_total_gametime(dataframe, datetimes=(None, datetimes[1]))
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    f, ax = plot_barplot_total_gametime(dataframe, datetimes=(datetimes[0], None))
-    assert isinstance(f, plt.Figure)
-    assert isinstance(ax, plt.Axes)
-
-    _, ax = plt.subplots(1, 1)
-    plot_barplot_total_gametime(dataframe, steam_ids, ax=ax)
-
-
 @pytest.mark.parametrize("hue", ["game_id", "steam_id"])
 def test_plot_lineplot(
     dataframe: pd.DataFrame,
@@ -131,3 +106,63 @@ def test_plot_lineplot(
 
     _, ax = plt.subplots(1, 1)
     plot_lineplot(dataframe, hue, steam_ids, ax=ax)
+
+
+def test_plot_barplot(
+    dataframe: pd.DataFrame,
+    steam_ids: list[str],
+    datetimes: tuple[pd.Timestamp, pd.Timestamp],
+):
+    """Test the plot_barplot_total_gametime function."""
+    f, ax = plot_barplot(dataframe)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot(dataframe, steam_ids)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot(dataframe, datetimes=datetimes)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot(dataframe, datetimes=(None, datetimes[1]))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot(dataframe, datetimes=(datetimes[0], None))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    _, ax = plt.subplots(1, 1)
+    plot_barplot(dataframe, steam_ids, ax=ax)
+
+
+def test_plot_barplot_total_gametime(
+    dataframe: pd.DataFrame,
+    steam_ids: list[str],
+    datetimes: tuple[pd.Timestamp, pd.Timestamp],
+):
+    """Test the plot_barplot_total_gametime function."""
+    f, ax = plot_barplot_total_gametime(dataframe)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot_total_gametime(dataframe, steam_ids)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot_total_gametime(dataframe, datetimes=datetimes)
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot_total_gametime(dataframe, datetimes=(None, datetimes[1]))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    f, ax = plot_barplot_total_gametime(dataframe, datetimes=(datetimes[0], None))
+    assert isinstance(f, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+
+    _, ax = plt.subplots(1, 1)
+    plot_barplot_total_gametime(dataframe, steam_ids, ax=ax)
