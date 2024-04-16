@@ -136,3 +136,11 @@ def test_select_and_map_too_few_steam_ids(
             steam_ids=None,
             steam_ids_mapping=mapping,
         )
+
+    del mapping[steam_ids[0]]
+    with pytest.raises(ValueError, match="must contain all the keys"):
+        plot_heatmap(
+            dataframe,
+            steam_ids=steam_ids,
+            steam_ids_mapping=mapping,
+        )

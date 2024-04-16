@@ -39,6 +39,11 @@ def plot_heatmap(
     if ax is None:
         _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
     ax = sns.heatmap(pivot_df, ax=ax)
+    ax.set_xticks(list(ax.get_xticks() - 0.5) + [ax.get_xticks()[-1] + 0.5])
+    ax.set_xticklabels(
+        df["acq_time"].sort_values().unique().strftime("%Y-%m-%d\n %H:%M"),
+        rotation=50,
+    )
     return ax.figure, ax
 
 
@@ -76,6 +81,11 @@ def plot_lineplot(
     if ax is None:
         _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
     ax = sns.lineplot(df, x="acq_time", y="game_time", hue=hue, ax=ax)
+    ax.set_xticks(ax.get_xticks())  # avoids warning on set_xticklabels
+    ax.set_xticklabels(
+        df["acq_time"].sort_values().unique().strftime("%Y-%m-%d\n %H:%M"),
+        rotation=50,
+    )
     return ax.figure, ax
 
 
@@ -200,6 +210,8 @@ def _select_datetimes(
 
 def _map_game_id(df: pd.DataFrame) -> pd.DataFrame:
     """Map the game IDs to game names."""
+    if sorted(df["game_id"].unique()) == ["Bejeweled", "Ecorescue"]:
+        return df  # no-op
     mapping = {
         str(STEAM_ECO_RESCUE_APP_ID): "Ecorescue",
         str(STEAM_BEJEWELED_APP_ID): "Bejeweled",
@@ -215,6 +227,8 @@ def _map_game_id(df: pd.DataFrame) -> pd.DataFrame:
 
 def _map_steam_id(df: pd.DataFrame, mapping: dict[str, str]) -> pd.DataFrame:
     """Map the steam IDs to user names."""
+    if all(elt in mapping.values() for elt in df["steam_id"].unique()):
+        return df  # no-op
     mapping = {
         key: value for key, value in mapping.items() if key in df["steam_id"].unique()
     }
