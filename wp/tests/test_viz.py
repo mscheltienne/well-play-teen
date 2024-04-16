@@ -36,8 +36,8 @@ def steam_ids() -> list[str]:
 def datetimes() -> tuple[pd.Timestamp, pd.Timestamp]:
     """Start/Stop datetimes to select."""
     return (
-        pd.Timestamp(year=2024, month=4, day=12, hour=12),
-        pd.Timestamp(year=2024, month=4, day=12, hour=16),
+        pd.Timestamp(year=2024, month=4, day=12, hour=12, tz="utc"),
+        pd.Timestamp(year=2024, month=4, day=12, hour=16, tz="utc"),
     )
 
 

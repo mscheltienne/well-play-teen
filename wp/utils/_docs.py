@@ -30,10 +30,10 @@ ax : Axes
 # -- D ---------------------------------------------------------------------------------
 docdict["datetimes"] = """
 datetimes : tuple of pd.Timestamp | list of pd.Timestamp
-    The start and stop datetimes to select and plot. Start or Stop can be set to None,
-    to select all datetimes. (None, None) selects all datetimes. (None, pd.Timestamp)
-    selects up to the stop datetime. (pd.Timestamp, None) selects from the start
-    datetime."""
+    The start and stop datetimes (UTC) to select and plot. Start or Stop can be set to
+    None, to select all datetimes. (None, None) selects all datetimes. (None,
+    pd.Timestamp) selects up to the stop datetime. (pd.Timestamp, None) selects from the
+    start datetime."""
 
 docdict["df_gametime"] = """
 df : pd.DataFrame

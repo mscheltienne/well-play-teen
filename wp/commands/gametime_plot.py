@@ -32,7 +32,7 @@ def run() -> None:
         "--datetime-start",
         type=str,
         metavar="str",
-        help="start date to select, format 'YYYY-MM-DD HH:MM:SS'.",
+        help="start datetime to select, format UTC 'YYYY-MM-DD HH:MM:SS'.",
         default=None,
     )
     parser.add_argument(
@@ -40,7 +40,7 @@ def run() -> None:
         "--datetime-stop",
         type=str,
         metavar="str",
-        help="stop date to select, format 'YYYY-MM-DD HH:MM:SS'.",
+        help="stop datetime to select, format UTC 'YYYY-MM-DD HH:MM:SS'.",
         default=None,
     )
     parser.add_argument(
@@ -72,9 +72,15 @@ def run() -> None:
     else:
         ids = None
     dt_start = (
-        None if args.datetime_start is None else pd.Timestamp(args.datetime_start)
+        None
+        if args.datetime_start is None
+        else pd.Timestamp(args.datetime_start, tz="utc")
     )
-    dt_stop = None if args.datetime_stop is None else pd.Timestamp(args.datetime_stop)
+    dt_stop = (
+        None
+        if args.datetime_stop is None
+        else pd.Timestamp(args.datetime_stop, tz="utc")
+    )
 
     now = datetime.now().strftime("%Y%m%d-%H%M%S")
     if args.lineplot:

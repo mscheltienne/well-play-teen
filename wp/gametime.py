@@ -143,7 +143,7 @@ def update_gametime_dataset(
         warn("Empty gametime dataset.")
         df = pd.DataFrame(dataset)
     # fetch new datapoints
-    ts = pd.Timestamp.now()  # simpler for visualization and triage
+    ts = pd.Timestamp.now(tz="utc")  # simpler for visualization and triage
     for steam_ids, game_id in (
         (steam_ids_ecorescue, STEAM_ECO_RESCUE_APP_ID),
         (steam_ids_bejeweled, STEAM_BEJEWELED_APP_ID),
