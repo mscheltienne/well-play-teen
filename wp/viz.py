@@ -108,6 +108,11 @@ def plot_barplot_dts(
     if ax is None:
         _, ax = plt.subplots(1, 1, figsize=(10, 10), layout="constrained")
     ax = sns.barplot(df, x="acq_time", y="game_time", hue="steam_id", ax=ax)
+    ax.set_xticks(ax.get_xticks())  # avoids warning on set_xticklabels
+    ax.set_xticklabels(
+        df["acq_time"].sort_values().unique().strftime("%Y-%m-%d\n %H:%M"),
+        rotation=50,
+    )
     return ax.figure, ax
 
 
