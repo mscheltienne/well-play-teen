@@ -85,7 +85,7 @@ def plot_lineplot(
 
 
 @fill_doc
-def plot_barplot(
+def plot_barplot_dts(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] = None,
     datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
@@ -120,14 +120,14 @@ def plot_barplot(
 
 
 @fill_doc
-def plot_barplot_total_gametime(
+def plot_barplot_ids(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...] = None,
     datetimes: tuple[pd.Timestamp | None, pd.Timestamp | None]
     | list[pd.Timestamp | None] = (None, None),
     ax: plt.Axes | None = None,
 ) -> tuple[plt.Figure, plt.Axes]:
-    """Plot a barplot of the total gametime.
+    """Plot a barplot of the total gametime per IDs.
 
     Parameters
     ----------
