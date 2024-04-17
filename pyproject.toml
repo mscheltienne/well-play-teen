@@ -79,7 +79,6 @@ website = [
 
 [project.scripts]
 wp-gametime = 'wp.commands.gametime:run'
-wp-gametime-plot = 'wp.commands.gametime_plot:run'
 wp-sys_info = 'wp.commands.sys_info:run'
 
 [project.urls]
