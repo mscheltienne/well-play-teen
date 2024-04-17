@@ -20,7 +20,6 @@ def prepare_dataframe(
     for key, value in steam_ids_mapping.items():
         check_type(key, (str,), "steam_ids_mapping key")
         check_type(value, (str,), "steam_ids_mapping value")
-
     # map game IDs
     ids = sorted(df["game_id"].unique())
     ids_warn = [
@@ -32,16 +31,14 @@ def prepare_dataframe(
         warn(f"Unexpected game IDs in the dataframe: {ids_warn}.")
     mapping = {key: _GAME_IDs_MAPPING.get(key, key) for key in ids}
     df.loc[:, "game_id"] = df["game_id"].map(mapping)
-
     # map steam IDs
     ids = sorted(df["steam_id"].unique())
     mapping = {key: steam_ids_mapping.get(key, key) for key in ids}
     df.loc[:, "steam_id"] = df["steam_id"].map(mapping)
-
     return df
 
 
-def df_select_steam_ids(df, steam_ids: list[str] | tuple[str, ...]):
+def select_steam_ids(df: pd.DataFrame, steam_ids: list[str] | tuple[str, ...]):
     """Select steam IDs from the dataframe."""
     check_gametime_dataframe(df)
     check_type(steam_ids, (list, tuple), "steam_ids")
@@ -51,27 +48,26 @@ def df_select_steam_ids(df, steam_ids: list[str] | tuple[str, ...]):
     return df
 
 
-def df_select_datetimes(
-    df, start: str | pd.Timestamp | None, stop: str | pd.Timestamp | None
+def select_datetimes(
+    df: pd.DataFrame,
+    start: str | pd.Timestamp | None,
+    stop: str | pd.Timestamp | None,
+    freq: str | pd.Timedelta | None = None,
 ) -> pd.DataFrame:
-    """Select datetimes from the dataframe."""
+    """Select and resample datetimes from the dataframe."""
     check_gametime_dataframe(df)
     check_type(start, (str, pd.Timestamp, None), "start")
     check_type(stop, (str, pd.Timestamp, None), "stop")
+    check_type(freq, (str, pd.Timedelta, None), "freq")
     if isinstance(start, str):  # 'YYYY-MM-DD HH:MM:SS'
         start = pd.Timestamp(start, tz="utc")
     if isinstance(stop, str):  # 'YYYY-MM-DD HH:MM:SS'
         stop = pd.Timestamp(stop, tz="utc")
-    if start is not None and stop is not None:
-        if stop < start:
-            raise ValueError(
-                "The stop datetime must be greater than the start datetime."
-            )
-        mask = (start <= df["acq_time"]) & (df["acq_time"] <= stop)
-    elif start is None and stop is not None:
-        mask = df["acq_time"] <= stop
-    elif start is not None and stop is None:
-        mask = start <= df["acq_time"]
-    else:
-        return df
-    return df.loc[mask]
+    if start is not None and stop is not None and stop < start:
+        raise ValueError("The stop datetime must be greater than the start datetime.")
+    start = df["acq_time"].min() if start is None else start
+    stop = df["acq_time"].max() if stop is None else stop
+    mask = (start <= df["acq_time"]) & (df["acq_time"] <= stop)
+    df = df.loc[mask]
+    dt_range = pd.date_range(start, stop, freq=freq)  # noqa
+    return df
