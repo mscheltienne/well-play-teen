@@ -45,6 +45,7 @@ def select_steam_ids(df: pd.DataFrame, steam_ids: list[str] | tuple[str, ...]):
     for steam_id in steam_ids:
         check_type(steam_id, (str,), "steam_id")
     df = df[df["steam_id"].isin(steam_ids)]
+    df.reset_index(drop=True, inplace=True)
     return df
 
 
@@ -69,16 +70,21 @@ def select_datetimes(
     stop = df["acq_time"].max() if stop is None else stop
     mask = (start <= df["acq_time"]) & (df["acq_time"] <= stop)
     df = df.loc[mask]
-    if freq is None:
-        return df
-    idx = list()
-    for dt in pd.date_range(start, stop, freq=freq):
-        series = abs(df["acq_time"] - dt)
-        idx.extend(list(series[series == series.min()].index))
-    if len(idx) != len(set(idx)):
-        warn(
-            "Duplicate indices found. Pay attention to the resampling frequency "
-            f"requested '{freq}'. Dropping duplicates."
-        )
-    idx = sorted(set(idx))
-    return df.loc[idx]
+    if freq is not None:
+        idx = list()
+        for dt in pd.date_range(start, stop, freq=freq):
+            series = abs(df["acq_time"] - dt)
+            idx.extend(list(series[series == series.min()].index))
+        if len(idx) != len(set(idx)):
+            warn(
+                "Duplicate indices found. Pay attention to the resampling frequency "
+                f"requested '{freq}'. Dropping duplicates."
+            )
+        idx = sorted(set(idx))
+        df = df.loc[idx]
+        # and now we need to recompute the game_time_diff
+        df.drop(labels="game_time_diff", axis=1, inplace=True)
+        diff = df.groupby("steam_id")["game_time"].diff().rename("game_time_diff")
+        df = pd.concat([df, diff], axis=1)
+    df.reset_index(drop=True, inplace=True)
+    return df

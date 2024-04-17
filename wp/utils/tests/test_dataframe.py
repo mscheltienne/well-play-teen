@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import pytest
 
@@ -47,9 +48,10 @@ def test_select_steam_ids(gametime_dataframe_fname):
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
     )
     ids = sorted(df["steam_id"].unique())
-    assert 1 < len(ids)  # more than 2 steam ID
-    df = select_steam_ids(df, [ids[0]])
-    assert sorted(df["steam_id"].unique()) == [ids[0]]
+    assert 3 < len(ids)  # more than 2 steam ID
+    df = select_steam_ids(df, [ids[2]])
+    assert sorted(df["steam_id"].unique()) == [ids[2]]
+    assert (df.index == range(0, len(df))).all()
 
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
@@ -58,6 +60,7 @@ def test_select_steam_ids(gametime_dataframe_fname):
     assert 2 < len(ids)  # more than 2 steam ID
     df = select_steam_ids(df, [ids[0], ids[1]])
     assert sorted(df["steam_id"].unique()) == [ids[0], ids[1]]
+    assert (df.index == range(0, len(df))).all()
 
     with pytest.raises(TypeError, match="must be an instance of"):
         select_steam_ids(df, 101)
@@ -75,6 +78,7 @@ def test_select_datetimes(gametime_dataframe_fname):
     df = select_datetimes(df, min_dt, min_dt + pd.Timedelta(hours=2))
     assert min_dt in df["acq_time"].unique()  # inclusion of edges
     assert df["acq_time"].unique().max() <= min_dt + pd.Timedelta(hours=2)
+    assert (df.index == range(0, len(df))).all()
 
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
@@ -82,6 +86,7 @@ def test_select_datetimes(gametime_dataframe_fname):
     size = df.size
     df = select_datetimes(df, None, max_dt)
     assert df.size == size  # unchanged
+    assert (df.index == range(0, len(df))).all()
 
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
@@ -89,6 +94,7 @@ def test_select_datetimes(gametime_dataframe_fname):
     size = df.size
     df = select_datetimes(df, None, None)
     assert df.size == size  # unchanged
+    assert (df.index == range(0, len(df))).all()
 
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
@@ -96,12 +102,14 @@ def test_select_datetimes(gametime_dataframe_fname):
     df = select_datetimes(df, None, max_dt - pd.Timedelta(hours=2))
     assert min_dt == df["acq_time"].unique().min()
     assert df["acq_time"].unique().max() <= max_dt - pd.Timedelta(hours=2)
+    assert (df.index == range(0, len(df))).all()
 
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
     )
     df = select_datetimes(df, None, max_dt - pd.Timedelta(weeks=101))
     assert df.size == 0
+    assert (df.index == range(0, len(df))).all()
 
     # start greater than stop
     df = pd.read_csv(
@@ -118,6 +126,7 @@ def test_select_datetimes(gametime_dataframe_fname):
         df, f"{min_dt.year}-{min_dt.month}-{min_dt.day} {min_dt.hour + 2}:00", None
     )
     assert min_dt + pd.Timedelta(hours=2) <= df["acq_time"].unique().min()
+    assert (df.index == range(0, len(df))).all()
 
 
 def test_resampling(gametime_dataframe_fname):
@@ -130,6 +139,7 @@ def test_resampling(gametime_dataframe_fname):
     delta = max_dt - min_dt
     df = select_datetimes(df, None, None, freq=f"{delta.days + 1}D")
     assert df["steam_id"].unique().size == df["steam_id"].size
+    assert (df.index == range(0, len(df))).all()
 
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
@@ -139,3 +149,24 @@ def test_resampling(gametime_dataframe_fname):
     assert 2 <= n
     df = select_datetimes(df, None, None, freq="2h")
     assert df["steam_id"].unique().size * (n + 1) == df["steam_id"].size
+    assert (df.index == range(0, len(df))).all()
+
+    # check game_time_diff
+    df_ori = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    for steam_id in df["steam_id"].unique():
+        sel = df[df["steam_id"] == steam_id]
+        sel_ori = df_ori[df_ori["steam_id"] == steam_id]
+        sum_ = 0
+        i = 0
+        for k, elt in enumerate(sel_ori["acq_time"].isin(sel["acq_time"]).values):
+            if k == 0:
+                assert np.isnan(sel["game_time_diff"].values[k])
+                i += 1
+                continue
+            sum_ += sel_ori["game_time_diff"].values[k]
+            if elt:
+                assert sum_ == sel["game_time_diff"].values[i]
+                sum_ = 0
+                i += 1
