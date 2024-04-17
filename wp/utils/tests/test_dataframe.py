@@ -65,7 +65,7 @@ def test_select_steam_ids(gametime_dataframe_fname):
         select_steam_ids(df, [101])
 
 
-def test_df_select_datetimes(gametime_dataframe_fname):
+def test_select_datetimes(gametime_dataframe_fname):
     """Test selection of dates."""
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
@@ -118,3 +118,24 @@ def test_df_select_datetimes(gametime_dataframe_fname):
         df, f"{min_dt.year}-{min_dt.month}-{min_dt.day} {min_dt.hour + 2}:00", None
     )
     assert min_dt + pd.Timedelta(hours=2) <= df["acq_time"].unique().min()
+
+
+def test_resampling(gametime_dataframe_fname):
+    """Test resampling of the datetimes."""
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    min_dt = df["acq_time"].unique().min()
+    max_dt = df["acq_time"].unique().max()
+    delta = max_dt - min_dt
+    df = select_datetimes(df, None, None, freq=f"{delta.days + 1}D")
+    assert df["steam_id"].unique().size == df["steam_id"].size
+
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    hours = delta.total_seconds() / 3600
+    n = hours // 2
+    assert 2 <= n
+    df = select_datetimes(df, None, None, freq="2h")
+    assert df["steam_id"].unique().size * (n + 1) == df["steam_id"].size

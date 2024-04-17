@@ -69,5 +69,16 @@ def select_datetimes(
     stop = df["acq_time"].max() if stop is None else stop
     mask = (start <= df["acq_time"]) & (df["acq_time"] <= stop)
     df = df.loc[mask]
-    dt_range = pd.date_range(start, stop, freq=freq)  # noqa
-    return df
+    if freq is None:
+        return df
+    idx = list()
+    for dt in pd.date_range(start, stop, freq=freq):
+        series = abs(df["acq_time"] - dt)
+        idx.extend(list(series[series == series.min()].index))
+    if len(idx) != len(set(idx)):
+        warn(
+            "Duplicate indices found. Pay attention to the resampling frequency "
+            f"requested '{freq}'. Dropping duplicates."
+        )
+    idx = sorted(set(idx))
+    return df.loc[idx]
