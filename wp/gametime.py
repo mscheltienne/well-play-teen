@@ -9,12 +9,7 @@ import numpy as np
 import pandas as pd
 import requests
 
-from .config import (
-    DF_DTYPES,
-    STEAM_API_KEY,
-    STEAM_BEJEWELED_APP_ID,
-    STEAM_ECO_RESCUE_APP_ID,
-)
+from .config import STEAM_API_KEY, STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
 from .utils._checks import check_type, ensure_path
 from .utils._docs import fill_doc
 from .utils.logs import add_file_handler, logger, verbose, warn
@@ -25,6 +20,7 @@ if TYPE_CHECKING:
 
 _URL = f"http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key={STEAM_API_KEY}&steamid={{}}&format=json"  # noqa: E501
 _BACKUP_DAYS: int = 14
+DF_DTYPES = {"steam_id": str, "game_id": str, "game_time": int, "game_time_diff": float}
 
 
 @fill_doc

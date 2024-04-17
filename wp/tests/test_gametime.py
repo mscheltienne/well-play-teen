@@ -7,9 +7,10 @@ import pandas as pd
 import pytest
 from numpy.testing import assert_allclose
 
-from wp.config import DF_DTYPES, STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
+from wp.config import STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
 from wp.gametime import (
     _BACKUP_DAYS,
+    DF_DTYPES,
     clean_backup_and_logs,
     fetch_gametime,
     update_gametime_dataset,

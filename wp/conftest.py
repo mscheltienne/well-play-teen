@@ -2,6 +2,7 @@ from __future__ import annotations  # c.f. PEP 563, PEP 649
 
 import os
 import warnings
+from importlib.resources import files
 from typing import TYPE_CHECKING
 
 from pytest import fixture
@@ -9,6 +10,8 @@ from pytest import fixture
 from .utils.logs import logger
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     from pytest import Config
 
 
@@ -70,3 +73,9 @@ def close_all():
 
     yield
     plt.close("all")
+
+
+@fixture(scope="session")
+def gametime_dataframe_fname() -> Path:
+    """Return the path of a gametime dataset."""
+    return files("wp.tests") / "data" / "gametime.csv"

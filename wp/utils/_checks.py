@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 import numpy as np
+import pandas as pd
 
 from ._docs import fill_doc
 
@@ -247,3 +248,30 @@ def ensure_path(item: Any, must_exist: bool) -> Path:
     if must_exist and not item.exists():
         raise FileNotFoundError(f"The provided path '{str(item)}' does not exist.")
     return item
+
+
+def check_gametime_dataframe(df: Any) -> None:
+    """Check the gametime dataframe validity."""
+    from ..gametime import DF_DTYPES
+
+    check_type(df, (pd.DataFrame,), "df")
+    columns = ["acq_time", "game_id", "game_time", "game_time_diff", "steam_id"]
+    if sorted(df.columns) != columns:
+        raise ValueError(
+            "Unexpected or missing columns in the dataframe. "
+            f"Found: {list(df.columns)}."
+        )
+
+    mapping = {
+        str: (np.dtypes.ObjectDType,),
+        int: (np.int64, np.int32),
+        float: (np.float64,),
+    }
+    for col, dtype in DF_DTYPES.items():
+        if df[col].dtype not in mapping[dtype]:
+            raise ValueError(
+                f"The '{col}' column must be of type '{dtype}' ({mapping[dtype]}), "
+                f"found {df[col].dtype} instead."
+            )
+    if str(df["acq_time"].dtype) != "datetime64[ns, UTC]":
+        raise ValueError("The 'acq_time' column must be of type 'datetime64[ns, UTC]'.")

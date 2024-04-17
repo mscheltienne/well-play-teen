@@ -3,7 +3,7 @@ from datetime import datetime
 
 import pandas as pd
 
-from ..config import DF_DTYPES
+from ..gametime import DF_DTYPES
 from ..utils._checks import ensure_path
 from ..viz import plot_barplot_dts, plot_barplot_ids, plot_heatmap, plot_lineplot
 

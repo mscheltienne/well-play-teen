@@ -2,9 +2,18 @@ import logging
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import pytest
 
-from .._checks import check_type, check_value, check_verbose, ensure_int, ensure_path
+from ...gametime import DF_DTYPES
+from .._checks import (
+    check_gametime_dataframe,
+    check_type,
+    check_value,
+    check_verbose,
+    ensure_int,
+    ensure_path,
+)
 
 
 def test_ensure_int():
@@ -110,3 +119,55 @@ def test_ensure_path():
 
     with pytest.raises(TypeError, match="path is invalid"):
         ensure_path(Foo(), must_exist=False)
+
+
+def test_check_gametime_dataframe(gametime_dataframe_fname):
+    """Test gametime dataset checker."""
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    check_gametime_dataframe(df)
+
+    # wrong type
+    with pytest.raises(TypeError, match="must be an instance of"):
+        check_gametime_dataframe(101)
+
+    # missing or extra column
+    data = df.to_dict()
+    del data["game_id"]
+    df2 = pd.DataFrame(data)
+    with pytest.raises(ValueError, match="Unexpected or missing columns"):
+        check_gametime_dataframe(df2)
+
+    data = df.to_dict()
+    data["game_id2"] = data["game_id"]
+    df2 = pd.DataFrame(data)
+    with pytest.raises(ValueError, match="Unexpected or missing columns"):
+        check_gametime_dataframe(df2)
+
+    # wrong column dtype
+    data = df.to_dict()
+    data["game_id"] = {k: int(elt) for k, elt in data["game_id"].items()}
+    df2 = pd.DataFrame(data)
+    with pytest.raises(ValueError, match="column must be of type"):
+        check_gametime_dataframe(df2)
+
+    data = df.to_dict()
+    data["steam_id"] = {k: int(elt) for k, elt in data["steam_id"].items()}
+    df2 = pd.DataFrame(data)
+    with pytest.raises(ValueError, match="column must be of type"):
+        check_gametime_dataframe(df2)
+
+    data = df.to_dict()
+    data["game_time"] = {k: str(elt) for k, elt in data["game_time"].items()}
+    df2 = pd.DataFrame(data)
+    with pytest.raises(ValueError, match="column must be of type"):
+        check_gametime_dataframe(df2)
+
+    df = pd.read_csv(gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES)
+    with pytest.raises(ValueError, match="column must be of type"):
+        check_gametime_dataframe(df)
+
+    df = pd.read_csv(gametime_dataframe_fname, index_col=0)
+    with pytest.raises(ValueError, match="column must be of type"):
+        check_gametime_dataframe(df)
