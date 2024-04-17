@@ -109,8 +109,8 @@ def select_steam_ids(df: pd.DataFrame, steam_ids: list[str] | tuple[str, ...]):
 @fill_doc
 def select_datetimes(
     df: pd.DataFrame,
-    start: str | pd.Timestamp | None,
-    stop: str | pd.Timestamp | None,
+    start: str | pd.Timestamp | None = None,
+    stop: str | pd.Timestamp | None = None,
     freq: str | pd.Timedelta | None = None,
 ) -> pd.DataFrame:
     """Select and resample datetimes from the dataframe.
@@ -171,6 +171,11 @@ def select_datetimes(
     check_type(start, (str, pd.Timestamp, None), "start")
     check_type(stop, (str, pd.Timestamp, None), "stop")
     check_type(freq, (str, pd.Timedelta, None), "freq")
+    if start is None and stop is None and freq is None:
+        raise RuntimeError(
+            "No selection or resampling requested. At least one argument among "
+            "'start', 'stop' and 'freq' must be provided."
+        )
     if isinstance(start, str):
         start = pd.Timestamp(start, tz="utc")
     if isinstance(stop, str):
