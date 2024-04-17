@@ -22,7 +22,6 @@ The package entry-points can be used from a terminal:
 
 ```bash
 wp-gametime --help
-wp-gametime-plot --help
 ```
 
 ## Website
