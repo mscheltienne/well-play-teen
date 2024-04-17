@@ -10,7 +10,7 @@ import pandas as pd
 import requests
 
 from .config import STEAM_API_KEY, STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
-from .utils._checks import check_type, ensure_path
+from .utils._checks import check_gametime_dataframe, check_type, ensure_path
 from .utils._docs import fill_doc
 from .utils.logs import add_file_handler, logger, verbose, warn
 
@@ -131,6 +131,7 @@ def update_gametime_dataset(
     dataset = {"steam_id": [], "acq_time": [], "game_time": [], "game_id": []}
     try:
         df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
+        check_gametime_dataframe(df)
         df.drop(labels="game_time_diff", axis=1, inplace=True)
     except FileNotFoundError:
         warn("No gametime dataset found. Creating a new one.")
