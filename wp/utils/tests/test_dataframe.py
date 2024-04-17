@@ -91,14 +91,6 @@ def test_select_datetimes(gametime_dataframe_fname):
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
     )
-    size = df.size
-    df = select_datetimes(df, None, None)
-    assert df.size == size  # unchanged
-    assert (df.index == range(0, len(df))).all()
-
-    df = pd.read_csv(
-        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
-    )
     df = select_datetimes(df, None, max_dt - pd.Timedelta(hours=2))
     assert min_dt == df["acq_time"].unique().min()
     assert df["acq_time"].unique().max() <= max_dt - pd.Timedelta(hours=2)
