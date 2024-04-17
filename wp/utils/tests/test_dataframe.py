@@ -103,11 +103,11 @@ def test_select_datetimes(gametime_dataframe_fname):
     assert df.size == 0
     assert (df.index == range(0, len(df))).all()
 
-    # start greater than stop
+    # start greater than end
     df = pd.read_csv(
         gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
     )
-    with pytest.raises(ValueError, match="stop datetime must be greater than the"):
+    with pytest.raises(ValueError, match="end datetime must be greater than the"):
         select_datetimes(df, max_dt, min_dt)
 
     # selection with str

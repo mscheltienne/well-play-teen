@@ -110,7 +110,7 @@ def select_steam_ids(df: pd.DataFrame, steam_ids: list[str] | tuple[str, ...]):
 def select_datetimes(
     df: pd.DataFrame,
     start: str | pd.Timestamp | None = None,
-    stop: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
     freq: str | pd.Timedelta | None = None,
 ) -> pd.DataFrame:
     """Select and resample datetimes from the dataframe.
@@ -123,8 +123,8 @@ def select_datetimes(
         used. If a string is provided, it should be in the format 'YYYY-MM-DD HH:MM:SS'.
         In the string format, part of the string can be omitted, for instance
         'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.
-    stop : str | pd.Timestamp | None
-        Stop datetime to select. If None, the maximum datetime in the dataframe is
+    end : str | pd.Timestamp | None
+        End datetime to select. If None, the maximum datetime in the dataframe is
         used. If a string is provided, it should be in the format 'YYYY-MM-DD HH:MM:SS'.
         In the string format, part of the string can be omitted, for instance
         'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.
@@ -140,7 +140,7 @@ def select_datetimes(
 
     Notes
     -----
-    Resampling the dataset will create a range from 'start' to 'stop' (included) with
+    Resampling the dataset will create a range from 'start' to 'end' (included) with
     the desired frequency. Then, it selects the rows with the closest 'acq_time' to
     each of the resampled datetimes. Finally, it re-computes the game_time_diff column
     with the new resolution.
@@ -155,7 +155,7 @@ def select_datetimes(
     >>> from wp.utils.dataframe import select_datetimes
     >>>
     >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
-    >>> df = select_datetimes(df, start="2024-05-01", stop="2024-05-10")
+    >>> df = select_datetimes(df, start="2024-05-01", end="2024-05-10")
 
     Selection of all samples between 01/05/2024 and 10/05/2024, resampled every 6 hours:
 
@@ -165,30 +165,30 @@ def select_datetimes(
     >>> from wp.utils.dataframe import select_datetimes
     >>>
     >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
-    >>> df = select_datetimes(df, start="2024-05-01", stop="2024-05-10", freq="6h")
+    >>> df = select_datetimes(df, start="2024-05-01", end="2024-05-10", freq="6h")
     """
     check_gametime_dataframe(df)
     check_type(start, (str, pd.Timestamp, None), "start")
-    check_type(stop, (str, pd.Timestamp, None), "stop")
+    check_type(end, (str, pd.Timestamp, None), "end")
     check_type(freq, (str, pd.Timedelta, None), "freq")
-    if start is None and stop is None and freq is None:
+    if start is None and end is None and freq is None:
         raise RuntimeError(
             "No selection or resampling requested. At least one argument among "
-            "'start', 'stop' and 'freq' must be provided."
+            "'start', 'end' and 'freq' must be provided."
         )
     if isinstance(start, str):
         start = pd.Timestamp(start, tz="utc")
-    if isinstance(stop, str):
-        stop = pd.Timestamp(stop, tz="utc")
-    if start is not None and stop is not None and stop < start:
-        raise ValueError("The stop datetime must be greater than the start datetime.")
+    if isinstance(end, str):
+        end = pd.Timestamp(end, tz="utc")
+    if start is not None and end is not None and end < start:
+        raise ValueError("The end datetime must be greater than the start datetime.")
     start = df["acq_time"].min() if start is None else start
-    stop = df["acq_time"].max() if stop is None else stop
-    mask = (start <= df["acq_time"]) & (df["acq_time"] <= stop)
+    end = df["acq_time"].max() if end is None else end
+    mask = (start <= df["acq_time"]) & (df["acq_time"] <= end)
     df = df.loc[mask]
     if freq is not None:
         idx = list()
-        for dt in pd.date_range(start, stop, freq=freq):
+        for dt in pd.date_range(start, end, freq=freq):
             series = abs(df["acq_time"] - dt)
             idx.extend(list(series[series == series.min()].index))
         if len(idx) != len(set(idx)):
