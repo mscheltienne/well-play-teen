@@ -17,24 +17,9 @@ if TYPE_CHECKING:
 docdict: dict[str, str] = dict()
 
 # -- A ---------------------------------------------------------------------------------
-docdict["ax_arg"] = """
-ax : Axes | None
-    The matplotlib Axes to plot on. If None, a new figure and Axes are created."""
-
-docdict["ax_return"] = """
-ax : Axes
-    The matplotlib Axes with the plot."""
-
 # -- B ---------------------------------------------------------------------------------
 # -- C ---------------------------------------------------------------------------------
 # -- D ---------------------------------------------------------------------------------
-docdict["datetimes"] = """
-datetimes : tuple of pd.Timestamp | list of pd.Timestamp
-    The start and stop datetimes (UTC) to select and plot. Start or Stop can be set to
-    None, to select all datetimes. (None, None) selects all datetimes. (None,
-    pd.Timestamp) selects up to the stop datetime. (pd.Timestamp, None) selects from the
-    start datetime."""
-
 docdict["df_gametime"] = """
 df : pd.DataFrame
     The DataFrame with the gametime data. The DataFrame should have columns
@@ -43,10 +28,6 @@ df : pd.DataFrame
 
 # -- E ---------------------------------------------------------------------------------
 # -- F ---------------------------------------------------------------------------------
-docdict["fig"] = """
-fig : Figure
-    The matplotlib Figure with the plot."""
-
 # -- G ---------------------------------------------------------------------------------
 # -- H ---------------------------------------------------------------------------------
 # -- I ---------------------------------------------------------------------------------
@@ -60,14 +41,6 @@ fig : Figure
 # -- Q ---------------------------------------------------------------------------------
 # -- R ---------------------------------------------------------------------------------
 # -- S ---------------------------------------------------------------------------------
-docdict["steam_ids"] = """
-steam_ids : list or tuple of str | None
-    The Steam IDs to select and plot. If None, all Steam IDs are plotted."""
-
-docdict["steam_ids_mapping"] = """
-steam_ids_mapping : dict of str -> str | None
-    Mapping between a steam ID and the username/token. If None, the steam ID is used."""
-
 # -- T ---------------------------------------------------------------------------------
 # -- U ---------------------------------------------------------------------------------
 # -- V ---------------------------------------------------------------------------------
