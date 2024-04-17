@@ -15,13 +15,13 @@ above.
 The python package can be installed with `pip` from source:
 
 ```bash
-pip install git+https://github.com/mscheltienne/well-play-teen
+$ pip install git+https://github.com/mscheltienne/well-play-teen
 ```
 
 The package entry-points can be used from a terminal:
 
 ```bash
-wp-gametime --help
+$ wp-gametime --help
 ```
 
 ## Website
