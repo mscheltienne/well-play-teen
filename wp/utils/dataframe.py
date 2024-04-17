@@ -39,3 +39,39 @@ def prepare_dataframe(
     df.loc[:, "steam_id"] = df["steam_id"].map(mapping)
 
     return df
+
+
+def df_select_steam_ids(df, steam_ids: list[str] | tuple[str, ...]):
+    """Select steam IDs from the dataframe."""
+    check_gametime_dataframe(df)
+    check_type(steam_ids, (list, tuple), "steam_ids")
+    for steam_id in steam_ids:
+        check_type(steam_id, (str,), "steam_id")
+    df = df[df["steam_id"].isin(steam_ids)]
+    return df
+
+
+def df_select_datetimes(
+    df, start: str | pd.Timestamp | None, stop: str | pd.Timestamp | None
+) -> pd.DataFrame:
+    """Select datetimes from the dataframe."""
+    check_gametime_dataframe(df)
+    check_type(start, (str, pd.Timestamp, None), "start")
+    check_type(stop, (str, pd.Timestamp, None), "stop")
+    if isinstance(start, str):  # 'YYYY-MM-DD HH:MM:SS'
+        start = pd.Timestamp(start, tz="utc")
+    if isinstance(stop, str):  # 'YYYY-MM-DD HH:MM:SS'
+        stop = pd.Timestamp(stop, tz="utc")
+    if start is not None and stop is not None:
+        if stop < start:
+            raise ValueError(
+                "The stop datetime must be greater than the start datetime."
+            )
+        mask = (start <= df["acq_time"]) & (df["acq_time"] <= stop)
+    elif start is None and stop is not None:
+        mask = df["acq_time"] <= stop
+    elif start is not None and stop is None:
+        mask = start <= df["acq_time"]
+    else:
+        return df
+    return df.loc[mask]

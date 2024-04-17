@@ -2,7 +2,12 @@ import pandas as pd
 import pytest
 
 from ...gametime import DF_DTYPES
-from ..dataframe import _GAME_IDs_MAPPING, prepare_dataframe
+from ..dataframe import (
+    _GAME_IDs_MAPPING,
+    df_select_datetimes,
+    df_select_steam_ids,
+    prepare_dataframe,
+)
 
 
 def test_prepare_dataframe(gametime_dataframe_fname):
@@ -34,3 +39,82 @@ def test_prepare_dataframe(gametime_dataframe_fname):
         df = prepare_dataframe(df, dict())
     assert sorted(df["game_id"].unique()) == ["99"] + sorted(_GAME_IDs_MAPPING.values())
     assert sorted(df["steam_id"].unique()) == sorted(df["steam_id"].unique())
+
+
+def test_df_select_steam_ids(gametime_dataframe_fname):
+    """Test selection of steam IDs."""
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    ids = sorted(df["steam_id"].unique())
+    assert 1 < len(ids)  # more than 2 steam ID
+    df = df_select_steam_ids(df, [ids[0]])
+    assert sorted(df["steam_id"].unique()) == [ids[0]]
+
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    ids = sorted(df["steam_id"].unique())
+    assert 2 < len(ids)  # more than 2 steam ID
+    df = df_select_steam_ids(df, [ids[0], ids[1]])
+    assert sorted(df["steam_id"].unique()) == [ids[0], ids[1]]
+
+    with pytest.raises(TypeError, match="must be an instance of"):
+        df_select_steam_ids(df, 101)
+    with pytest.raises(TypeError, match="must be an instance of"):
+        df_select_steam_ids(df, [101])
+
+
+def test_df_select_datetimes(gametime_dataframe_fname):
+    """Test selection of dates."""
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    min_dt = df["acq_time"].unique().min()
+    max_dt = df["acq_time"].unique().max()
+    df = df_select_datetimes(df, min_dt, min_dt + pd.Timedelta(hours=2))
+    assert min_dt in df["acq_time"].unique()  # inclusion of edges
+    assert df["acq_time"].unique().max() <= min_dt + pd.Timedelta(hours=2)
+
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    size = df.size
+    df = df_select_datetimes(df, None, max_dt)
+    assert df.size == size  # unchanged
+
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    size = df.size
+    df = df_select_datetimes(df, None, None)
+    assert df.size == size  # unchanged
+
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    df = df_select_datetimes(df, None, max_dt - pd.Timedelta(hours=2))
+    assert min_dt == df["acq_time"].unique().min()
+    assert df["acq_time"].unique().max() <= max_dt - pd.Timedelta(hours=2)
+
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    df = df_select_datetimes(df, None, max_dt - pd.Timedelta(weeks=101))
+    assert df.size == 0
+
+    # start greater than stop
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    with pytest.raises(ValueError, match="stop datetime must be greater than the"):
+        df_select_datetimes(df, max_dt, min_dt)
+
+    # selection with str
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    df = df_select_datetimes(
+        df, f"{min_dt.year}-{min_dt.month}-{min_dt.day} {min_dt.hour + 2}:00", None
+    )
+    assert min_dt + pd.Timedelta(hours=2) <= df["acq_time"].unique().min()
