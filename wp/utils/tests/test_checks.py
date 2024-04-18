@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from ...gametime import DF_DTYPES
-from .._checks import (
+from wp.gametime import DF_DTYPES
+from wp.utils._checks import (
     check_gametime_dataframe,
     check_type,
     check_value,

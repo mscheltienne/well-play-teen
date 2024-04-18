@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from ...gametime import DF_DTYPES
-from ..dataframe import (
+from wp.gametime import DF_DTYPES
+from wp.utils.dataframe import (
     _GAME_IDs_MAPPING,
     prepare_dataframe,
     select_datetimes,
