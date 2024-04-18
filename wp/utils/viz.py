@@ -12,7 +12,7 @@ _LABELS: dict[str, str] = {
     "game_time": "Game time (min)",
     "steam_id": "Username",
     "game_id": "Game",
-    "game_time_diff": "Δ (Game time - min)",
+    "game_time_diff": "Δ game time (min)",
 }
 
 
