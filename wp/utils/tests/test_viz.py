@@ -36,3 +36,11 @@ def test_make_plot_prettier(gametime_dataframe_fname):
     assert isinstance(grid, sns.FacetGrid)
     make_plot_prettier(grid)
     assert isinstance(grid, sns.FacetGrid)
+
+    pivot_df = df.pivot_table(
+        index="steam_id", columns="acq_time", values="game_time_diff"
+    )
+    ax = sns.heatmap(pivot_df)
+    assert isinstance(ax, plt.Axes)
+    make_plot_prettier(ax)
+    assert isinstance(ax, plt.Axes)

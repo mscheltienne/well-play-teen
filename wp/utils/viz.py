@@ -27,13 +27,15 @@ def make_plot_prettier(plot: plt.Axes | sns.FacetGrid) -> None:
     check_type(plot, (plt.Axes, sns.FacetGrid), "plot")
     if isinstance(plot, plt.Axes):
         _make_ax_prettier(plot)
-        llabel = plot.get_legend().get_title().get_text()
-        plot.get_legend().set_title(_LABELS.get(llabel, llabel))
+        if plot.get_legend() is not None:
+            llabel = plot.get_legend().get_title().get_text()
+            plot.get_legend().set_title(_LABELS.get(llabel, llabel))
     elif isinstance(plot, sns.FacetGrid):
         for ax in plot.axes.flatten():
             _make_ax_prettier(ax)
-        llabel = plot.legend.get_title().get_text()
-        plot.legend.set_title(_LABELS.get(llabel, llabel))
+        if plot.legend is not None:
+            llabel = plot.legend.get_title().get_text()
+            plot.legend.set_title(_LABELS.get(llabel, llabel))
     # layout
     if isinstance(plot, plt.Axes):
         plt.tight_layout()
@@ -51,20 +53,26 @@ def _make_ax_prettier(ax: plt.Axes):
             loc = getattr(ax, f"get_{axis}ticks")()
             getattr(ax, f"{axis}axis").set_major_locator(mticker.FixedLocator(loc))
             # map ticklabels to human readable format
-            try:
-                ticklabels = [
-                    datetime.strptime(elt.get_text(), "%Y-%m-%d %H:%M:%S%z")
-                    for elt in getattr(ax, f"get_{axis}ticklabels")()
-                ]
-                hours = [elt.hour for elt in ticklabels]
-                format_str = "%Y-%m-%d" if np.std(hours) <= 1 else "%Y-%m-%d\n %H:%M"
-                ticklabels = [elt.strftime(format_str) for elt in ticklabels]
-                getattr(ax, f"set_{axis}ticklabels")(ticklabels)
-            except ValueError:
-                continue  # already formatted
+            for fmt in ("%Y-%m-%d %H:%M:%S%z", "%Y-%m-%dT%H:%M:%S.000000000"):
+                try:
+                    ticklabels = [
+                        datetime.strptime(elt.get_text(), fmt)
+                        for elt in getattr(ax, f"get_{axis}ticklabels")()
+                    ]
+                    hours = [elt.hour for elt in ticklabels]
+                    format_str = (
+                        "%Y-%m-%d" if np.std(hours) <= 1 else "%Y-%m-%d\n %H:%M"
+                    )
+                    ticklabels = [elt.strftime(format_str) for elt in ticklabels]
+                    getattr(ax, f"set_{axis}ticklabels")(ticklabels)
+                except ValueError:
+                    continue  # already formatted
 
     # title
     title = ax.get_title()
     if "game_id =" in title:
         title = title.split("game_id =")[1].strip()
+        ax.set_title(title)
+    if "steam_id =" in title:
+        title = title.split("steam_id =")[1].strip()
         ax.set_title(title)
