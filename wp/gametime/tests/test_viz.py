@@ -2,9 +2,9 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-from wp.gametime import DF_DTYPES
-from wp.utils.dataframe import prepare_dataframe
-from wp.utils.viz import make_plot_prettier
+from wp.gametime._config import DF_DTYPES
+from wp.gametime.selection import prepare_dataframe
+from wp.gametime.viz import make_plot_prettier
 
 
 def test_make_plot_prettier(gametime_dataframe_fname):

@@ -1,14 +1,9 @@
 import pandas as pd
 
-from ..config import STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
-from ._checks import check_gametime_dataframe, check_type
-from ._docs import fill_doc
-from .logs import warn
-
-_GAME_IDs_MAPPING = {
-    str(STEAM_ECO_RESCUE_APP_ID): "Ecorescue",
-    str(STEAM_BEJEWELED_APP_ID): "Bejeweled",
-}
+from ..utils._checks import check_gametime_dataframe, check_type
+from ..utils._docs import fill_doc
+from ..utils.logs import warn
+from ._config import _GAME_IDs_MAPPING
 
 
 @fill_doc

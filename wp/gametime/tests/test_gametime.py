@@ -7,10 +7,13 @@ import pandas as pd
 import pytest
 from numpy.testing import assert_allclose
 
-from wp.config import STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
-from wp.gametime import (
+from wp.gametime._config import (
     _BACKUP_DAYS,
+    _STEAM_BEJEWELED_APP_ID,
+    _STEAM_ECO_RESCUE_APP_ID,
     DF_DTYPES,
+)
+from wp.gametime.acquisition import (
     clean_backup_and_logs,
     fetch_gametime,
     update_gametime_dataset,
@@ -63,17 +66,17 @@ def test_clean_backup_and_logs(folder):
 )
 def test_fetch_gametime(steam_id):
     """Test fetching the playtime for both games."""
-    gt = fetch_gametime(steam_id, STEAM_BEJEWELED_APP_ID)
+    gt = fetch_gametime(steam_id, _STEAM_BEJEWELED_APP_ID)
     assert 0 < gt
     time.sleep(0.1)
-    gt = fetch_gametime(steam_id, STEAM_ECO_RESCUE_APP_ID)
+    gt = fetch_gametime(steam_id, _STEAM_ECO_RESCUE_APP_ID)
     assert 0 < gt
 
 
 def test_fetch_gametime_invalid_steam_id():
     """Test fetching the playtime with an invalid steam ID."""
     with pytest.warns(RuntimeWarning, match="Failed to fetch user"):
-        gt = fetch_gametime("76561199999999999", STEAM_BEJEWELED_APP_ID)
+        gt = fetch_gametime("76561199999999999", _STEAM_BEJEWELED_APP_ID)
     assert gt is np.nan
 
 

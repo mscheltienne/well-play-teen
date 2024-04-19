@@ -5,7 +5,7 @@ import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-from ._checks import check_type
+from ..utils._checks import check_type
 
 _LABELS: dict[str, str] = {
     "acq_time": "Date/Time (UTC)",

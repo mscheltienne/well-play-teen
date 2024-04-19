@@ -1,6 +1,6 @@
 import argparse
 
-from ..gametime import update_gametime_dataset
+from ..gametime.acquisition import update_gametime_dataset
 from ..utils._checks import ensure_path
 
 

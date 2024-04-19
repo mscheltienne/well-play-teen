@@ -9,18 +9,22 @@ import numpy as np
 import pandas as pd
 import requests
 
-from .config import STEAM_API_KEY, STEAM_BEJEWELED_APP_ID, STEAM_ECO_RESCUE_APP_ID
-from .utils._checks import check_gametime_dataframe, check_type, ensure_path
-from .utils._docs import fill_doc
-from .utils.logs import add_file_handler, logger, verbose, warn
+from ..utils._checks import check_gametime_dataframe, check_type, ensure_path
+from ..utils._docs import fill_doc
+from ..utils.logs import add_file_handler, logger, verbose, warn
+from ._config import (
+    _BACKUP_DAYS,
+    _STEAM_API_KEY,
+    _STEAM_BEJEWELED_APP_ID,
+    _STEAM_ECO_RESCUE_APP_ID,
+    DF_DTYPES,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
 
 
-_URL = f"http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key={STEAM_API_KEY}&steamid={{}}&format=json"  # noqa: E501
-_BACKUP_DAYS: int = 14
-DF_DTYPES = {"steam_id": str, "game_id": str, "game_time": int, "game_time_diff": float}
+_URL = f"http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key={_STEAM_API_KEY}&steamid={{}}&format=json"  # noqa: E501
 
 
 @fill_doc
@@ -142,8 +146,8 @@ def update_gametime_dataset(
     # fetch new datapoints
     ts = pd.Timestamp.now(tz="utc").round("s")  # simpler for visualization and triage
     for steam_ids, game_id in (
-        (steam_ids_ecorescue, STEAM_ECO_RESCUE_APP_ID),
-        (steam_ids_bejeweled, STEAM_BEJEWELED_APP_ID),
+        (steam_ids_ecorescue, _STEAM_ECO_RESCUE_APP_ID),
+        (steam_ids_bejeweled, _STEAM_BEJEWELED_APP_ID),
     ):
         for steam_id in steam_ids:
             dataset["steam_id"].append(steam_id)

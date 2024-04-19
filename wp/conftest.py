@@ -78,4 +78,4 @@ def close_all():
 @fixture(scope="session")
 def gametime_dataframe_fname() -> Path:
     """Return the path of a gametime dataset."""
-    return files("wp.tests") / "data" / "gametime.csv"
+    return files("wp.gametime.tests") / "data" / "gametime.csv"
