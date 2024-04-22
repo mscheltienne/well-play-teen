@@ -54,7 +54,6 @@ def test_plot_gametime_barplot(gametime_dataframe_fname):
     )
     f = plot_gametime_barplot(
         df,
-        ["76561198329580271", "76561198329580273"],
         {
             "76561198329580271": "2024-04-12",
             "76561198329580273": "2024-04-12",
@@ -68,7 +67,6 @@ def test_plot_gametime_barplot(gametime_dataframe_fname):
     with pytest.warns(RuntimeWarning, match="not at midnight"):
         f = plot_gametime_barplot(
             df,
-            ["76561198329580271", "76561198329580273"],
             {
                 "76561198329580271": "2024-04-12 11:40:00",
                 "76561198329580273": "2024-04-12 13:40:00",
@@ -83,7 +81,6 @@ def test_plot_gametime_barplot(gametime_dataframe_fname):
     with pytest.warns(RuntimeWarning, match="not at midnight"):
         f = plot_gametime_barplot(
             df,
-            ["76561198329580271", "76561198329580273"],
             {
                 "76561198329580271": "2024-04-12 11:40:00",
                 "76561198329580273": "2024-04-12 13:40:00",
@@ -98,7 +95,6 @@ def test_plot_gametime_barplot(gametime_dataframe_fname):
     with pytest.warns(RuntimeWarning, match="not at midnight"):
         f = plot_gametime_barplot(
             df,
-            ["necromancia", "76561198329580273"],
             {
                 "necromancia": "2024-04-12 11:40:00",
                 "76561198329580273": "2024-04-12 13:40:00",
@@ -115,7 +111,6 @@ def test_plot_gametime_barplot_week(gametime_dataframe_fname):
     with pytest.warns(RuntimeWarning, match="Duplicate indices found."):
         f = plot_gametime_barplot(
             df,
-            ["76561198329580271", "76561198329580273"],
             {
                 "76561198329580271": "2024-04-12",
                 "76561198329580273": "2024-04-12",

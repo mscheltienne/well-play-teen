@@ -90,7 +90,6 @@ def _make_ax_prettier(ax: plt.Axes):
 @fill_doc
 def plot_gametime_barplot(
     df: pd.DataFrame,
-    steam_ids: list[str] | tuple[str, ...],
     start_dates: dict[str, str | pd.Timestamp],
     week: int | None = None,
 ) -> plt.Figure:
@@ -99,12 +98,10 @@ def plot_gametime_barplot(
     Parameters
     ----------
     %(df_gametime)s
-    steam_ids : list of str | tuple of str
-        List of steam IDs to select.
     start_dates : dict
         Mapping of steam IDs to the date (UTC) at which they start the play-phase.
         The date is either provided as a pd.Timestamp or as a string in the format:
-        'YYYY-MM-DD'.
+        'YYYY-MM-DD'. The keys restrict the selection to the given steam IDs.
     week : int | None
         Week number to select. If None, all weeks are selected. 0-indexed, 0 correspond
         to the first week, 1 to the second, etc.
@@ -120,13 +117,10 @@ def plot_gametime_barplot(
     must match the usernames provided in the mapping.
     """
     check_gametime_dataframe(df)
-    check_type(steam_ids, (list, tuple), "steam_ids")
-    for steam_id in steam_ids:
-        check_type(steam_id, (str,), "steam_id")
     check_type(start_dates, (dict,), "start_dates")
     for key, value in start_dates.items():
         check_type(key, (str,), "start_dates key")
-        check_value(key, steam_ids, "start_dates key")
+        check_value(key, df["steam_id"].unique(), "start_dates key")
         check_type(value, (str, pd.Timestamp), "start_dates value")
     if week is not None:
         week = ensure_int(week, "week")
@@ -144,9 +138,9 @@ def plot_gametime_barplot(
         if week is not None:
             start_dates[key] += pd.Timedelta(weeks=week)
     # select steam IDs, then let's create one dataframe per ID with the correct dates
-    df = select_steam_ids(df, steam_ids)
+    df = select_steam_ids(df, list(start_dates))
     dfs = dict()
-    for steam_id in steam_ids:
+    for steam_id in start_dates.keys():
         end_time = (
             None if week is None else start_dates[steam_id] + pd.Timedelta(weeks=1)
         )
