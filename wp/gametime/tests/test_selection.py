@@ -3,7 +3,32 @@ import pandas as pd
 import pytest
 
 from wp.gametime._config import DF_DTYPES, _GAME_IDs_MAPPING
-from wp.gametime.selection import prepare_dataframe, select_datetimes, select_steam_ids
+from wp.gametime.selection import (
+    prepare_dataframe,
+    select_datetimes,
+    select_gametimes,
+    select_steam_ids,
+)
+
+
+@pytest.fixture(scope="function")
+def mock_df_select_gametimes(gametime_dataframe_fname) -> pd.DataFrame:
+    """Create a mock dataset for selection of gametimes."""
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    df.loc[:, "steam_id"] = "76561198329580271"
+    df.loc[:, "game_id"] = "2163350"
+    start = df["acq_time"].min()
+    for k in df.index:
+        df.loc[k, "acq_time"] = start + pd.Timedelta(hours=6 * k)
+        df.loc[k, "game_time"] = 60 * k  # 1h every 6h
+    # recompute the game_time_diff
+    df.drop(labels="game_time_diff", axis=1, inplace=True)
+    diff = df.groupby("steam_id")["game_time"].diff().rename("game_time_diff")
+    df = pd.concat([df, diff], axis=1)
+    df.reset_index(drop=True, inplace=True)
+    return df
 
 
 def test_prepare_dataframe(gametime_dataframe_fname):
@@ -157,3 +182,75 @@ def test_resampling(gametime_dataframe_fname):
                 assert sum_ == sel["game_time_diff"].values[i]
                 sum_ = 0
                 i += 1
+
+
+def test_select_gametimes(mock_df_select_gametimes):
+    """Test selection of steam IDs based on gametimes."""
+    steam_ids = select_gametimes(
+        mock_df_select_gametimes,
+        {"76561198329580271": "2024-04-12"},
+        "<",
+        10,
+        all_weeks=True,
+    )
+    assert isinstance(steam_ids, list)
+    assert len(steam_ids) == 0
+
+    steam_ids = select_gametimes(
+        mock_df_select_gametimes,
+        {"76561198329580271": "2024-04-12"},
+        ">",
+        10,
+        all_weeks=True,
+    )
+    assert isinstance(steam_ids, list)
+    assert len(steam_ids) == 1
+    assert all(
+        elt in mock_df_select_gametimes["steam_id"].unique() for elt in steam_ids
+    )
+
+    steam_ids = select_gametimes(
+        mock_df_select_gametimes,
+        {"76561198329580271": "2024-04-12"},
+        ">",
+        1600,
+        all_weeks=True,
+    )
+    assert isinstance(steam_ids, list)
+    assert len(steam_ids) == 0
+
+    steam_ids = select_gametimes(
+        mock_df_select_gametimes,
+        {"76561198329580271": "2024-04-12"},
+        ">",
+        1600,
+        all_weeks=False,
+    )
+    assert isinstance(steam_ids, list)
+    assert len(steam_ids) == 1
+    assert all(
+        elt in mock_df_select_gametimes["steam_id"].unique() for elt in steam_ids
+    )
+
+    steam_ids = select_gametimes(
+        mock_df_select_gametimes,
+        {"76561198329580271": "2024-04-12"},
+        ">",
+        1560,
+        all_weeks=True,
+    )
+    assert isinstance(steam_ids, list)
+    assert len(steam_ids) == 0
+
+    steam_ids = select_gametimes(
+        mock_df_select_gametimes,
+        {"76561198329580271": "2024-04-12"},
+        ">=",
+        1560,
+        all_weeks=True,
+    )
+    assert isinstance(steam_ids, list)
+    assert len(steam_ids) == 1
+    assert all(
+        elt in mock_df_select_gametimes["steam_id"].unique() for elt in steam_ids
+    )

@@ -1,6 +1,11 @@
 import pandas as pd
 
-from ..utils._checks import check_gametime_dataframe, check_type
+from ..utils._checks import (
+    check_gametime_dataframe,
+    check_type,
+    check_value,
+    ensure_int,
+)
 from ..utils._docs import fill_doc
 from ..utils.logs import warn
 from ._config import _GAME_IDs_MAPPING
@@ -29,7 +34,7 @@ def prepare_dataframe(
     >>> import pandas as pd
     >>>
     >>> from wp.gametime import DF_DTYPE
-    >>> from wp.utils.dataframe import prepare_dataframe
+    >>> from wp.gametime.selection import prepare_dataframe
     >>>
     >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
     >>> df = prepare_dataframe(df, {"76561198329580271": "necromancia"})
@@ -76,7 +81,7 @@ def select_steam_ids(df: pd.DataFrame, steam_ids: list[str] | tuple[str, ...]):
     >>> import pandas as pd
     >>>
     >>> from wp.gametime import DF_DTYPE
-    >>> from wp.utils.dataframe import select_steam_ids
+    >>> from wp.gametime.selection import select_steam_ids
     >>>
     >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
     >>> df = select_steam_ids(df, ["76561198329580271", "76561198329580272"])
@@ -86,7 +91,7 @@ def select_steam_ids(df: pd.DataFrame, steam_ids: list[str] | tuple[str, ...]):
     >>> import pandas as pd
     >>>
     >>> from wp.gametime import DF_DTYPE
-    >>> from wp.utils.dataframe import prepare_dataframe, select_steam_ids
+    >>> from wp.gametime.selection import prepare_dataframe, select_steam_ids
     >>>
     >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
     >>> df = prepare_dataframe(df, {"76561198329580271": "necromancia"})
@@ -147,7 +152,7 @@ def select_datetimes(
     >>> import pandas as pd
     >>>
     >>> from wp.gametime import DF_DTYPE
-    >>> from wp.utils.dataframe import select_datetimes
+    >>> from wp.gametime.selection import select_datetimes
     >>>
     >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
     >>> df = select_datetimes(df, start="2024-05-01", end="2024-05-10")
@@ -157,7 +162,7 @@ def select_datetimes(
     >>> import pandas as pd
     >>>
     >>> from wp.gametime import DF_DTYPE
-    >>> from wp.utils.dataframe import select_datetimes
+    >>> from wp.gametime.selection import select_datetimes
     >>>
     >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
     >>> df = select_datetimes(df, start="2024-05-01", end="2024-05-10", freq="6h")
@@ -199,3 +204,113 @@ def select_datetimes(
         df = pd.concat([df, diff], axis=1)
     df.reset_index(drop=True, inplace=True)
     return df
+
+
+@fill_doc
+def select_gametimes(
+    df: pd.DataFrame,
+    start_dates: dict[str, str | pd.Timestamp],
+    rule: str,
+    amount: int,
+    all_weeks: bool = True,
+) -> list[str]:
+    """Select steam IDs that satisfy a gametime comparison rule.
+
+    Parameters
+    ----------
+    %(df_gametime)s
+    start_dates : dict
+        Mapping of steam IDs to the date (UTC) at which they start the play-phase.
+        The date is either provided as a pd.Timestamp or as a string in the format:
+        'YYYY-MM-DD'. The keys restrict the selection to the given steam IDs.
+    rule : str
+        Gametime comparison filter rule to apply. The following rules are available:
+        - '<': less than the amount of gametime.
+        - '<=': less than or equal to the amount of gametime.
+        - '>': greater than the amount of gametime.
+        - '>=': greater than or equal to the amount of gametime.
+    amount : int
+        Amount of gametime to compare.
+    all_weeks : bool
+        If True, the comparison must be true for all completed weeks. If False, the
+        comparison must be true for any week completed.
+
+    Returns
+    -------
+    steam_ids : list of str
+        List of steam IDs that satisfy the gametime comparison rule.
+
+    Examples
+    --------
+    Selection of all steam IDs that played less than 2 hours in any week:
+
+    >>> import pandas as pd
+    >>>
+    >>> from wp.gametime import DF_DTYPE
+    >>> from wp.gametime.selection import select_gametimes
+    >>>
+    >>> df = pd.read_csv(fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"])
+    >>> df = select_gametimes(
+    ...     df,
+    ...     start_dates={"necromancia": "2024-05-01"},
+    ...     rule="<",
+    ...     amount=2,
+    ...     all_weeks=False,
+    ... )
+    """
+    check_gametime_dataframe(df)
+    check_type(start_dates, (dict,), "start_dates")
+    for key, value in start_dates.items():
+        check_type(key, (str,), "start_dates key")
+        check_value(key, df["steam_id"].unique(), "start_dates key")
+        check_type(value, (str, pd.Timestamp), "start_dates value")
+    check_type(rule, (str,), "rule")
+    check_value(rule, ["<", "<=", ">", ">="], "rule")
+    amount = ensure_int(amount, "amount")
+    if amount <= 0:
+        raise ValueError("The amount of gametime must be strictly positive.")
+    check_type(all_weeks, (bool,), "all_weeks")
+    # convert to timestamps, confirm that hours, minute and second are set to 0, else
+    # warn and round
+    for key, value in start_dates.items():
+        if isinstance(value, str):
+            value = pd.Timestamp(value, tz="utc")
+        if value.hour != 0 or value.minute != 0 or value.second != 0:
+            warn(
+                f"Start date for {key} is not at midnight 00:00:00. Rounding to the "
+                "nearest day."
+            )
+        start_dates[key] = value.round("1D")
+    # select and compare, sadly groupby is difficult to use here since the start_date
+    # is different for every participant
+    df = select_steam_ids(df, list(start_dates))
+    steam_ids = []
+    for steam_id in df["steam_id"].unique():
+        df_ = select_steam_ids(df.copy(deep=True), [steam_id])
+        df_ = select_datetimes(df_, start_dates[steam_id], end=None, freq="1D")
+        start = start_dates[steam_id]
+        while start + pd.Timedelta(weeks=1) <= df_["acq_time"].max():
+            df_week = select_datetimes(
+                df_.copy(deep=True), start, start + pd.Timedelta(weeks=1)
+            )
+            if _compare(df_week, rule, amount) and not all_weeks:
+                steam_ids.append(steam_id)
+                break
+            elif not _compare(df_week, rule, amount) and all_weeks:
+                break
+            start += pd.Timedelta(weeks=1)
+        else:
+            steam_ids.append(steam_id)
+    return steam_ids
+
+
+def _compare(df: pd.DataFrame, rule: str, amount: int) -> bool:
+    """Compare gametimes according to the set rule."""
+    if rule == "<":
+        return df["game_time_diff"].sum() < amount
+    elif rule == "<=":
+        return df["game_time_diff"].sum() <= amount
+    elif rule == ">":
+        return df["game_time_diff"].sum() > amount
+    elif rule == ">=":
+        return df["game_time_diff"].sum() >= amount
