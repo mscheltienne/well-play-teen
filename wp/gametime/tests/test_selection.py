@@ -254,3 +254,25 @@ def test_select_gametimes(mock_df_select_gametimes):
     assert all(
         elt in mock_df_select_gametimes["steam_id"].unique() for elt in steam_ids
     )
+
+
+def test_select_gametimes_short_week(mock_df_select_gametimes):
+    """Test selection by gametimes on a week too short."""
+    df = mock_df_select_gametimes.copy(deep=True).iloc[:10]
+    steam_ids = select_gametimes(
+        df, {"76561198329580271": "2024-04-12"}, ">", 500, all_weeks=False
+    )
+    assert isinstance(steam_ids, list)
+    assert len(steam_ids) == 0
+
+
+def test_selection_gamestimes_invalid(mock_df_select_gametimes):
+    """Test selection of gametimes with invalid inputs."""
+    with pytest.raises(ValueError, match="must be strictly positive"):
+        select_gametimes(
+            mock_df_select_gametimes,
+            {"76561198329580271": "2024-04-12"},
+            "<",
+            -101,
+            all_weeks=True,
+        )
