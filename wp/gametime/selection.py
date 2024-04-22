@@ -290,7 +290,7 @@ def select_gametimes(
         df_ = select_datetimes(df_, start_dates[steam_id], end=None, freq="1D")
         start = start_dates[steam_id]
         if df_["acq_time"].max() < start + pd.Timedelta(weeks=1):
-            continue
+            continue  # required to avoid jumping to the else statement
         while start + pd.Timedelta(weeks=1) <= df_["acq_time"].max():
             df_week = select_datetimes(
                 df_.copy(deep=True), start, start + pd.Timedelta(weeks=1)
