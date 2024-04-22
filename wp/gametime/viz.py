@@ -6,7 +6,12 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-from ..utils._checks import check_gametime_dataframe, check_type, check_value
+from ..utils._checks import (
+    check_gametime_dataframe,
+    check_type,
+    check_value,
+    ensure_int,
+)
 from ..utils._docs import fill_doc
 from ..utils.logs import warn
 from .selection import select_datetimes, select_steam_ids
@@ -87,6 +92,7 @@ def plot_gametime_barplot(
     df: pd.DataFrame,
     steam_ids: list[str] | tuple[str, ...],
     start_dates: dict[str, str | pd.Timestamp],
+    week: int | None = None,
 ) -> plt.Figure:
     """Plot the total gametime in function of time, per day and per steam ID.
 
@@ -99,6 +105,9 @@ def plot_gametime_barplot(
         Mapping of steam IDs to the date (UTC) at which they start the play-phase.
         The date is either provided as a pd.Timestamp or as a string in the format:
         'YYYY-MM-DD'.
+    week : int | None
+        Week number to select. If None, all weeks are selected. 0-indexed, 0 correspond
+        to the first week, 1 to the second, etc.
 
     Returns
     -------
@@ -119,6 +128,8 @@ def plot_gametime_barplot(
         check_type(key, (str,), "start_dates key")
         check_value(key, steam_ids, "start_dates key")
         check_type(value, (str, pd.Timestamp), "start_dates value")
+    if week is not None:
+        week = ensure_int(week, "week")
     # convert to timestamps, confirm that hours, minute and second are set to 0, else
     # warn and round
     for key, value in start_dates.items():
@@ -130,12 +141,17 @@ def plot_gametime_barplot(
                 "nearest day."
             )
         start_dates[key] = value.round("1D")
+        if week is not None:
+            start_dates[key] += pd.Timedelta(weeks=week)
     # select steam IDs, then let's create one dataframe per ID with the correct dates
     df = select_steam_ids(df, steam_ids)
     dfs = dict()
     for steam_id in steam_ids:
+        end_time = (
+            None if week is None else start_dates[steam_id] + pd.Timedelta(weeks=1)
+        )
         df_ = select_steam_ids(df.copy(deep=True), [steam_id])
-        df_ = select_datetimes(df_, start_dates[steam_id], end=None, freq="1D")
+        df_ = select_datetimes(df_, start_dates[steam_id], end=end_time, freq="1D")
         df_["Day"] = [str(k + 1) for k in df_.index]
         dfs[steam_id] = df_
     # concatenate back the dataframes into a single object and plot

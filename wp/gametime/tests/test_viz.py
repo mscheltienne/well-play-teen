@@ -105,3 +105,21 @@ def test_plot_gametime_barplot(gametime_dataframe_fname):
             },
         )
     assert isinstance(f, plt.Figure)
+
+
+def test_plot_gametime_barplot_week(gametime_dataframe_fname):
+    """Test plotting barplot since inclusion."""
+    df = pd.read_csv(
+        gametime_dataframe_fname, index_col=0, dtype=DF_DTYPES, parse_dates=["acq_time"]
+    )
+    with pytest.warns(RuntimeWarning, match="Duplicate indices found."):
+        f = plot_gametime_barplot(
+            df,
+            ["76561198329580271", "76561198329580273"],
+            {
+                "76561198329580271": "2024-04-12",
+                "76561198329580273": "2024-04-12",
+            },
+            week=0,
+        )
+    assert isinstance(f, plt.Figure)
