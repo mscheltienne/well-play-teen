@@ -34,7 +34,7 @@ def fetch_gametime(
     game_id: int,
     *,
     verbose: bool | str | int | None = None,
-) -> int | np.nan:
+) -> float | np.nan:
     """Fetch the playtime for a game and user on Steam.
 
     Parameters
@@ -47,7 +47,7 @@ def fetch_gametime(
 
     Returns
     -------
-    gametime : int
+    gametime : float
         Total gametime in minutes. np.nan is returned if the API requests failed or if
         the game was not found in the recent games list.
     """
@@ -88,7 +88,8 @@ def fetch_gametime(
     games = response.get("games", [])
     for game in games:
         if game.get("appid", -1) == game_id:
-            return game.get("playtime_forever", 0)
+            gt = game.get("playtime_forever", 0.0)
+            return float(gt)
     else:
         warn(
             f"Game '{game_id}' not found in user's '{steam_id}' recently played games."
@@ -172,7 +173,7 @@ def _concatenate_dataframes(df: pd.DataFrame, new_df: pd.DataFrame) -> pd.DataFr
         diff = new_df.groupby("steam_id")["game_time"].diff().rename("game_time_diff")
         return pd.concat([new_df, diff], axis=1)
     # in case the game was not played recently, we need to look through our dataset
-    for idx in new_df["game_time"].isna().index:
+    for idx in new_df[new_df["game_time"].isna()].index:
         sid = new_df.iloc[idx]["steam_id"]
         sel = df[df["steam_id"] == sid]
         if sel.size == 0:
