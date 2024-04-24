@@ -45,7 +45,7 @@ def folder(tmp_path):
 @pytest.fixture(scope="session")
 def steam_id():
     """Return a steam id."""
-    return "7656119832958027"
+    return "76561198329580271"
 
 
 def requires_recent_played_games(steam_id: str):
