@@ -1,10 +1,10 @@
-import os
 import time
 from datetime import datetime, timedelta
 
 import numpy as np
 import pandas as pd
 import pytest
+import requests
 from numpy.testing import assert_allclose
 
 from wp.gametime._config import (
@@ -14,6 +14,7 @@ from wp.gametime._config import (
     DF_DTYPES,
 )
 from wp.gametime.acquisition import (
+    _URL,
     clean_backup_and_logs,
     fetch_gametime,
     update_gametime_dataset,
@@ -44,7 +45,35 @@ def folder(tmp_path):
 @pytest.fixture(scope="session")
 def steam_id():
     """Return a steam id."""
-    return "76561198329580271"
+    return "7656119832958027"
+
+
+def requires_recent_played_games(steam_id: str):
+    """Skip test if games were not played in the last 2 weeks."""
+    response = requests.get(
+        _URL.format(steam_id),
+        headers={"Content-Type": "application/json", "Accept": "application/json"},
+        timeout=10,
+    )
+    status_code = response.status_code
+    reason = response.reason
+    if not response.ok:  # True if status code is inferior to 400
+        pytest.skip(
+            f"Request response not OK. Status code: {status_code}, Reason: {reason}."
+        )
+    response = response.json()
+    if "response" not in response:
+        pytest.skip("Incomplete request response.")
+    response = response["response"]
+    if len(response) == 0:
+        pytest.skip(f"No recently played games found on steam ID {steam_id}.")
+    games = response.get("games", [])
+    ids = [game.get("appid", -1) for game in games]
+    if _STEAM_BEJEWELED_APP_ID not in ids or _STEAM_ECO_RESCUE_APP_ID not in ids:
+        pytest.skip(
+            "Requires both games to be played in the last 2 weeks on steam "
+            f"ID {steam_id}."
+        )
 
 
 def test_clean_backup_and_logs(folder):
@@ -60,12 +89,9 @@ def test_clean_backup_and_logs(folder):
     assert len(backup_files2) == 2
 
 
-@pytest.mark.skipif(
-    os.environ.get("WP_PLAYED_2_WEEKS", 0) not in ("True", 1),
-    reason="Required both games to be played in the last 2 weeks.",
-)
 def test_fetch_gametime(steam_id):
     """Test fetching the playtime for both games."""
+    requires_recent_played_games(steam_id)
     gt = fetch_gametime(steam_id, _STEAM_BEJEWELED_APP_ID)
     assert 0 < gt
     time.sleep(0.1)
@@ -80,12 +106,9 @@ def test_fetch_gametime_invalid_steam_id():
     assert gt is np.nan
 
 
-@pytest.mark.skipif(
-    os.environ.get("WP_PLAYED_2_WEEKS", 0) not in ("True", 1),
-    reason="Required both games to be played in the last 2 weeks.",
-)
 def test_update_gametime_dataset(tmp_path, steam_id):
     """Test updating the gametime dataset."""
+    requires_recent_played_games(steam_id)
     assert not (tmp_path / "gametime.csv").exists()
     assert not (tmp_path / "backup").exists()
     assert not (tmp_path / "logs").exists()

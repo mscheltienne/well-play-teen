@@ -39,8 +39,6 @@ jobs:
         run: wp-sys_info --developer
       - name: Run pytest
         run: pytest wp --cov=wp --cov-report=xml --cov-config=pyproject.toml
-        env:
-          WP_PLAYED_2_WEEKS: 0
       - name: Upload to codecov
         uses: codecov/codecov-action@v4
         with:

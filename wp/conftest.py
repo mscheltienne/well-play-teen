@@ -25,8 +25,6 @@ def pytest_configure(config: Config) -> None:
         if warning_line and not warning_line.startswith("#"):
             config.addinivalue_line("filterwarnings", warning_line)
     logger.propagate = True
-    if "WP_PLAYED_2_WEEKS" not in os.environ:
-        os.environ["WP_PLAYED_2_WEEKS"] = "True"
 
 
 @fixture(scope="session")
