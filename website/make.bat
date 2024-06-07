@@ -17,7 +17,6 @@ REM Define targets
 :help
 echo Please use `make ^<target^>` where ^<target^> is one of
 echo   html             to make standalone HTML files
-echo   html-noplot      to make standalone HTML files without plotting
 echo   clean            to clean HTML files
 echo   linkcheck        to check all external links for integrity
 echo   linkcheck-grep   to grep the linkcheck result
@@ -26,10 +25,6 @@ goto :eof
 
 :html
 %SPHINXBUILD% . _build\html -b html %SPHINXOPTS%
-goto :eof
-
-:html-noplot
-%SPHINXBUILD% . _build\html -b html %SPHINXOPTS% -D plot_gallery=0
 goto :eof
 
 :clean
