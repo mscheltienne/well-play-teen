@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 import pandas as pd
 
 from ..utils._checks import (
@@ -5,10 +9,20 @@ from ..utils._checks import (
     check_type,
     check_value,
     ensure_int,
+    ensure_path,
 )
 from ..utils._docs import fill_doc
 from ..utils.logs import warn
 from ._config import _GAME_IDs_MAPPING
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+
+def load_metadata(fname: str | Path):
+    """Load the metadata from a .csv file."""
+    fname = ensure_path(fname, must_exist=True)
+    raise NotImplementedError
 
 
 @fill_doc
