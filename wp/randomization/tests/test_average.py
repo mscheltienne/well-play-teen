@@ -14,7 +14,11 @@ if TYPE_CHECKING:
 @pytest.fixture
 def var_groups_extreme() -> list[NDArray[np.float64]]:
     """Return a list of groups with extreme values."""
-    return [np.array([1, 2, 3]), np.array([35, 36, 37]), np.array([70, 71, 72])]
+    return [
+        np.array([1, 2, 3], dtype=np.float64),
+        np.array([35, 36, 37], dtype=np.float64),
+        np.array([70, 71, 72], dtype=np.float64),
+    ]
 
 
 @pytest.mark.xfail(reason="This test is expected to fail.")
