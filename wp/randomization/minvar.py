@@ -60,18 +60,21 @@ def randomization(var_groups: list[NDArray[np.float64]], var_subject: float) -> 
     if np.sum(mask) == 1:
         return np.argmin(group_sizes)
     # now, we passed all the special case and we will finally look for the group which
-    # minimizes the variance of the variable of interest, but first, we need to exclude
-    # all the groups which already have one more subject than the others.
-    var_groups_considered = [var for k, var in enumerate(var_groups) if mask[k]]
-    variances = np.zeros(len(var_groups_considered), dtype=np.float64)
-    for k, group in enumerate(var_groups_considered):
+    # minimizes the variance of the variable of interest, in the groups which do not
+    # have one more subject than the others.
+    variances = []
+    for k, group in enumerate(var_groups):
+        if not mask[k]:
+            continue
         # temporary add the participant to the group considered
-        temp_groups = deepcopy(var_groups_considered)
+        temp_groups = deepcopy(var_groups)
         temp_groups[k] = np.append(np.copy(group), var_subject)
-        # compute the total mean and the variance between groups
+        # compute the total mean and the variance between groups, note that some formula
+        # weight the difference between the group mean and the total mean by the number
+        # of samples within a group, but this is omitted here.
         mean_total = np.mean(np.hstack(temp_groups))
-        variances[k] = np.sum(
-            [len(group) * (np.mean(group) - mean_total) ** 2 for group in temp_groups]
+        variances.append(
+            np.sum([(np.mean(group) - mean_total) ** 2 for group in temp_groups])
         )
     # find the group which minimizes the variance between groups
     idx = np.argmin(variances)
