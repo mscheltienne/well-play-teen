@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 
 from ..utils._checks import check_type
-from ..utils.logs import logger
+from ..utils.logs import logger, warn
 
 if TYPE_CHECKING:
     from np.typing import NDArray
@@ -32,6 +32,7 @@ def randomization(var_groups: list[NDArray[np.float64]], var_subject: float) -> 
         Index of the group where the new subject has been randomized, in respect to the
         groups within var_groups.
     """
+    warn("Do not use this function. It corresponds to the erroneous code on Wave.")
     check_type(var_groups, (list,), "var_groups")
     for var in var_groups:
         check_type(var, (np.ndarray,), "var_groups")
@@ -53,15 +54,12 @@ def randomization(var_groups: list[NDArray[np.float64]], var_subject: float) -> 
     # - else, we will look for the group which minimizes the average of the variable.
     group_sizes = np.array([elt.size for elt in var_groups])
     min_size = np.min(group_sizes)
-    if np.sum(group_sizes == min_size) == 1:
+    mask = group_sizes == min_size
+    if np.sum(mask) == 1:
         return np.argmin(group_sizes)
     # now, we passed all the special case and we will finally look for the group which
     # minimizes the average of the variable of interest, but first, we need to exclude
     # all the groups which already have one more subject than the others.
-    if np.sum(group_sizes == min_size) == group_sizes.size:
-        mask = np.ones(len(var_groups), dtype=bool)
-    else:
-        mask = group_sizes == min_size
     var_groups_considered = [var for k, var in enumerate(var_groups) if mask[k]]
     averages = np.zeros(len(var_groups_considered), dtype=np.float64)
     for k, group in enumerate(var_groups_considered):

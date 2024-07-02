@@ -33,10 +33,18 @@ def test_randomization_extreme_assignments(
 
 def test_randomization_unbalanced_subject_per_group() -> None:
     """Test randomization method."""
-    var_groups = [np.array([1, 2, 3]), np.array([35, 36, 37]), np.array([70, 71])]
+    var_groups = [
+        np.array([1, 2, 3], dtype=np.float64),
+        np.array([35, 36, 37], dtype=np.float64),
+        np.array([70, 71], dtype=np.float64),
+    ]
     idx = randomization(var_groups, 80.0)
     assert idx == 2
 
-    var_groups = [np.array([1, 2, 3]), np.array([36, 37]), np.array([70, 71])]
+    var_groups = [
+        np.array([1, 2, 3], dtype=np.float64),
+        np.array([36, 37], dtype=np.float64),
+        np.array([70, 71], dtype=np.float64),
+    ]
     idx = randomization(var_groups, 80.0)
     assert idx == 1

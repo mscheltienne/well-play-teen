@@ -56,15 +56,12 @@ def randomization(var_groups: list[NDArray[np.float64]], var_subject: float) -> 
     # - else, we will look for the group which minimizes the variance of the variable.
     group_sizes = np.array([elt.size for elt in var_groups])
     min_size = np.min(group_sizes)
-    if np.sum(group_sizes == min_size) == 1:
+    mask = group_sizes == min_size
+    if np.sum(mask) == 1:
         return np.argmin(group_sizes)
     # now, we passed all the special case and we will finally look for the group which
     # minimizes the variance of the variable of interest, but first, we need to exclude
     # all the groups which already have one more subject than the others.
-    if np.sum(group_sizes == min_size) == group_sizes.size:
-        mask = np.ones(len(var_groups), dtype=bool)
-    else:
-        mask = group_sizes == min_size
     var_groups_considered = [var for k, var in enumerate(var_groups) if mask[k]]
     variances = np.zeros(len(var_groups_considered), dtype=np.float64)
     for k, group in enumerate(var_groups_considered):
