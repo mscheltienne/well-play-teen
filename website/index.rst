@@ -4,7 +4,7 @@
 
     <style type="text/css">h1 {display:none;}</style>
 
-Participer à Well-Play !
+Participez à Well-Play !
 ========================
 
 .. raw:: html
