@@ -1,0 +1,6 @@
+{%- extends "!layout.html" %}  {# Extend the layout from your current theme #}
+
+{%- block extrahead %}
+    {{ super() }}
+    <link rel="canonical" href="{{ canonical_url }}" />
+{%- endblock %}

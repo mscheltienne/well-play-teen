@@ -50,6 +50,7 @@ default_role = "py:obj"
 
 # -- options for HTML output -----------------------------------------------------------
 html_context = {
+    "canonical_url": "https://well-play-teen.org/",
     "display_github": True,
     "github_user": "mscheltienne",
     "github_repo": "well-play-teen",
