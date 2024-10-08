@@ -102,3 +102,10 @@ Responsables du projet de recherche:
 Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou si vous
 avez des questions, n'hésitez pas à nous écrire à l'adresse
 suivante : wellplay@unige.ch
+
+.. toctree::
+    :hidden:
+
+    people.rst
+    faq.rst
+    contact.rst
