@@ -10,8 +10,14 @@ from datetime import date
 
 project = "WELL-PLAY-TEEN"
 author = "Mathieu Scheltienne"
-copyright = f"{date.today().year}, {author}"
-release = "0.0.1"
+copyright = f"{date.today().year}, {author}"  # noqa: A001
+release = "0.0.2"
+canonical_url = "https://well-play-teen.org/"
+description = (
+    "L'Université et la Haute Ecole de Santé de Genève vous proposent de vous inscrire "
+    "pour participer à un projet de recherche sur l'impact des jeux vidéos sur la "
+    "santé et les émotions des adolescents."
+)
 
 # -- general configuration -------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -28,6 +34,7 @@ root_doc = "index"
 extensions = [
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.mathjax",
+    "sphinxext.opengraph",
     "sphinxcontrib.bibtex",
     "sphinx_copybutton",
     "sphinx_design",
@@ -50,7 +57,7 @@ default_role = "py:obj"
 
 # -- options for HTML output -----------------------------------------------------------
 html_context = {
-    "canonical_url": "https://well-play-teen.org/",
+    "canonical_url": canonical_url,
     "display_github": True,
     "github_user": "mscheltienne",
     "github_repo": "well-play-teen",
@@ -84,3 +91,13 @@ linkcheck_ignore = []  # will be compiled to regex
 # -- sphinx_copybutton -----------------------------------------------------------------
 copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
 copybutton_prompt_is_regexp = True
+
+# -- sphinx opengraph ------------------------------------------------------------------
+# use https://www.opengraph.xyz/ to preview the Open Graph data
+ogp_site_url = canonical_url
+ogp_enable_meta_description = False
+ogp_custom_meta_tags = [
+    '<meta property="og:title" content="Participez à Well-Play !">',
+    f'<meta property="og:description" content="{description}">',
+    f'<meta name="description" content="{description}">',
+]

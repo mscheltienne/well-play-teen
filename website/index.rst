@@ -2,13 +2,6 @@
 
 .. raw:: html
 
-    <style type="text/css">h1 {display:none;}</style>
-
-Participez à Well-Play !
-========================
-
-.. raw:: html
-
     <div class="welcome">
         <p><strong>Bonjour et bienvenue !</strong></p>
     </div>

@@ -74,6 +74,7 @@ website = [
   'sphinx',
   'sphinx-copybutton',
   'sphinx-design',
+  'sphinxext-opengraph',
   'sphinxcontrib-bibtex',
 ]
 
