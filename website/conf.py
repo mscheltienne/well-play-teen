@@ -58,6 +58,7 @@ default_role = "py:obj"
 # -- options for HTML output -----------------------------------------------------------
 html_context = {
     "canonical_url": canonical_url,
+    "default_mode": "light",
 }
 html_css_files = ["style.css"]
 html_logo = "_static/logo-UNIGE.png"
@@ -78,6 +79,7 @@ html_theme_options = {
         },
     ],
     "navbar_persistent": [],
+    "navbar_end": ["navbar-icon-links"],
     "navigation_with_keys": False,
     "use_edit_page_button": False,
     "secondary_sidebar_items": [],
