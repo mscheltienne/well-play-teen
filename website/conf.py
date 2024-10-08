@@ -67,6 +67,16 @@ html_show_sphinx = False
 html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
+    "article_header_start": [],
+    "footer_end": [],
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/mscheltienne/well-play-teen",
+            "icon": "fa-brands fa-square-github",
+            "type": "fontawesome",
+        },
+    ],
     "navbar_persistent": [],
     "navigation_with_keys": False,
     "use_edit_page_button": False,

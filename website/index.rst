@@ -2,7 +2,7 @@
 
 .. raw:: html
 
-    <div class="welcome">
+    <div class="raw-title">
         <p><strong>Bonjour et bienvenue !</strong></p>
     </div>
 
@@ -72,8 +72,11 @@ l'apprentissage et du bien-être chez les adolescents.
                 </iframe>
             </div>
 
-Responsables du projet de recherche:
-------------------------------------
+.. raw:: html
+
+    <div class="raw-title">
+        <p><strong>Responsable du projet de recherche</strong></p>
+    </div>
 
 .. raw:: html
 
