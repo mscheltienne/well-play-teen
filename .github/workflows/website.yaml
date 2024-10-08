@@ -76,6 +76,7 @@ jobs:
             CNAME
             .nojekyll
             .gitignore
+            robots.txt
 
   deploy-staging:
     if: github.event_name == 'pull_request'
