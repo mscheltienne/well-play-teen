@@ -58,22 +58,20 @@ default_role = "py:obj"
 # -- options for HTML output -----------------------------------------------------------
 html_context = {
     "canonical_url": canonical_url,
-    "display_github": True,
-    "github_user": "mscheltienne",
-    "github_repo": "well-play-teen",
 }
 html_css_files = ["style.css"]
 html_logo = "_static/logo-UNIGE.png"
 html_permalinks_icon = "🔗"
+html_sidebars = {"**": []}
 html_show_sphinx = False
 html_static_path = ["_static"]
-html_theme = "insipid"
+html_theme = "pydata_sphinx_theme"
 html_theme_options = {
-    "breadcrumbs": False,
-    "left_buttons": [],
+    "navbar_persistent": [],
     "navigation_with_keys": False,
-    "nosidebar": True,
-    "show_insipid": False,
+    "use_edit_page_button": False,
+    "secondary_sidebar_items": [],
+    "show_prev_next": False,
 }
 html_title = project
 

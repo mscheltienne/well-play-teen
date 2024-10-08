@@ -70,7 +70,7 @@ test = [
 ]
 website = [
   'bibclean',
-  'insipid-sphinx-theme',
+  'pydata-sphinx-theme',
   'sphinx',
   'sphinx-copybutton',
   'sphinx-design',
