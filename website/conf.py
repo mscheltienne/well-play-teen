@@ -71,6 +71,7 @@ html_theme = "insipid"
 html_theme_options = {
     "breadcrumbs": False,
     "left_buttons": [],
+    "navigation_with_keys": False,
     "nosidebar": True,
     "show_insipid": False,
 }
