@@ -12,7 +12,7 @@ div.body h3 { font-size: 1.1em; }
 div.body h4 { font-size: 0.9em; }
 div.body h5 { font-size: 0.8em; }
 div.body h6 { font-size: 0.7em }
-.welcome {
+.raw-title {
     font-size: 1.5em;
 }
 .dynamic-size-iframe {
