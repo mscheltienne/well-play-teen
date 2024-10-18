@@ -87,7 +87,7 @@ l'apprentissage et du bien-être chez les adolescents.
                 <li>Naïma Gradi, <a href="https://www.unige.ch/fapse/">FPSE</a> - Université de Genève</li>
             </ul>
         </div>
-        <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: 20px; margin-top: 25px;">
+        <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: 20px;">
     </div>
 
 .. raw:: html
