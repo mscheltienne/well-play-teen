@@ -43,7 +43,7 @@ Ou par le biais du formulaire ci-dessous.
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="jhon.doe@mail.com"
+                  placeholder="john.doe@mail.com"
                   class="formbold-form-input"
                   />
                   <label for="email" class="formbold-form-label"> Email </label>

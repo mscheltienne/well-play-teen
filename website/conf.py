@@ -62,7 +62,7 @@ html_context = {
 }
 html_css_files = ["style.css"]
 html_favicon = "_static/logo.png"
-html_logo = "_static/logo.png"
+html_logo = "_static/logos.png"
 html_permalinks_icon = "🔗"
 html_sidebars = {"**": []}
 html_show_sphinx = False
@@ -94,7 +94,7 @@ html_theme_options = {
             "type": "fontawesome",
         },
     ],
-    "navbar_persistent": [],
+    "navbar_persistent": ["participate"],
     "navbar_end": ["navbar-icon-links"],
     "navigation_with_keys": False,
     "use_edit_page_button": False,
