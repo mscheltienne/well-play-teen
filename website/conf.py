@@ -69,7 +69,18 @@ html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
     "article_header_start": [],
+    "external_links": [
+        {
+            "name": "Brain and Learning lab",
+            "url": "https://www.unige.ch/fapse/brainlearning",
+        },
+        {
+            "name": "Swann Pichon",
+            "url": "https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon",
+        },
+    ],
     "footer_end": [],
+    "header_links_before_dropdown": 3,
     "icon_links": [
         {
             "name": "GitHub",
