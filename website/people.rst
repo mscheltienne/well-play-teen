@@ -17,8 +17,6 @@ neque. Integer feugiat velit dui, vel hendrerit velit consequat a.
             :alt: Daphne Bavelier
             :width: 100%
 
-        Directrice du Brain and Learning lab à l'université de Genève.
-
     .. grid-item-card:: Swann Pichon
         :link: https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon
         :link-type: url
@@ -27,23 +25,17 @@ neque. Integer feugiat velit dui, vel hendrerit velit consequat a.
             :alt: Swann Pichon
             :width: 100%
 
-        Professeur associé en santé digitale à la Haute école de santé de Genève.
-
     .. grid-item-card:: Naïma Gradi
 
         .. image:: ./_static/people/naima.jpg
             :alt: Naïma Gradi
             :width: 100%
 
-        PhD Candidate
-
     .. grid-item-card:: Sara Teixeira
 
         .. image:: ./_static/people/sara.png
             :alt: Sara Teixeria
             :width: 100%
-
-        Research Assistant, ARE
 
 Pellentesque auctor quam malesuada sapien mollis tempus. Aenean commodo est orci. Etiam
 sit amet interdum arcu. Donec convallis porta sapien nec sodales. Morbi augue justo,

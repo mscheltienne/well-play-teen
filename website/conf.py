@@ -61,7 +61,8 @@ html_context = {
     "default_mode": "light",
 }
 html_css_files = ["style.css"]
-html_logo = "_static/logo-UNIGE.png"
+html_favicon = "_static/logo.png"
+html_logo = "_static/logo.png"
 html_permalinks_icon = "🔗"
 html_sidebars = {"**": []}
 html_show_sphinx = False

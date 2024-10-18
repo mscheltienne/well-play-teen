@@ -20,7 +20,7 @@ Ou par le biais du formulaire ci-dessous.
                   type="text"
                   name="firstname"
                   id="firstname"
-                  placeholder="Naïma"
+                  placeholder="John"
                   class="formbold-form-input"
                   />
                   <label for="firstname" class="formbold-form-label"> Prénom </label>
@@ -30,7 +30,7 @@ Ou par le biais du formulaire ci-dessous.
                   type="text"
                   name="lastname"
                   id="lastname"
-                  placeholder="Gradi"
+                  placeholder="Doe"
                   class="formbold-form-input"
                   />
                   <label for="lastname" class="formbold-form-label"> Nom </label>
@@ -43,7 +43,7 @@ Ou par le biais du formulaire ci-dessous.
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="jhon@mail.com"
+                  placeholder="jhon.doe@mail.com"
                   class="formbold-form-input"
                   />
                   <label for="email" class="formbold-form-label"> Email </label>
