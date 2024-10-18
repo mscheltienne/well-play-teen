@@ -36,7 +36,7 @@ jobs:
       - name: Build doc
         run: make -C website html
       - name: Prune sphinx environment
-        run: rm -R ./website/_build/html/.doctrees
+        run: rm -R ./website/_build/html/.doctrees ./website/_build/html/_sources
       - name: Upload documentation
         uses: actions/upload-artifact@v4
         with:

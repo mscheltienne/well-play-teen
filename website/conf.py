@@ -10,8 +10,14 @@ from datetime import date
 
 project = "WELL-PLAY-TEEN"
 author = "Mathieu Scheltienne"
-copyright = f"{date.today().year}, {author}"
-release = "0.0.1"
+copyright = f"{date.today().year}, {author}"  # noqa: A001
+release = "0.0.2"
+canonical_url = "https://well-play-teen.org/"
+description = (
+    "L'Université et la Haute Ecole de Santé de Genève vous proposent de vous inscrire "
+    "pour participer à un projet de recherche sur l'impact des jeux vidéos sur la "
+    "santé et les émotions des adolescents."
+)
 
 # -- general configuration -------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -28,6 +34,7 @@ root_doc = "index"
 extensions = [
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.mathjax",
+    "sphinxext.opengraph",
     "sphinxcontrib.bibtex",
     "sphinx_copybutton",
     "sphinx_design",
@@ -50,22 +57,50 @@ default_role = "py:obj"
 
 # -- options for HTML output -----------------------------------------------------------
 html_context = {
-    "canonical_url": "https://well-play-teen.org/",
-    "display_github": True,
-    "github_user": "mscheltienne",
-    "github_repo": "well-play-teen",
+    "canonical_url": canonical_url,
+    "default_mode": "light",
 }
 html_css_files = ["style.css"]
-html_logo = "_static/logo-UNIGE.png"
+html_favicon = "_static/favicon.png"
+html_logo = "_static/logo.png"
 html_permalinks_icon = "🔗"
+html_sidebars = {"**": []}
+html_sidebars = {"**": ["logos"]}
 html_show_sphinx = False
 html_static_path = ["_static"]
-html_theme = "insipid"
+html_theme = "pydata_sphinx_theme"
 html_theme_options = {
-    "breadcrumbs": False,
-    "left_buttons": [],
-    "nosidebar": True,
-    "show_insipid": False,
+    "article_header_start": [],
+    "external_links": [
+        {
+            "name": "Brain and Learning lab",
+            "url": "https://www.unige.ch/fapse/brainlearning",
+        },
+        {
+            "name": "Daphne Bavelier",
+            "url": "https://www.unige.ch/cisa/center/members/bavelier-daphne/",
+        },
+        {
+            "name": "Swann Pichon",
+            "url": "https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon",
+        },
+    ],
+    "footer_end": [],
+    "header_links_before_dropdown": 3,
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/mscheltienne/well-play-teen",
+            "icon": "fa-brands fa-square-github",
+            "type": "fontawesome",
+        },
+    ],
+    "navbar_persistent": ["participate"],
+    "navbar_end": ["navbar-icon-links"],
+    "navigation_with_keys": False,
+    "use_edit_page_button": False,
+    "secondary_sidebar_items": [],
+    "show_prev_next": False,
 }
 html_title = project
 
@@ -84,3 +119,13 @@ linkcheck_ignore = []  # will be compiled to regex
 # -- sphinx_copybutton -----------------------------------------------------------------
 copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
 copybutton_prompt_is_regexp = True
+
+# -- sphinx opengraph ------------------------------------------------------------------
+# use https://www.opengraph.xyz/ to preview the Open Graph data
+ogp_site_url = canonical_url
+ogp_enable_meta_description = False
+ogp_custom_meta_tags = [
+    '<meta property="og:title" content="Participez à Well-Play !">',
+    f'<meta property="og:description" content="{description}">',
+    f'<meta name="description" content="{description}">',
+]

@@ -2,14 +2,7 @@
 
 .. raw:: html
 
-    <style type="text/css">h1 {display:none;}</style>
-
-Participez à Well-Play !
-========================
-
-.. raw:: html
-
-    <div class="welcome">
+    <div class="raw-title">
         <p><strong>Bonjour et bienvenue !</strong></p>
     </div>
 
@@ -79,8 +72,11 @@ l'apprentissage et du bien-être chez les adolescents.
                 </iframe>
             </div>
 
-Responsables du projet de recherche:
-------------------------------------
+.. raw:: html
+
+    <div class="raw-title">
+        <p><strong>Responsable du projet de recherche</strong></p>
+    </div>
 
 .. raw:: html
 
@@ -91,7 +87,7 @@ Responsables du projet de recherche:
                 <li>Naïma Gradi, <a href="https://www.unige.ch/fapse/">FPSE</a> - Université de Genève</li>
             </ul>
         </div>
-        <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: 20px; margin-top: 25px;">
+        <img src="./_static/logo-UNIGE.png" width="100" style="margin-left: 20px;">
     </div>
 
 .. raw:: html
@@ -105,7 +101,9 @@ Responsables du projet de recherche:
         <img src="./_static/logo-HEDS.svg" width="100" style="margin-left: 20px;">
     </div>
 
+.. toctree::
+    :hidden:
 
-Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou si vous
-avez des questions, n'hésitez pas à nous écrire à l'adresse
-suivante : wellplay@unige.ch
+    people.rst
+    faq.rst
+    contact.rst
