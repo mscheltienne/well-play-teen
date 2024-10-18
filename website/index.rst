@@ -101,11 +101,6 @@ l'apprentissage et du bien-être chez les adolescents.
         <img src="./_static/logo-HEDS.svg" width="100" style="margin-left: 20px;">
     </div>
 
-
-Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou si vous
-avez des questions, n'hésitez pas à nous écrire à l'adresse
-suivante : wellplay@unige.ch
-
 .. toctree::
     :hidden:
 
