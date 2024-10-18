@@ -75,6 +75,10 @@ html_theme_options = {
             "url": "https://www.unige.ch/fapse/brainlearning",
         },
         {
+            "name": "Daphne Bavelier",
+            "url": "https://www.unige.ch/cisa/center/members/bavelier-daphne/",
+        },
+        {
             "name": "Swann Pichon",
             "url": "https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon",
         },

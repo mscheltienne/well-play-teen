@@ -7,19 +7,43 @@ lorem, interdum tristique urna at, convallis interdum purus. Nulla purus lectus,
 dignissim a nisi eget, mollis iaculis ligula. Nulla at fermentum massa, vitae tempor
 neque. Integer feugiat velit dui, vel hendrerit velit consequat a.
 
-.. grid:: 3
+.. grid:: 4
 
-    .. grid-item-card::  Person 1
+    .. grid-item-card:: Daphne Bavelier
+        :link: https://www.unige.ch/cisa/center/members/bavelier-daphne/
+        :link-type: url
 
-        Text + img
+        .. image:: ./_static/people/daphne.jpg
+            :alt: Daphne Bavelier
+            :width: 100%
 
-    .. grid-item-card::  Person 2
+        Directrice du Brain and Learning lab à l'université de Genève.
 
-        Text + img
+    .. grid-item-card:: Swann Pichon
+        :link: https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon
+        :link-type: url
 
-    .. grid-item-card::  Person 3
+        .. image:: ./_static/people/swann.png
+            :alt: Swann Pichon
+            :width: 100%
 
-        Text + img
+        Professeur associé en santé digitale à la Haute école de santé de Genève.
+
+    .. grid-item-card:: Naïma Gradi
+
+        .. image:: ./_static/people/naima.jpg
+            :alt: Naïma Gradi
+            :width: 100%
+
+        PhD Candidate
+
+    .. grid-item-card:: Sara Teixeira
+
+        .. image:: ./_static/people/sara.png
+            :alt: Sara Teixeria
+            :width: 100%
+
+        Research Assistant, ARE
 
 Pellentesque auctor quam malesuada sapien mollis tempus. Aenean commodo est orci. Etiam
 sit amet interdum arcu. Donec convallis porta sapien nec sodales. Morbi augue justo,
