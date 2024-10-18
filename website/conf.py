@@ -61,10 +61,11 @@ html_context = {
     "default_mode": "light",
 }
 html_css_files = ["style.css"]
-html_favicon = "_static/logo.png"
-html_logo = "_static/logos.png"
+html_favicon = "_static/favicon.png"
+html_logo = "_static/logo.png"
 html_permalinks_icon = "🔗"
 html_sidebars = {"**": []}
+html_sidebars = {"**": ["logos"]}
 html_show_sphinx = False
 html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"

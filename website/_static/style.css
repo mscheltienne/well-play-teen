@@ -44,3 +44,24 @@ div.body h6 { font-size: 0.7em }
 .participate-button:hover {
     background-color: #0056b3;
 }
+
+/* Ensure the logos are displayed vertically and have the same size */
+.logos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 150px; /* Adjust the width as necessary */
+    height: auto;
+    margin-bottom: 10px; /* Space between the two images */
+}
+
+/* Remove scrolling behavior of the sidebar */
+.bd-sidebar {
+    position: relative;
+    overflow: visible; /* Ensure no scrollbar appears */
+    height: auto; /* Let the sidebar height adjust to its content */
+}
