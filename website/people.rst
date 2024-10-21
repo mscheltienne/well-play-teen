@@ -27,7 +27,7 @@ neque. Integer feugiat velit dui, vel hendrerit velit consequat a.
 
     .. grid-item-card:: Naïma Gradi
 
-        .. image:: ./_static/people/naima.jpg
+        .. image:: ./_static/people/naima.png
             :alt: Naïma Gradi
             :width: 100%
 
