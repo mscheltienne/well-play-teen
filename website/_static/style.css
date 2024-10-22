@@ -244,3 +244,13 @@ a.team-card a:hover {
         width: calc(100% - 20px); /* One card per row on smaller screens */
     }
 }
+
+/* Add cursor pointer to clickable cards */
+.clickable-card {
+    cursor: pointer;
+}
+
+/* Prevent text selection on card click */
+.clickable-card, .clickable-card * {
+    user-select: none;
+}

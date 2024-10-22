@@ -97,32 +97,51 @@ l'apprentissage et du bien-être chez les adolescents.
                         </iframe>
                     </div>
 
-    .. tab-item:: Equipe
+    .. tab-item:: Équipe
 
         .. raw:: html
 
             <div class="team-container">
-                <a href="https://www.unige.ch/cisa/center/members/bavelier-daphne/" target="_blank" class="team-card">
+                <!-- Clickable Card for Prof. Daphne Bavelier -->
+                <div class="team-card clickable-card" data-url="https://www.unige.ch/cisa/center/members/bavelier-daphne/">
                     <img src="_static/people/daphne.jpg" alt="Daphne Bavelier">
                     <h3>Prof. Daphne Bavelier</h3>
-                    <p>FPSE<br>Université de Genève</p>
-                </a>
-                <a href="https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon" target="_blank" class="team-card">
+                    <p><a href="https://www.unige.ch/fapse" target="_blank">FPSE</a><br>Université de Genève</p>
+                </div>
+                <!-- Clickable Card for Prof. Swann Pichon -->
+                <div class="team-card clickable-card" data-url="https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon">
                     <img src="_static/people/swann.png" alt="Swann Pichon">
                     <h3>Prof. Swann Pichon</h3>
-                    <p>HES-SO<br>Haute école de santé de Genève</p>
-                </a>
+                    <p><a href="https://www.hes-so.ch/accueil" target="_blank">HES-SO</a><br>Haute école de santé de Genève</p>
+                </div>
+                <!-- Non-clickable Card for Naïma Gradi -->
                 <div class="team-card">
                     <img src="_static/people/naima.png" alt="Naïma Gradi">
                     <h3>Naïma Gradi</h3>
                     <p><a href="https://www.unige.ch/fapse" target="_blank">FPSE</a><br>Université de Genève</p>
                 </div>
+                <!-- Non-clickable Card for Sara Teixeira -->
                 <div class="team-card">
                     <img src="_static/people/sara.png" alt="Sara Teixeira">
                     <h3>Sara Teixeira</h3>
                     <p></p>
                 </div>
             </div>
+
+            <!-- JavaScript to handle card clicks -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var cards = document.querySelectorAll('.clickable-card');
+                    cards.forEach(function(card) {
+                        card.addEventListener('click', function(e) {
+                            // Check if the click was on an internal link
+                            if (!e.target.closest('a')) {
+                                window.open(card.getAttribute('data-url'), '_blank');
+                            }
+                        });
+                    });
+                });
+            </script>
 
     .. tab-item:: Contact
 
