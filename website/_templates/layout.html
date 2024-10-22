@@ -4,3 +4,21 @@
     {{ super() }}
     <link rel="canonical" href="{{ canonical_url }}" />
 {%- endblock %}
+
+{% block header %}
+    <header id="topbar-placeholder">
+      <div id="topbar">
+        <div id="titlebar">
+          <div class="title">
+            <img src="{{ '_static/favicon.png' }}" alt="Icon" style="height: 38px; vertical-align: middle; margin-right: 6px;">
+            <a href="#" style="height: 38px;">Well-Play-Teen</a>
+          </div>
+          <div class="buttons">
+            <a href="https://github.com/mscheltienne/well-play-teen/" title="Github">
+                {% include 'icons/facebook.svg' %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+{%- endblock %}

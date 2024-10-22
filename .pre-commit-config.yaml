@@ -34,13 +34,6 @@ repos:
             files: wp
             additional_dependencies: [tomli]
 
-    - repo: https://github.com/mscheltienne/bibclean
-      rev: 0.8.0
-      hooks:
-          - id: bibclean-fix
-            files: website/references.bib
-            args: [--exit-non-zero-on-fix]
-
     - repo: https://github.com/pappasam/toml-sort
       rev: v0.23.1
       hooks:

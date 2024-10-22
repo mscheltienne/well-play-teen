@@ -3,14 +3,12 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-from datetime import date
 
 # -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "WELL-PLAY-TEEN"
 author = "Mathieu Scheltienne"
-copyright = f"{date.today().year}, {author}"
 release = "0.0.1"
 
 # -- general configuration -------------------------------------------------------------
@@ -26,10 +24,6 @@ root_doc = "index"
 # Add any Sphinx extension module names here, as strings. They can be extensions coming
 # with Sphinx (named "sphinx.ext.*") or your custom ones.
 extensions = [
-    "sphinx.ext.autosectionlabel",
-    "sphinx.ext.mathjax",
-    "sphinxcontrib.bibtex",
-    "sphinx_copybutton",
     "sphinx_design",
 ]
 
@@ -51,12 +45,10 @@ default_role = "py:obj"
 # -- options for HTML output -----------------------------------------------------------
 html_context = {
     "canonical_url": "https://well-play-teen.org/",
-    "display_github": True,
-    "github_user": "mscheltienne",
-    "github_repo": "well-play-teen",
 }
 html_css_files = ["style.css"]
-html_logo = "_static/logo-UNIGE.png"
+html_favicon = "_static/favicon.png"
+html_logo = "_static/favicon.png"
 html_permalinks_icon = "🔗"
 html_show_sphinx = False
 html_static_path = ["_static"]
@@ -69,18 +61,8 @@ html_theme_options = {
 }
 html_title = project
 
-# -- autosectionlabels -----------------------------------------------------------------
-autosectionlabel_prefix_document = True
-
-# -- sphinxcontrib-bibtex --------------------------------------------------------------
-bibtex_bibfiles = ["./references.bib"]
-
 # -- linkcheck -------------------------------------------------------------------------
 linkcheck_anchors = False  # saves a bit of time
 linkcheck_timeout = 15  # some can be quite slow
 linkcheck_retries = 3
 linkcheck_ignore = []  # will be compiled to regex
-
-# -- sphinx_copybutton -----------------------------------------------------------------
-copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
-copybutton_prompt_is_regexp = True

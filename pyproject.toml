@@ -69,12 +69,9 @@ test = [
   'pytest>=8.0',
 ]
 website = [
-  'bibclean',
   'insipid-sphinx-theme',
   'sphinx',
-  'sphinx-copybutton',
   'sphinx-design',
-  'sphinxcontrib-bibtex',
 ]
 
 [project.scripts]
