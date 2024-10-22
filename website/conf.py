@@ -10,6 +10,7 @@
 project = "WELL-PLAY-TEEN"
 author = "Mathieu Scheltienne"
 release = "0.0.1"
+canonical_url = "https://well-play-teen.org/"
 
 # -- general configuration -------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -24,6 +25,7 @@ root_doc = "index"
 # Add any Sphinx extension module names here, as strings. They can be extensions coming
 # with Sphinx (named "sphinx.ext.*") or your custom ones.
 extensions = [
+    "sphinxext.opengraph",
     "sphinx_design",
 ]
 
@@ -44,7 +46,7 @@ default_role = "py:obj"
 
 # -- options for HTML output -----------------------------------------------------------
 html_context = {
-    "canonical_url": "https://well-play-teen.org/",
+    "canonical_url": canonical_url,
 }
 html_css_files = ["style.css"]
 html_favicon = "_static/favicon.png"
@@ -66,3 +68,7 @@ linkcheck_anchors = False  # saves a bit of time
 linkcheck_timeout = 15  # some can be quite slow
 linkcheck_retries = 3
 linkcheck_ignore = []  # will be compiled to regex
+
+# -- sphinx opengraph ------------------------------------------------------------------
+# use https://www.opengraph.xyz/ to preview the Open Graph data
+ogp_site_url = canonical_url
