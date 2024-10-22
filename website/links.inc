@@ -7,7 +7,5 @@
    __not_case_sensitive__, so only one target definition is needed for:
    nipy, NIPY, Nipy, etc...
 
-.. _FPSE: https://www.unige.ch/fapse/
-.. _HES-SO: https://www.hes-so.ch/accueil
 .. _participation questionnaire: http://fpse.qualtrics.com/jfe/form/SV_3E6v3cgTWULvUHk
 .. _RTS emission: https://www.rts.ch/info/sciences-tech/10593222-vision-attention-les-jeux-videos-daction-benefiques-a-nos-cerveaux.html
