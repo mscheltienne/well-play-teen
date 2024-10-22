@@ -102,16 +102,16 @@ l'apprentissage et du bien-être chez les adolescents.
         .. raw:: html
 
             <div class="team-container">
-                <div class="team-card">
+                <a href="https://www.unige.ch/cisa/center/members/bavelier-daphne/" target="_blank" class="team-card">
                     <img src="_static/people/daphne.jpg" alt="Daphne Bavelier">
                     <h3>Prof. Daphne Bavelier</h3>
-                    <p><a href="https://www.unige.ch/cisa/center/members/bavelier-daphne/" target="_blank">FPSE</a><br>Université de Genève</p>
-                </div>
-                <div class="team-card">
+                    <p>FPSE<br>Université de Genève</p>
+                </a>
+                <a href="https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon" target="_blank" class="team-card">
                     <img src="_static/people/swann.png" alt="Swann Pichon">
                     <h3>Prof. Swann Pichon</h3>
-                    <p><a href="https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon" target="_blank">HES-SO</a><br>Haute école de santé de Genève</p>
-                </div>
+                    <p>HES-SO<br>Haute école de santé de Genève</p>
+                </a>
                 <div class="team-card">
                     <img src="_static/people/naima.png" alt="Naïma Gradi">
                     <h3>Naïma Gradi</h3>
