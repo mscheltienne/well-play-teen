@@ -99,51 +99,30 @@ l'apprentissage et du bien-être chez les adolescents.
 
     .. tab-item:: Equipe
 
-        .. grid:: 2
-            :gutter: 3
-            :padding: 1 1 5 5
+        .. raw:: html
 
-            .. grid-item-card:: Prof. Daphne Bavelier
-                :link: https://www.unige.ch/cisa/center/members/bavelier-daphne/
-                :link-type: url
-
-                | `FPSE`_
-                | Université de Genève
-
-                .. image:: ./_static/people/daphne.jpg
-                    :alt: Daphne Bavelier
-                    :width: 100%
-
-            .. grid-item-card:: Prof. Swann Pichon
-                :link: https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon
-                :link-type: url
-
-                | `HES-SO`_
-                | Haute école de santé de Genève
-
-                .. image:: ./_static/people/swann.png
-                    :alt: Swann Pichon
-                    :width: 100%
-
-            .. grid-item-card:: Naïma Gradi
-
-                | `FPSE`_
-                | Université de Genève
-
-                .. image:: ./_static/people/naima.png
-                    :alt: Naïma Gradi
-                    :width: 100%
-                    :class: non-clickable-image
-
-            .. grid-item-card:: Sara Teixeira
-
-                |
-                |
-
-                .. image:: ./_static/people/sara.png
-                    :alt: Sara Teixeria
-                    :width: 100%
-                    :class: non-clickable-image
+            <div class="team-container">
+                <div class="team-card">
+                    <img src="_static/people/daphne.jpg" alt="Daphne Bavelier">
+                    <h3>Prof. Daphne Bavelier</h3>
+                    <p><a href="https://www.unige.ch/cisa/center/members/bavelier-daphne/" target="_blank">FPSE</a><br>Université de Genève</p>
+                </div>
+                <div class="team-card">
+                    <img src="_static/people/swann.png" alt="Swann Pichon">
+                    <h3>Prof. Swann Pichon</h3>
+                    <p><a href="https://www.hesge.ch/heds/la-heds/annuaire/swann-pichon" target="_blank">HES-SO</a><br>Haute école de santé de Genève</p>
+                </div>
+                <div class="team-card">
+                    <img src="_static/people/naima.png" alt="Naïma Gradi">
+                    <h3>Naïma Gradi</h3>
+                    <p><a href="https://www.unige.ch/fapse" target="_blank">FPSE</a><br>Université de Genève</p>
+                </div>
+                <div class="team-card">
+                    <img src="_static/people/sara.png" alt="Sara Teixeira">
+                    <h3>Sara Teixeira</h3>
+                    <p></p>
+                </div>
+            </div>
 
     .. tab-item:: Contact
 

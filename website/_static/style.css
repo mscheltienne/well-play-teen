@@ -171,3 +171,74 @@ body {
     outline: none;
     box-shadow: 0px 0px 0px 3px rgba(106, 100, 241, 0.5);
 }
+
+/* Team Cards */
+
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Spacing between cards */
+}
+
+.team-card {
+    background-color: #FFFFFF;
+    border: 1px solid #DDE3EC;
+    border-radius: 8px;
+    width: calc(50% - 20px); /* Two cards per row minus the gap */
+    box-sizing: border-box;
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-card img {
+    width: 100%;
+    max-width: 150px; /* Fixed image size */
+    aspect-ratio: 1 / 1; /* Ensure the image is square */
+    object-fit: cover;
+    border-radius: 50%; /* Circular images */
+    margin-bottom: 16px;
+}
+
+.team-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #07074D;
+}
+
+.team-card p {
+    font-size: 1em;
+    margin: 0;
+    color: #536387;
+}
+
+.team-card a {
+    text-decoration: none;
+    color: #6A64F1; /* Customize link color */
+}
+
+.team-card a:hover {
+    text-decoration: underline;
+}
+
+.team-card {
+    /* Existing styles */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+    .team-card {
+        width: calc(100% - 20px); /* One card per row on smaller screens */
+    }
+}
