@@ -1,5 +1,7 @@
 .. include:: ./links.inc
 
+:og:description: L'Université et la Haute Ecole de Santé de Genève vous proposent de vous inscrire pour participer à un projet de recherche sur l'impact des jeux vidéos sur la santé et les émotions des adolescents.
+
 .. meta::
    :title: Well-Play-Teen
    :description: L'Université et la Haute Ecole de Santé de Genève vous proposent de vous inscrire pour participer à un projet de recherche sur l'impact des jeux vidéos sur la santé et les émotions des adolescents.
