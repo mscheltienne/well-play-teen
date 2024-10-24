@@ -67,7 +67,7 @@ Participez à Well-Play !
 
         Tous les adolescents seront accueillis à l’université de Genève 3 fois pour
         remplir des questionnaires et faire des jeux cognitifs. Pour sa participation,
-        votre enfant recevra des bons cadeau (jusqu’à 60CHF) et nous versons en plus un
+        votre enfant recevra des bons cadeau (jusqu’à 60 CHF) et nous versons en plus un
         don de 40 CHF en son nom à une fondation de son choix (parmi
         `Pro Natura Genève`_, l'`Association pour la Sauvegarde du Léman`_, `WWF`_ et
         `One Tree Planted`_) agissant pour notre planète. Inscrivez-le et donner lui
