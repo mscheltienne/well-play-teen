@@ -53,7 +53,7 @@ Participez à Well-Play !
         ci-dessous. Votre enfant fera partie (tirage au sort) d’un des trois groupes de
         l’étude :
 
-        1. groupe qui jouer à un jeu vidéo-ludique sur l’écologie
+        1. groupe qui joue à un jeu vidéo-ludique sur l’écologie
         2. groupe qui joue à un jeu vidéo de puzzle
         3. groupe qui ne joue pas (groupe contrôle)
 
