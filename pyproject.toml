@@ -71,6 +71,7 @@ test = [
 website = [
   'insipid-sphinx-theme',
   'sphinx',
+  'sphinx-copybutton',
   'sphinx-design',
   'sphinxext-opengraph',
 ]
