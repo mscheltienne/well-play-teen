@@ -127,7 +127,8 @@ Participez à Well-Play !
 
                 .. tab-item:: Campus Biotech
 
-                    .. code-block::
+                    .. code-block:: text
+                        :class: address-block
 
                         Chemin des Mines 9, Genève
 
@@ -143,7 +144,8 @@ Participez à Well-Play !
 
                 .. tab-item:: Unimail
 
-                    .. code-block::
+                    .. code-block:: text
+                        :class: address-block
 
                         Boulevard du Pont d’Arve 40, Genève
 

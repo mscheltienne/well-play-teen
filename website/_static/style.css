@@ -285,3 +285,48 @@ a.team-card a:hover {
 .clickable-card, .clickable-card * {
     user-select: none;
 }
+
+/* Address block styling */
+div.address-block {
+    background-color: #FFFFFF;
+    border: 2px solid #90d5f2;
+    padding: 10px;
+    font-size: 1em;
+    color: #000;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: relative; /* For positioning the copy button */
+}
+
+div.address-block .highlight {
+    background: transparent;
+    padding: 0;
+    position: relative; /* Positioning context for absolute elements */
+}
+
+div.address-block .highlight pre {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+div.address-block .copybtn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    /* Adjust the size if necessary */
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+}
+
+div.address-block .copybtn svg {
+    width: 100%;
+    height: 100%;
+    stroke: #90d5f2;
+}
