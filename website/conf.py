@@ -72,5 +72,5 @@ linkcheck_ignore = []  # will be compiled to regex
 # -- sphinx opengraph ------------------------------------------------------------------
 # use https://www.opengraph.xyz/ to preview the Open Graph data
 ogp_site_url = canonical_url
-ogp_image = canonical_url + "_static/favicon.png"
+ogp_image = canonical_url + "_static/header.png"
 ogp_use_first_image = False
