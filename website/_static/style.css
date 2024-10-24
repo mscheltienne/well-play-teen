@@ -15,6 +15,8 @@ div.body h6 { font-size: 0.7em }
 .welcome {
     font-size: 1.5em;
 }
+
+/* Video iframes */
 .dynamic-size-iframe {
     position: relative;
     width: 100%;
@@ -22,6 +24,21 @@ div.body h6 { font-size: 0.7em }
     height: 0;
 }
 .dynamic-size-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Google maps iframes with 4:3 aspect ratio */
+.dynamic-size-iframe-4-3 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%; /* Aspect ratio 4:3 */
+    height: 0;
+}
+.dynamic-size-iframe-4-3 iframe {
     position: absolute;
     top: 0;
     left: 0;

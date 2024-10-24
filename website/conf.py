@@ -26,6 +26,7 @@ root_doc = "index"
 # with Sphinx (named "sphinx.ext.*") or your custom ones.
 extensions = [
     "sphinxext.opengraph",
+    "sphinx_copybutton",
     "sphinx_design",
 ]
 
