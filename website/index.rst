@@ -176,8 +176,8 @@ Participez à Well-Play !
 
         .. dropdown:: Puis-je accéder aux résultats de l’étude ?
 
-            Oui, vous pouvez demander à recevoir les résultats en contactant les Prof.
-            Swann Pichon et Prof. Daphné Bavelier, responsables de l’étude.
+            Oui, vous pouvez demander à recevoir les résultats en contactant les
+            `Prof. Swann Pichon`_ et `Prof. Daphné Bavelier`_, responsables de l’étude.
 
     .. tab-item:: Media
 
