@@ -254,7 +254,7 @@ Participez à Well-Play !
                 <div class="team-card">
                     <img src="_static/people/sara.png" alt="Sara Teixeira">
                     <h3>Sara Teixeira</h3>
-                    <p></p>
+                    <p><a href="https://www.hes-so.ch/accueil" target="_blank">HES-SO</a><br>Haute école de santé de Genève</p>
                 </div>
             </div>
 
