@@ -68,6 +68,20 @@ div.body h6 { font-size: 0.7em }
     }
 }
 
+/* Text justification */
+.admonition-participer p:not(.admonition-title) {
+    text-align: justify;
+}
+.sd-summary-content .sd-card-text {
+    text-align: justify;
+}
+.sd-tab-content {
+    text-align: justify;
+}
+.line {
+    text-align: justify;
+}
+
 /* Disable image clickability */
 .non-clickable-image {
     pointer-events: none;
