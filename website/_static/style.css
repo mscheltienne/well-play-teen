@@ -318,15 +318,21 @@ div.address-block .copybtn {
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
-    /* Adjust the size if necessary */
     width: 24px;
     height: 24px;
     border: none;
     background: transparent;
+    display: block !important;  /* Ensure the button is always displayed */
+    opacity: 1 !important;      /* Ensure full opacity */
+    transition: none;           /* Disable transition effects */
 }
 
 div.address-block .copybtn svg {
     width: 100%;
     height: 100%;
     stroke: #90d5f2;
+}
+
+div.address-block:hover .copybtn {
+    opacity: 1 !important;
 }
