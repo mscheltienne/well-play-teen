@@ -139,7 +139,7 @@ Participez à Well-Play !
                     .. raw:: html
 
                         <div class="dynamic-size-iframe-4-3">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2760.450086656126!2d6.145157427922064!3d46.22139343259789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c651ea1e33b17%3A0x163a5f132e7fbe93!2sCampus%20Biotech!5e0!3m2!1sen!2sch!4v1729784997798!5m2!1sen!2sch" width="400" height="300" style="border:0;" allowfullscreen="" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2760.450086656126!2d6.145157427922064!3d46.22139343259789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c651ea1e33b17%3A0x163a5f132e7fbe93!2sCampus%20Biotech!5e0!3m2!1sen!2sch!4v1729784997798!5m2!1sen!2sch" style="border:0;" allowfullscreen="" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
 
                 .. tab-item:: Unimail
@@ -156,7 +156,7 @@ Participez à Well-Play !
                     .. raw:: html
 
                        <div class="dynamic-size-iframe-4-3">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5523.561743855485!2d6.137296077921574!3d46.19491908438593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c7ad59a95c06f%3A0x405b734617bdd72c!2sUni%20Mail%2C%20Bd%20du%20Pont-d&#39;Arve%2040%2C%201205%20Gen%C3%A8ve!5e0!3m2!1sen!2sch!4v1729784952248!5m2!1sen!2sch" width="400" height="300" style="border:0;" allowfullscreen="" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5523.561743855485!2d6.137296077921574!3d46.19491908438593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c7ad59a95c06f%3A0x405b734617bdd72c!2sUni%20Mail%2C%20Bd%20du%20Pont-d&#39;Arve%2040%2C%201205%20Gen%C3%A8ve!5e0!3m2!1sen!2sch!4v1729784952248!5m2!1sen!2sch" style="border:0;" allowfullscreen="" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
 
         .. dropdown:: Comment est décidé dans quel groupe sera mon enfant ?
