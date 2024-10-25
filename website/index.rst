@@ -46,11 +46,12 @@ Participez à Well-Play !
         l’Université de Genève qui étudions l’effet des jeux vidéo sur la santé et les
         émotions des adolescent-es. Nous recrutons actuellement des adolescent-es entre
         11 et 14 ans intéressés à participer à une recherche pour comprendre comment une
-        pratique modérée de jeux vidéo soigneusement sélectionnés, dans un environnement
-        encadré, peut influencer l’apprentissage et le bien-être des adolescent-es. Si
-        vous inscrivez votre enfant et qu’il est inclus dans cette recherche, nous
-        prendrons contact avec vous pour vous expliquer le déroulé de l’étude. Votre
-        enfant fera partie (tirage au sort) d’un des trois groupes de l’étude :
+        pratique **modérée** de jeux vidéo soigneusement sélectionnés, dans un
+        environnement **encadré**, peut influencer **l’apprentissage** et le
+        **bien-être** des adolescent-es. Si vous inscrivez votre enfant et qu’il est
+        inclus dans cette recherche, nous prendrons contact avec vous pour vous
+        expliquer le déroulé de l’étude. Votre enfant fera partie (tirage au sort) d’un
+        des trois groupes de l’étude :
 
         .. raw:: html
 
@@ -66,8 +67,8 @@ Participez à Well-Play !
 
         Tous les adolescents seront accueillis à l’université de Genève trois fois pour
         remplir des questionnaires et faire des jeux cognitifs. Pour sa participation,
-        votre enfant recevra des bons cadeau (jusqu’à 60 CHF) et nous verserons en plus
-        un don de 40 CHF en son nom à une fondation de son choix (parmi
+        votre enfant recevra des **bons cadeau** (jusqu’à 60 CHF) et nous verserons en
+        plus un **don de 40 CHF** en son nom à une fondation de son choix (parmi
         `Pro Natura Genève`_, l'`Association pour la Sauvegarde du Léman`_, `WWF`_ et
         `One Tree Planted`_) agissant pour notre planète. Inscrivez-le et donnez-lui
         l’opportunité de soutenir la planète !
