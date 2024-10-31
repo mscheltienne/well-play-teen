@@ -45,7 +45,7 @@ Participez à Well-Play !
         Nous sommes un groupe de chercheurs de la Haute Ecole de Santé et de
         l’Université de Genève qui étudions l’effet des jeux vidéo sur la santé et les
         émotions des adolescent-es. Nous recrutons actuellement des adolescent-es entre
-        11 et 14 ans intéressés à participer à une recherche pour comprendre comment une
+        11 et 15 ans intéressés à participer à une recherche pour comprendre comment une
         pratique **modérée** de jeux vidéo soigneusement sélectionnés, dans un
         environnement **encadré**, peut influencer **l’apprentissage** et le
         **bien-être** des adolescent-es. Si vous inscrivez votre enfant et qu’il est
@@ -110,13 +110,13 @@ Participez à Well-Play !
 
         .. dropdown:: Quel âge doit avoir mon enfant pour participer ?
 
-            Pour participer à l’étude, votre enfant doit être âgé de 11 à 14 ans. Si
+            Pour participer à l’étude, votre enfant doit être âgé de 11 à 15 ans. Si
             votre enfant a 10 ans, vous pouvez tout de même l’inscrire à l’étude et s’il
             est éligible, nous vous contacterons lorsqu’il aura atteint les 11 ans.
 
         .. dropdown:: Mon enfant doit-il être joueur ou joueuse de jeu vidéo pour participer à l’étude ?
 
-            Non, tous les adolescent-es entre 11 et 14 ans peuvent participer à l’étude,
+            Non, tous les adolescent-es entre 11 et 15 ans peuvent participer à l’étude,
             il est important pour nous d’avoir une diversité des participant-es.
 
         .. dropdown:: Où se trouve le laboratoire de L’université ?
