@@ -1,14 +1,18 @@
 .. include:: ./links.inc
 
-:og:title: Inscrivez-vous à Well-Play Teen Genève !
-:og:url: https://well-play-teen.org/
-:og:description: Inscrivez-vous à Well-Play Teen Genève, une étude scientifique de l'Université et la Haute Ecole de santé de Genève pour étudier l'impact des jeux vidéo sur la santé et le bien-être des adolescent-es
-
 .. meta::
    :title: Participez à l'étude Well-Play Teen Genève
    :description: Inscrivez-vous à Well-Play Teen Genève, une étude scientifique de l'Université et la Haute Ecole de santé de Genève pour étudier l'impact des jeux vidéo sur la santé et le bien-être des adolescent-es
    :keywords lang=fr: Jeux vidéo, santé mentale, adolescents, bien-être, émotions, apprentissage, Université de Genève, Haute Ecole de Santé de Genève
    :keywords lang=en: Video games, mental health, teenagers, well-being, emotions, learning, University of Geneva, Geneva School for Health Science
+
+:og:description: Inscrivez-vous à Well-Play Teen Genève, une étude scientifique de l'Université et la Haute Ecole de santé de Genève pour étudier l'impact des jeux vidéo sur la santé et le bien-être des adolescent-es
+:og:image: https://well-play-teen.org/_static/header_lowres.jpg
+:og:locale: fr_FR
+:og:title: Inscrivez-vous à Well-Play Teen Genève !
+:og:site_name: Etude Well-Play Teen Genève
+:og:type: website
+:og:url: https://well-play-teen.org/
 
 .. raw:: html
 
