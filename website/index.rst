@@ -13,7 +13,6 @@
 :og:site_name: Etude Well-Play Teen Genève
 :og:type: website
 :og:url: https://well-play-teen.org/
-:og:twitter:card: summary_large_image
 
 .. raw:: html
 
