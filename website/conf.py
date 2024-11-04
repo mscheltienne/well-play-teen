@@ -73,5 +73,10 @@ linkcheck_ignore = []  # will be compiled to regex
 # -- sphinx opengraph ------------------------------------------------------------------
 # use https://www.opengraph.xyz/ to preview the Open Graph data
 ogp_site_url = canonical_url
-ogp_image = canonical_url + "_static/header.png"
+ogp_image = canonical_url + "_static/header_lowres.jpg"
 ogp_use_first_image = False
+ogp_type = "website"
+ogp_custom_meta_tags = [
+    '<meta property="og:locale" content="fr_FR" />',
+]
+ogp_site_name = "Etude Well-Play Teen Genève"
