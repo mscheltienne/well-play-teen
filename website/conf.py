@@ -78,8 +78,8 @@ linkcheck_ignore = []  # will be compiled to regex
 # - https://opengraph.dev/
 
 ogp_custom_meta_tags = [
-    '<meta property="og:image:width" content="2527">',
-    '<meta property="og:image:height" content="1447">',
+    '<meta property="og:image:width" content="1200">',
+    '<meta property="og:image:height" content="630">',
     '<meta property="og:locale" content="fr_FR">',
     '<meta name="twitter:card" content="summary_large_image">',
     '<meta property="twitter:domain" content="well-play-teen.org">',
