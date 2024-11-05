@@ -69,3 +69,28 @@ linkcheck_anchors = False  # saves a bit of time
 linkcheck_timeout = 15  # some can be quite slow
 linkcheck_retries = 3
 linkcheck_ignore = []  # will be compiled to regex
+
+# -- sphinx opengraph ------------------------------------------------------------------
+# use third parties to preview the Open Graph data:
+# - https://www.opengraph.xyz/
+# - https://developers.facebook.com/tools/debug/
+# - https://robolly.com/
+# - https://opengraph.dev/
+
+ogp_custom_meta_tags = [
+    '<meta property="og:image:width" content="2527">',
+    '<meta property="og:image:height" content="1447">',
+    '<meta property="og:locale" content="fr_FR">',
+    '<meta name="twitter:card" content="summary_large_image">',
+    '<meta property="twitter:domain" content="well-play-teen.org">',
+    '<meta property="twitter:url" content="https://well-play-teen.org/">',
+    '<meta name="twitter:title" content="Inscrivez-vous à Well-Play Teen Genève !">'
+    """<meta name="twitter:description" content="Inscrivez-vous à Well-Play Teen Genève, une étude scientifique de l’Université et la Haute Ecole de santé de Genève pour étudier l’impact des jeux vidéo sur la santé et le bien-être des adolescent-es">""",  # noqa: E501
+    '<meta name="twitter:image" content="https://well-play-teen.org/_static/header_lowres.jpg">',
+]
+ogp_enable_meta_description = False
+ogp_image = canonical_url + "_static/header_lowres.jpg"
+ogp_site_name = "Etude Well-Play Teen Genève"
+ogp_site_url = canonical_url
+ogp_type = "website"
+ogp_use_first_image = False
