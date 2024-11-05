@@ -21,6 +21,7 @@ needs_sphinx = "5.0"
 # The document name of the “root” document, that is, the document that contains the root
 # toctree directive.
 root_doc = "index"
+language = "fr"
 
 # Add any Sphinx extension module names here, as strings. They can be extensions coming
 # with Sphinx (named "sphinx.ext.*") or your custom ones.
@@ -78,18 +79,19 @@ linkcheck_ignore = []  # will be compiled to regex
 # - https://opengraph.dev/
 
 ogp_custom_meta_tags = [
+    '<meta property="og:image:secure_url" content="https://well-play-teen.org/_static/header_og.jpg">',
     '<meta property="og:image:width" content="1200">',
-    '<meta property="og:image:height" content="630">',
+    '<meta property="og:image:height" content="628">',
     '<meta property="og:locale" content="fr_FR">',
     '<meta name="twitter:card" content="summary_large_image">',
     '<meta property="twitter:domain" content="well-play-teen.org">',
     '<meta property="twitter:url" content="https://well-play-teen.org/">',
     '<meta name="twitter:title" content="Inscrivez-vous à Well-Play Teen Genève !">'
     """<meta name="twitter:description" content="Inscrivez-vous à Well-Play Teen Genève, une étude scientifique de l’Université et la Haute Ecole de santé de Genève pour étudier l’impact des jeux vidéo sur la santé et le bien-être des adolescent-es">""",  # noqa: E501
-    '<meta name="twitter:image" content="https://well-play-teen.org/_static/header_lowres.jpg">',
+    '<meta name="twitter:image" content="https://well-play-teen.org/_static/header_og.jpg">',
 ]
 ogp_enable_meta_description = False
-ogp_image = canonical_url + "_static/header_lowres.jpg"
+ogp_image = canonical_url + "_static/header_og.jpg"
 ogp_site_name = "Etude Well-Play Teen Genève"
 ogp_site_url = canonical_url
 ogp_type = "website"
