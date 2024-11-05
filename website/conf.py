@@ -74,7 +74,7 @@ linkcheck_ignore = []  # will be compiled to regex
 # use third parties to preview the Open Graph data:
 # - https://www.opengraph.xyz/
 # - https://developers.facebook.com/tools/debug/
-# - https://robolly.com/
+# - https://robolly.com/open-graph-preview/
 # - https://opengraph.dev/
 
 ogp_custom_meta_tags = [

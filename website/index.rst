@@ -14,8 +14,8 @@
 
     <style type="text/css">h1 {display:none;}</style>
 
-Participez à Well-Play !
-========================
+Participez à l'étude Well-Play Teen Genève
+==========================================
 
 .. raw:: html
 
