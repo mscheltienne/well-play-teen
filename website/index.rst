@@ -86,7 +86,7 @@ Participez à l'étude Well-Play Teen Genève
         .. dropdown:: Que fait mon enfant pendant l'étude ?
             :open:
 
-            .. image:: _static/timeline.png
+            .. image:: _static/timeline.svg
                 :width: 100%
 
             L'étude comporte quatre étapes :
