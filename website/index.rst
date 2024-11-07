@@ -74,6 +74,11 @@ Participez à l'étude Well-Play Teen Genève
         `One Tree Planted`_) agissant pour notre planète. Inscrivez-le et donnez-lui
         l’opportunité de soutenir la planète !
 
+        .. rubric:: Déroulement
+
+        .. image:: _static/timeline.svg
+            :class: responsive-image
+
     .. tab-item:: FAQ
 
         .. dropdown:: Quel est l'objectif de l'étude Well-Play ?
@@ -87,9 +92,17 @@ Participez à l'étude Well-Play Teen Genève
             :open:
 
             .. image:: _static/timeline.svg
-                :width: 100%
+                :class: responsive-image
+
+            .. raw:: html
+
+                <p style="margin-top: 15px;"></p>
 
             L'étude comporte quatre étapes :
+
+            .. raw:: html
+
+                <p style="margin-bottom: 15px;"></p>
 
             **Étape 1** : Un premier rendez-vous (1h45) au laboratoire à l’Université où
             l’adolescent donne son consentement pour participer à l’étude. Puis,

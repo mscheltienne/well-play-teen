@@ -276,6 +276,21 @@ a.team-card a:hover {
     }
 }
 
+/* Default styles for mobile devices */
+.responsive-image {
+    width: 100%;
+    height: auto;
+}
+
+/* Styles for screens wider than 768px */
+@media (min-width: 768px) {
+    .responsive-image {
+        max-width: 450px; /* Adjust this value as needed */
+        margin: 0 auto;   /* Center the image */
+        display: block;   /* Ensure it's treated as a block element */
+    }
+}
+
 /* Add cursor pointer to clickable cards */
 .clickable-card {
     cursor: pointer;
