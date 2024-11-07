@@ -111,9 +111,19 @@ Participez à l'étude Well-Play Teen Genève
 
             **Étape 2** : Un rendez-vous en ligne (15-45min) avec l’adolescent pour
             expliquer comment vont se passer les 6 prochaines semaines et aider à
-            installer le jeu si besoin. Pendant 6 semaines, l’adolescent joue au jeu
+            installer le jeu si besoin.
+
+            .. raw:: html
+
+                <p style="margin-top: 15px;"></p>
+
+            Pendant 6 semaines, l’adolescent joue au jeu
             vidéo ou continue ses activités habituelles. On le contactera chaque semaine
             (5 minutes) pour répondre à quelques questions.
+
+            .. raw:: html
+
+                <p style="margin-bottom: 15px;"></p>
 
             **Étape 3** : Un deuxième rendez-vous (1h30) au laboratoire environ 7
             semaines après le rendez-vous en ligne pour refaire les questionnaires et
