@@ -44,7 +44,7 @@ jobs:
           path: ./website/_build/html
 
   deploy:
-    if: github.event_name == 'push'
+    if: ${{ github.event_name == 'push' }}
     needs: build
     timeout-minutes: 10
     runs-on: ubuntu-latest
@@ -78,9 +78,23 @@ jobs:
             .gitignore
             robots.txt
 
+  get_commit_message:
+    name: get commit message
+    runs-on: ubuntu-latest
+    outputs:
+      commit_message: ${{ steps.get_message.outputs.commit_message }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # ensure the correct commit is checked out for PRs or pushes
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - run: echo "commit_message=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
+        id: get_message
+
   deploy-staging:
-    if: github.event_name == 'pull_request'
-    needs: build
+    if: ${{ github.event_name == 'pull_request' && contains(needs.get_commit_message.outputs.commit_message, '[deploy]') }}
+    needs: [get_commit_message, build]
     timeout-minutes: 10
     runs-on: ubuntu-latest
     permissions:
