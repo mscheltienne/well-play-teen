@@ -17,7 +17,7 @@ jobs:
         shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -55,7 +55,7 @@ jobs:
         shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Download documentation
         uses: actions/download-artifact@v4
         with:
@@ -84,7 +84,7 @@ jobs:
     outputs:
       commit_message: ${{ steps.get_message.outputs.commit_message }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # ensure the correct commit is checked out for PRs or pushes
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -104,7 +104,7 @@ jobs:
         shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Download documentation
         uses: actions/download-artifact@v4
         with:
