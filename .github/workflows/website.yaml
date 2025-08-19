@@ -12,14 +12,9 @@ jobs:
   build:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.11
           architecture: 'x64'
@@ -31,14 +26,12 @@ jobs:
         run: |
           python -m pip install --progress-bar off --upgrade pip setuptools
           python -m pip install --progress-bar off .[website]
-      - name: Display system information
-        run: wp-sys_info --developer
-      - name: Build doc
-        run: make -C website html
-      - name: Prune sphinx environment
-        run: rm -R ./website/_build/html/.doctrees
-      - name: Upload documentation
-        uses: actions/upload-artifact@v4
+      - run: wp-sys_info --developer
+      - name: Build documentation
+        run: |
+          make -C website html
+          rm -R ./website/_build/html/.doctrees
+      - uses: actions/upload-artifact@v4
         with:
           name: doc-build
           path: ./website/_build/html
@@ -50,19 +43,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    defaults:
-      run:
-        shell: bash
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Download documentation
-        uses: actions/download-artifact@v5
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v5
         with:
           name: doc-build
           path: ./doc-build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./doc-build
           target-folder: .
@@ -84,7 +71,7 @@ jobs:
     outputs:
       commit_message: ${{ steps.get_message.outputs.commit_message }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # ensure the correct commit is checked out for PRs or pushes
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -99,19 +86,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    defaults:
-      run:
-        shell: bash
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Download documentation
-        uses: actions/download-artifact@v5
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v5
         with:
           name: doc-build
           path: ./doc-build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./doc-build
           target-folder: ./staging/
