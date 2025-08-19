@@ -78,7 +78,7 @@ linkcheck_ignore = []  # will be compiled to regex
 # - https://robolly.com/open-graph-preview/
 # - https://opengraph.dev/
 
-ogp_custom_meta_tags = [
+ogp_custom_meta_tags = (
     '<meta property="og:image:secure_url" content="https://well-play-teen.org/_static/header_og.jpg">',
     '<meta property="og:image:width" content="1200">',
     '<meta property="og:image:height" content="628">',
@@ -89,7 +89,7 @@ ogp_custom_meta_tags = [
     '<meta name="twitter:title" content="Inscrivez-vous à Well-Play Teen Genève !">'
     """<meta name="twitter:description" content="Inscrivez-vous à Well-Play Teen Genève, une étude scientifique de l’Université et la Haute Ecole de santé de Genève pour étudier l’impact des jeux vidéo sur la santé et le bien-être des adolescent-es">""",  # noqa: E501
     '<meta name="twitter:image" content="https://well-play-teen.org/_static/header_og.jpg">',
-]
+)
 ogp_enable_meta_description = False
 ogp_image = canonical_url + "_static/header_og.jpg"
 ogp_site_name = "Etude Well-Play Teen Genève"
