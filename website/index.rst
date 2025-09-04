@@ -41,9 +41,20 @@ Participez à l'étude Well-Play Teen Genève
         .. image:: _static/header.png
             :width: 100%
 
-        🧠 Nous invitons des adolescent·e·s âgé·e·s de 11 à 15 ans qui se sentent
-        parfois stressé·e·s ou inquiet·e·s à participer à une étude scientifique
-        innovante sur les jeux numériques, l'apprentissage et le bien-être
+        .. raw:: html
+
+            <p style="margin-top: 15px;"></p>
+
+        .. raw:: html
+
+            <div style="text-align: center; margin: 20px 0;">
+                <p style="font-size: 1.15em; font-weight: bold; line-height: 1.4;">
+                🧠 Nous invitons des adolescent·e·s âgé·e·s de 11 à 15 ans qui se
+                sentent parfois stressé·e·s ou inquiet·e·s à participer à une étude
+                scientifique innovante sur les jeux numériques, l'apprentissage et le
+                bien-être.
+                </p>
+            </div>
 
         .. raw:: html
 
@@ -321,10 +332,10 @@ Participez à l'étude Well-Play Teen Genève
                     <h3>Naïma Gradi</h3>
                     <p><a href="https://www.unige.ch/fapse" target="_blank">FPSE</a><br>Université de Genève</p>
                 </div>
-                <!-- Non-clickable Card for Sara Teixeira -->
+                <!-- Non-clickable Card for Shadee Thiam -->
                 <div class="team-card">
-                    <img src="_static/people/sara.png" alt="Sara Teixeira">
-                    <h3>Sara Teixeira</h3>
+                    <img src="_static/people/shadee.jpeg" alt="Shadee Thiam">
+                    <h3>Shadee Thiam</h3>
                     <p><a href="https://www.hes-so.ch/accueil" target="_blank">HES-SO</a><br>Haute école de santé de Genève</p>
                 </div>
             </div>
