@@ -31,8 +31,38 @@ Participez à l'étude Well-Play Teen Genève
 .. admonition:: **Participer !**
 
     Pour participer à cette étude, les parents doivent d'abord donner leur consentement
-    et répondre à quelques questionnaires (environ 10 minutes).
-    `Cliquez ici <participation questionnaire_>`_.
+    et répondre à quelques questionnaires (environ 10 minutes)
+    `en cliquant ici <participation questionnaire_>`_.
+
+    .. raw:: html
+
+        <p style="margin-top: 15px;"></p>
+
+    Ou laissez-nous vos coordonnées pour que nous vous contactions
+    `en cliquant ici <javascript:void(0)>`_.
+
+.. raw:: html
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find the link that should open the contact tab
+        var contactLinks = document.querySelectorAll('a[href="javascript:void(0)"]');
+        contactLinks.forEach(function(link) {
+            if (link.textContent.trim() === 'en cliquant ici') {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Find and click the contact tab radio button
+                    var contactTab = document.getElementById('sd-tab-item-4');
+                    if (contactTab) {
+                        contactTab.checked = true;
+                        // Scroll to the tab
+                        contactTab.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        });
+    });
+    </script>
 
 .. tab-set::
 
@@ -356,6 +386,7 @@ Participez à l'étude Well-Play Teen Genève
             </script>
 
     .. tab-item:: Contact
+        :name: contact
 
         Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou
         si vous avez des questions, n'hésitez pas à nous écrire à l'adresse suivante :
