@@ -68,13 +68,6 @@ Participez à l'étude Well-Play Teen Genève
 
     .. tab-item:: Etude
 
-        .. image:: _static/header.png
-            :width: 100%
-
-        .. raw:: html
-
-            <p style="margin-top: 15px;"></p>
-
         .. raw:: html
 
             <div style="text-align: center; margin: 20px 0;">
@@ -86,9 +79,8 @@ Participez à l'étude Well-Play Teen Genève
                 </p>
             </div>
 
-        .. raw:: html
-
-            <p style="margin-top: 15px;"></p>
+        .. image:: _static/header.png
+            :width: 100%
 
         🔬 **Quoi** : Des chercheur·euse·s de l'Université de Genève
         (`Prof. Daphné Bavelier`_) et de la Haute École de Santé Genève
