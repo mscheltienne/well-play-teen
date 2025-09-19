@@ -9,7 +9,7 @@
 
 
 .. _Association pour la Sauvegarde du Léman: https://www.facebook.com/AssociationPourLaSauvegardeDuLeman
-.. _fonds National pour la recherche scientifique Suisse (FNS): https://www.snf.ch/fr
+.. _Fonds National Suisse (FNS): https://www.snf.ch/fr
 .. _galaxus: https://www.galaxus.ch
 .. _one tree planted: https://www.facebook.com/onetreeplanted
 .. _participation questionnaire: http://fpse.qualtrics.com/jfe/form/SV_3E6v3cgTWULvUHk

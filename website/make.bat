@@ -28,7 +28,7 @@ goto :eof
 goto :eof
 
 :clean
-rmdir /s /q _build generated
+rmdir /s /q _build
 goto :eof
 
 :linkcheck

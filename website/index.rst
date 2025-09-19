@@ -31,48 +31,88 @@ Participez à l'étude Well-Play Teen Genève
 .. admonition:: **Participer !**
 
     Pour participer à cette étude, les parents doivent d'abord donner leur consentement
-    et répondre à quelques questionnaires (environ 10 minutes).
-    `Cliquez ici <participation questionnaire_>`_.
+    et répondre à quelques questionnaires (environ 10 minutes)
+    `en cliquant ici <participation questionnaire_>`_.
+
+    .. raw:: html
+
+        <p style="margin-top: 15px;"></p>
+
+    Ou laissez-nous vos coordonnées pour que nous vous contactions
+    `en cliquant ici <javascript:void(0)>`_.
+
+.. raw:: html
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find the link that should open the contact tab
+        var contactLinks = document.querySelectorAll('a[href="javascript:void(0)"]');
+        contactLinks.forEach(function(link) {
+            if (link.textContent.trim() === 'en cliquant ici') {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Find and click the contact tab radio button
+                    var contactTab = document.getElementById('sd-tab-item-4');
+                    if (contactTab) {
+                        contactTab.checked = true;
+                        // Scroll to the tab
+                        contactTab.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        });
+    });
+    </script>
 
 .. tab-set::
 
     .. tab-item:: Etude
 
+        .. raw:: html
+
+            <div style="text-align: center; margin: 20px 0;">
+                <p style="font-size: 1.15em; font-weight: bold; line-height: 1.4;">
+                🧠 Nous invitons des adolescent·e·s âgé·e·s de 11 à 15 ans qui se
+                sentent parfois stressé·e·s ou inquiet·e·s à participer à une étude
+                scientifique innovante sur les jeux numériques, l'apprentissage et le
+                bien-être.
+                </p>
+            </div>
+
         .. image:: _static/header.png
             :width: 100%
 
-        Nous sommes heureux de vous accueillir dans le projet de recherche Well-Play
-        financé par le `fonds National pour la recherche scientifique Suisse (FNS)`_.
-        Nous sommes un groupe de chercheurs de la Haute Ecole de Santé et de
-        l’Université de Genève qui étudions l’effet des jeux vidéo sur la santé et les
-        émotions des adolescent-es. Nous recrutons actuellement des adolescent-es entre
-        11 et 15 ans intéressés à participer à une recherche pour comprendre comment une
-        pratique **modérée** de jeux vidéo soigneusement sélectionnés, dans un
-        environnement **encadré**, peut influencer **l’apprentissage** et le
-        **bien-être** des adolescent-es. Si vous inscrivez votre enfant et qu’il est
-        inclus dans cette recherche, nous prendrons contact avec vous pour vous
-        expliquer le déroulé de l’étude. Votre enfant fera partie (tirage au sort) d’un
-        des trois groupes de l’étude :
+        🔬 **Quoi** : Des chercheur·euse·s de l'Université de Genève
+        (`Prof. Daphné Bavelier`_) et de la Haute École de Santé Genève
+        (`Prof. Swann Pichon`_) invitent des **adolescent·e·s âgé·e·s de 11 à 15 ans
+        (inclus) qui se sentent parfois stressé·e·s ou inquiet·e·s, à participer à une
+        étude scientifique** financée par le `Fonds National Suisse (FNS)`_. **L'étude
+        examine comment le fait de jouer modérément et de s'entraîner pendant plusieurs
+        semaines avec un jeu que nous fournissons adapté à l'âge des participant·e·s,
+        pourrait influencer l'apprentissage et les émotions**.
 
         .. raw:: html
 
             <p style="margin-top: 15px;"></p>
 
-        1. groupe qui joue à un jeu vidéo-ludique sur l’écologie
-        2. groupe qui joue à un jeu vidéo de puzzle
-        3. groupe qui ne joue pas (groupe contrôle)
+        🎁 **Ce que le/la participant-e gagne** : pour chaque participant, nous ferons
+        un **don de 40 fr** en son nom à une fondation de son choix parmi
+        `Pro Natura Genève`_, l'`Association pour la Sauvegarde du Léman`_, `WWF`_ et
+        `One Tree Planted`_. Les participant-es recevront **en plus des bons cadeau
+        Galaxus** (jusqu'à 60 fr).
 
         .. raw:: html
 
-            <p style="margin-bottom: 15px;"></p>
+            <p style="margin-top: 15px;"></p>
 
-        Tous les adolescents seront accueillis à l’université de Genève trois fois pour
-        remplir des questionnaires et faire des jeux cognitifs. Pour sa participation,
-        votre enfant recevra des **bons cadeau** (jusqu’à 60 CHF) et nous verserons en
-        plus un **don de 40 CHF** en son nom à une fondation de son choix (parmi
-        `Pro Natura Genève`_, l'`Association pour la Sauvegarde du Léman`_, `WWF`_ et
-        `One Tree Planted`_) agissant pour notre planète. Inscrivez-le et donnez-lui
-        l’opportunité de soutenir la planète !
+        🎲 **Si vous êtes éligible** : Vous serez invité·e·s à participer et inclus·es
+        dans l'une des trois conditions de l'étude: soit deux conditions « jeu » qui
+        nécessitent de jouer depuis chez soit 2 heures par semaine, par séances de 20 à
+        30 minutes, pendant 6 semaines à un jeu de type puzzle ou à un jeu sur le thème
+        de l'écologie, soit une condition qui poursuit ses activités habituelles. Par
+        ailleurs, trois rendez-vous ont lieu à l'Université de Genève (Uni Mail ou
+        Campus Biotech) pour remplir des questionnaires et réaliser des tâches
+        cognitives.
 
         .. rubric:: Déroulement
 
@@ -314,10 +354,10 @@ Participez à l'étude Well-Play Teen Genève
                     <h3>Naïma Gradi</h3>
                     <p><a href="https://www.unige.ch/fapse" target="_blank">FPSE</a><br>Université de Genève</p>
                 </div>
-                <!-- Non-clickable Card for Sara Teixeira -->
+                <!-- Non-clickable Card for Shadee Thiam -->
                 <div class="team-card">
-                    <img src="_static/people/sara.png" alt="Sara Teixeira">
-                    <h3>Sara Teixeira</h3>
+                    <img src="_static/people/shadee.jpeg" alt="Shadee Thiam">
+                    <h3>Shadee Thiam</h3>
                     <p><a href="https://www.hes-so.ch/accueil" target="_blank">HES-SO</a><br>Haute école de santé de Genève</p>
                 </div>
             </div>
@@ -338,6 +378,7 @@ Participez à l'étude Well-Play Teen Genève
             </script>
 
     .. tab-item:: Contact
+        :name: contact
 
         Merci de votre intérêt pour notre recherche. Si vous souhaitez nous contacter ou
         si vous avez des questions, n'hésitez pas à nous écrire à l'adresse suivante :
