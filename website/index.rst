@@ -309,10 +309,11 @@ Participez à l'étude Well-Play Teen Genève
 
                     <div class="dynamic-size-iframe">
                         <iframe
-                            src="https://player.twitch.tv/?video=1950152310&parent=mscheltienne.github.io&parent=well-play-teen.org&autoplay=false"
-                            allowfullscreen
+                            src="https://www.youtube.com/embed/IG_UlMXJ5-I?si=bhR6ZHmIhC9rmk6U"
+                            title="YouTube video player"
                             frameborder="0"
-                            scrolling="no">
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
                         </iframe>
                     </div>
 
