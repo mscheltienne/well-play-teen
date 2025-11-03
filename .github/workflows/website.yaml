@@ -31,7 +31,7 @@ jobs:
         run: |
           make -C website html
           rm -R ./website/_build/html/.doctrees
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: doc-build
           path: ./website/_build/html
