@@ -32,7 +32,7 @@ jobs:
           python -m pip install --progress-bar off .[test]
       - run: wp-sys_info --developer
       - run: pytest wp --cov=wp --cov-report=xml --cov-config=pyproject.toml
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         with:
           files: ./coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
